@@ -1,12 +1,6 @@
-// 可能是我的node版本问题，不用严格模式使用ES6语法会报错
-"use strict";
 const models = require('./db');
 const express = require('express');
 const router = express.Router();
-console.log(models)
-
-/************** 创建(create) 读取(get) 更新(update) 删除(delete) **************/
-
 // 创建账号接口
 router.post('/api/login/createAccount',(req,res) => {
     // 这里的req.body能够使用就在index.js中引入了const bodyParser = require('body-parser')
@@ -23,7 +17,6 @@ router.post('/api/login/createAccount',(req,res) => {
         }
     });
 });
-
 // 获取已有账号接口
 router.get('/api/login/getAccount',(req,res) => {
     // 通过模型去查找数据库
@@ -36,14 +29,31 @@ router.get('/api/login/getAccount',(req,res) => {
         }
     });
 });
-//
-router.get('/api/home/getlist',(req,res)=>{
-    models.home.find((err,data)=>{
+router.post('/api/list/addlist',(req,res)=>{
+   let newAccount=new models.list({
+       title:req.body.title,
+       time:req.body.time,
+       sort:req.body.sort,
+       con:req.body.con
+   });
+   newAccount.save((err,data)=>{
+       if(err){
+           res.send(err)
+       }else{
+           res.send('成功添加列表')
+       }
+   })
+});
+//获取列表
+router.get('/api/list/showlist',(req,res)=>{
+    models.list.find((err,data)=>{
         if(err){
-            res.send(err);
+            res.send(err)
         }else{
             res.send(data)
         }
     })
-})
+});
+//添加列表数据
+
 module.exports = router;

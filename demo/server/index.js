@@ -21,5 +21,29 @@ app.get('*', function(req, res) {
     res.send(html)
 })
 // 监听8088端口
-app.listen(8088);
+app.listen(12345);
 console.log('success listen…………');
+// var mongodb=require('mongodb');
+// var server=new mongodb.Server('localhost',27017,{auto_reconnect:true});
+// var db=new mongodb.Db("test",server,{safe:true});
+// db.open(function(err,db){
+// 	if(err){
+// 		throw err;
+// 	}
+// 	if(!err){
+// 		console.log('we are connected')
+// 		db.collection('list',function(err,collection){
+// 			if(err) throw err;
+// 			else{
+// 				collection.find({}).toArray(function(err,docs){
+// 					if(err) throw err;
+// 					else{
+// 						console.log(docs)
+						
+// 					}
+// 				})
+// 			}
+			
+// 		})
+// 	}
+// })

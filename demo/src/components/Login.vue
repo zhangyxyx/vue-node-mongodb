@@ -38,8 +38,8 @@
             });
         },
         list(){
-          this.$http.get('/api/home/getlist').then((response)=>{
-              console.log(response);
+          this.$http.get('/api/list/list').then((response)=>{
+            console.log(response);
           }).then((response)=>{
             console.log(response)
           }).catch((reject)=>{

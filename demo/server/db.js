@@ -9,18 +9,28 @@ mongoose.connect('mongodb://localhost/test');
 const db = mongoose.connection;
 db.once('error',() => console.log('Mongo connection error'));
 db.once('open',() => console.log('Mongo connection successed'));
+
+/************** 定义模型Model **************/
+
+
 /************** 定义模式loginSchema **************/
 const loginSchema = mongoose.Schema({
     account : String,
     password : String
 });
-const home=mongoose.Schema({
+const homesSchema=mongoose.Schema({
 	id:String
-})
-/************** 定义模型Model **************/
-console.log(mongoose.model)
+});
+//列表的模式
+const listSchema=mongoose.Schema({
+	title:String,
+    time:String,
+    sort:String,
+    con:String
+});
 const Models = {
     Login : mongoose.model('Login',loginSchema),
-    home: mongoose.model('home',home)
+    homes: mongoose.model('homes',homesSchema),
+    list:mongoose.model('list',listSchema)
 }
 module.exports = Models;
