@@ -29,6 +29,7 @@ router.get('/api/login/getAccount',(req,res) => {
         }
     });
 });
+//添加列表
 router.post('/api/list/addlist',(req,res)=>{
    let newAccount=new models.list({
        title:req.body.title,
@@ -54,6 +55,19 @@ router.get('/api/list/showlist',(req,res)=>{
         }
     })
 });
-//添加列表数据
+//删除列表内容
+router.post('/api/list/removelist',(req,res)=>{
+    var removelist=new models.list({
+        _id:req.body._id
+    })
+    removelist.remove((err,data)=>{
+        if(err){
+            res.send(err)
+        }else{
+            res.send('删除成功')
+        }
+    })
+    
+})
 
 module.exports = router;
