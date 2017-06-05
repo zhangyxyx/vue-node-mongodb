@@ -43,19 +43,7 @@ export default {
 		clickmenu(menu){
 			$(".rightevery").eq(menu).css({display:"block"}).siblings().css({display:"none"})
 		},
-		//添加列表
-		addlist(){
-			let params = { 
-                title : this.list.title,
-                time : this.list.time,
-				sort:this.list.sort,
-				con:this.list.con
-            };
-			return this.$http.post('/api/list/addlist',params);
-		},
-
 	}
-	
 }
 
 </script>

@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-sm-12  home-con-right" v-for="(item,index) in homelists">
             <div class="row" style="padding:10px 0px">
-                <div class="col-sm-12"><h2>{{item.title}}</h2><span class="articleremove" v-on:click="remove(homelists[index])">x</span></div>
+                <div class="col-sm-12"><h2 style="float:left;margin-top:0px;">{{item.title}}</h2><span class="articleremove" v-on:click="clickremove(homelists[index])">x</span></div>
                 <div class="col-sm-3"><span class="articlesort" style="height:30px;display:block;line-height:30px;">{{item.sort}}</span></div>
                 <div class="col-sm-3"><span class="articletime" style="height:30px;display:block;line-height:30px;">{{item.time}}</span></div>
                 <div class="col-sm-12"><span class="articlesort" >{{item.con}}</span></div>
@@ -55,8 +55,9 @@ export default {
 				return _this.homelists;
 			})
 		},
-        //删除数据
-        remove(i){
+         //删除数据
+        clickremove(i){
+            alert("删除成功！");
             var obj=i._id;
             console.log(i);
             var params={
@@ -74,6 +75,7 @@ export default {
 				con:this.list.con
             };
 			this.$http.post('/api/list/addlist',params);
+            alert('添加成功！');
             this.sums();
 		},
 
@@ -81,5 +83,5 @@ export default {
 }
 </script>
 <style>
-.articleremove{width:20px;height:20px;line-height:20px;cursor:pointer;display:block;border:1px solid #000;}
+.articleremove{margin:8px 0 0 20px;float:left;width:15px;height:15px;line-height:15px;color:#fff;background:#ccc;text-align:center;cursor:pointer;display:block;border:1px solid #000;}
 </style>
