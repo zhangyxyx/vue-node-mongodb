@@ -46,14 +46,20 @@ router.post('/api/list/addlist',(req,res)=>{
    })
 });
 //获取列表
-router.get('/api/list/showlist',(req,res)=>{
-    models.list.find((err,data)=>{
+router.post('/api/list/showlist',(req,res)=>{
+    var page=req.body.page;
+    var limit=req.body.limit;
+    console.log(req)
+    var query=models.list.find();
+    var s=page*limit;
+    query.skip(s).limit(limit).exec('find',function(err,data){
         if(err){
             res.send(err)
         }else{
             res.send(data)
         }
     })
+   
 });
 //删除列表内容
 router.post('/api/list/removelist',(req,res)=>{

@@ -8,6 +8,12 @@
                 <div class="col-sm-12"><span class="articlesort" >{{item.con}}</span></div>
             </div>
     </div>
+    <!--分页-->
+    <div class="page">
+        <span v-on:click="clickpage(0)">1</span>
+        <span v-on:click="clickpage(1)">2</span>
+        <span v-on:click="clickpage(2)">3</span>
+    </div>
     <!--添加的-->
 	<div class="col-sm-12">
 		<label>标题：</label><input type="text" v-model="list.title"/>	
@@ -78,10 +84,22 @@ export default {
             alert('添加成功！');
             this.sums();
 		},
+        //点击分页
+        clickpage(i){
+            //点击的是第几页
+            var params={
+                page:i,
+                limit:5
+            };
+            this.$http.post('/api/list/showlist',params);
+
+        }
 
     }
 }
 </script>
 <style>
 .articleremove{margin:8px 0 0 20px;float:left;width:15px;height:15px;line-height:15px;color:#fff;background:#ccc;text-align:center;cursor:pointer;display:block;border:1px solid #000;}
+.page span{width:20px;height:20px;line-height:20px;text-align:center;border:1px solid #000;displaY:block;floaT:left;cursor:pointer;margin:5px}
+.page span:hover{background:#000;color:#fff}
 </style>

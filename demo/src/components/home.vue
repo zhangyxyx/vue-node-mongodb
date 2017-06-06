@@ -15,6 +15,8 @@
 			<div class="col-sm-12 rightevery"><articleview></articleview></div>
 			<div class="col-sm-12 rightevery"><contactview></contactview></div>
 		</div>
+		<!--分页-->
+		
 	</div>
     
 </div>
