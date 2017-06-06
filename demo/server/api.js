@@ -49,7 +49,6 @@ router.post('/api/list/addlist',(req,res)=>{
 router.post('/api/list/showlist',(req,res)=>{
     var page=req.body.page;
     var limit=req.body.limit;
-    console.log(req)
     var query=models.list.find();
     var s=page*limit;
     query.skip(s).limit(limit).exec('find',function(err,data){

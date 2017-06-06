@@ -46,7 +46,16 @@ export default {
         //渲染列表
         sums(){
 			var _this=this;
-			this.$http.get('/api/list/showlist').then((response)=>{
+            var params={
+                page:0,
+                limit:5
+            };
+			this.showlist(params);
+		},
+        //渲染数据
+        showlist(params){
+            var _this=this;
+            this.$http.post('/api/list/showlist',params).then((response)=>{
 				//这是一个将数组字符串转化为数组json形式的过程
 				var string=response.bodyText.substring(1,response.bodyText.length-1);
 				var string2=string.replace(/},/g,"};");
@@ -60,7 +69,7 @@ export default {
 				_this.homelists=array2;
 				return _this.homelists;
 			})
-		},
+        },
          //删除数据
         clickremove(i){
             alert("删除成功！");
@@ -86,13 +95,13 @@ export default {
 		},
         //点击分页
         clickpage(i){
+            var _this=this;
             //点击的是第几页
             var params={
                 page:i,
                 limit:5
             };
-            this.$http.post('/api/list/showlist',params);
-
+            this.showlist(params);
         }
 
     }
