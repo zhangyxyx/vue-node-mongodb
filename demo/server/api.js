@@ -29,6 +29,39 @@ router.get('/api/login/getAccount',(req,res) => {
         }
     });
 });
+
+//获取列表
+router.post('/api/list/showlist',(req,res)=>{
+    //初始化
+    var page=req.body.page;//页码
+    var limit=req.body.limit;//限制显示几个 
+    var s=page*limit;//从第几个开始
+    var val=req.body.title||'';//搜索关键字  
+    var sum;
+    if(val){
+        var query=models.list.find({"title":new RegExp("^.*"+val+".*$")});
+        models.list.find({"title":new RegExp("^.*"+val+".*$")}).count(function(err,data){
+            sum=data;
+        });
+    }else{
+        var query=models.list.find();
+        models.list.find().count(function(err,data){
+           sum=data;
+        })
+    }
+
+    query.skip(s).limit(limit).find(function(err,data){
+        if(err){
+            res.send(err)
+        }else{
+            res.send({
+                data:data,
+                sum:sum
+            })
+        }
+    })
+   
+});
 //添加列表
 router.post('/api/list/addlist',(req,res)=>{
    let newAccount=new models.list({
@@ -44,21 +77,6 @@ router.post('/api/list/addlist',(req,res)=>{
            res.send('成功添加列表')
        }
    })
-});
-//获取列表
-router.post('/api/list/showlist',(req,res)=>{
-    var page=req.body.page;
-    var limit=req.body.limit;
-    var query=models.list.find();
-    var s=page*limit;
-    query.skip(s).limit(limit).exec('find',function(err,data){
-        if(err){
-            res.send(err)
-        }else{
-            res.send(data)
-        }
-    })
-   
 });
 //删除列表内容
 router.post('/api/list/removelist',(req,res)=>{

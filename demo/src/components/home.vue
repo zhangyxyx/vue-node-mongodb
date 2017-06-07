@@ -1,5 +1,5 @@
 <template>
-<div class="row">
+<div class="home row">
     <!--左侧菜单-->
     <div class="col-sm-2 home-con-menu">
       <div class="row">
@@ -50,6 +50,17 @@ export default {
 
 </script>
 <style>
+.home{border:1px solid #fff;}
+/*左側菜單*/
+.menu-every{
+	background:rgba(234,234,234,.5);
+	cursor:pointer;
+	height:50px;
+	line-height:50px;
+	font-size:18px;
+	text-align:center;
+	}
+.menu-every:hover{background:rgba(214,214,214,.5)}
 .rightevery{display:none}
 </style>
 

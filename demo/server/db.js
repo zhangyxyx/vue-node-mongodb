@@ -31,6 +31,6 @@ const listSchema=mongoose.Schema({
 const Models = {
     Login : mongoose.model('Login',loginSchema),
     homes: mongoose.model('homes',homesSchema),
-    list:mongoose.model('list',listSchema)
+    list:mongoose.model('lists',listSchema)
 }
 module.exports = Models;
