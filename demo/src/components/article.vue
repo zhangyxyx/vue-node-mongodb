@@ -4,8 +4,9 @@
         <input class="serchtext" type="text" placeholder="输入你要查找的内容" >
         <span class="search" v-on:click="search()">搜索</span>
     </div>
+   
     <div class="col-sm-12  home-con-right" v-for="(item,index) in homelists">
-            <div class="row">
+            <div class="row"  v-on:click="goDetails(item._id)">
                 <div class="col-sm-12"><h2>{{item.title}}</h2><span class="articleremove" v-on:click="clickremove(homelists[index])">x</span></div>
                 <div class="col-sm-3"><span class="articlesort" >{{item.sort}}</span></div>
                 <div class="col-sm-3"><span class="articletime" >{{item.time}}</span></div>
@@ -47,6 +48,7 @@ export default {
         //类似于jquery中的ready方法
         this.sums();
     },
+   
     methods:{
         //渲染数据
         showlist(params){
@@ -63,7 +65,6 @@ export default {
                 for(var i=0;i<Math.ceil(sum/params.limit);i++){
                     _this.sumpage.push(i);
                 }
-                console.log( _this.sumpage)
 				//将结果赋值给需要循环
 				_this.homelists=result;
 				return _this.homelists;
@@ -125,7 +126,11 @@ export default {
 			this.$http.post('/api/list/removelist',params);
             this.sums();
         },
-        
+        goDetails(id){
+            console.log(id)
+            this.$store.commit('changeId',id);
+            this.$router.push({path:'/details'});
+        }
 
     }
 }
@@ -164,11 +169,12 @@ export default {
 /*每個數據*/
 .home-con-right{
     height:150px;
-    border:1px solid #ccc;
+    border:1px solid #99cccc;
     padding:10px;
+    cursor:pointer
 }
 .home-con-right:hover{
-    backgorund:#efefef;
+    background:#99CC99
 }
 .home-con-right h2{
     margin-top:10px;
