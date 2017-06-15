@@ -1,5 +1,6 @@
 const models = require('./db');
 const express = require('express');
+const ObjectID=require('mongodb').ObjectID;
 const router = express.Router();
 // 创建账号接口
 router.post('/api/login/createAccount',(req,res) => {
@@ -29,7 +30,7 @@ router.get('/api/login/getAccount',(req,res) => {
         }
     });
 });
-
+console.log(ObjectID);
 //获取列表
 router.post('/api/list/showlist',(req,res)=>{
     //初始化
@@ -37,12 +38,25 @@ router.post('/api/list/showlist',(req,res)=>{
     var limit=req.body.limit;//限制显示几个 
     var s=page*limit;//从第几个开始
     var val=req.body.title||'';//搜索关键字  
+    var id=req.body.id||'',//对应正确的id获取数据new RegExp("^.*"+ObjectID(paramsval.id)+".*$")
+    paramsval={
+        val:val,
+        id:id,
+    };
     var sum;
-    if(val){
-        var query=models.list.find({"title":new RegExp("^.*"+val+".*$")});
-        models.list.find({"title":new RegExp("^.*"+val+".*$")}).count(function(err,data){
+    console.log(paramsval);
+    if(paramsval.id){
+        var query=models.list.find({"_id":ObjectID(paramsval.id)});
+        models.list.find({"_id":ObjectID(paramsval.id)}).count(function(err,data){
             sum=data;
         });
+        console.log(sum)
+    }else if(paramsval.val){
+        var query=models.list.find({"title":new RegExp("^.*"+paramsval.val+".*$")});
+        models.list.find({"title":new RegExp("^.*"+paramsval.val+".*$")}).count(function(err,data){
+            sum=data;
+        });
+        console.log(sum)
     }else{
         var query=models.list.find();
         models.list.find().count(function(err,data){

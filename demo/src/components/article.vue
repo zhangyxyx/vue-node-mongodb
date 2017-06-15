@@ -6,12 +6,14 @@
     </div>
    
     <div class="col-sm-12  home-con-right" v-for="(item,index) in homelists">
-            <div class="row"  v-on:click="goDetails(item._id)">
-                <div class="col-sm-12"><h2>{{item.title}}</h2><span class="articleremove" v-on:click="clickremove(homelists[index])">x</span></div>
+            <router-link :to="{name:'details',params:{id:item._id}}">
+            <div class="row">
+                <div class="col-sm-12"><h2>{{item.title.substring(0,10)}}</h2><span class="articleremove" v-on:click="clickremove(homelists[index])">x</span></div>
                 <div class="col-sm-3"><span class="articlesort" >{{item.sort}}</span></div>
                 <div class="col-sm-3"><span class="articletime" >{{item.time}}</span></div>
-                <div class="col-sm-12"><span class="articlesort" >{{item.con}}</span></div>
+                <div class="col-sm-12"><span class="articlesort" >{{item.con.substring(0,100)}}</span></div>
             </div>
+            </router-link>
     </div>
     <!--分页-->
     <div class="fenye">
@@ -126,11 +128,7 @@ export default {
 			this.$http.post('/api/list/removelist',params);
             this.sums();
         },
-        goDetails(id){
-            console.log(id)
-            this.$store.commit('changeId',id);
-            this.$router.push({path:'/details'});
-        }
+       
 
     }
 }

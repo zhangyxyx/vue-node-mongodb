@@ -1,17 +1,17 @@
 <template>
-<div class="row">
+<div class="row" style="background:#fff">
     <!--标题-->
-    <div class="col-sm-12">
-        <h2>asasas</h2>
+    <div class="col-sm-12" style="margin:10px 0px">
+        <h1>{{result.title}}</h1>
     </div>
     <!--分类和时间-->
-    <div class="col-sm-3">
-        <span></span>
-        <span></span>
+    <div class="col-sm-5" style="margin:10px 0px">
+        <span style="color:#666">分类：{{result.sort}}</span>
+        <span style="color:#666">时间：{{result.time}}</span>
     </div>
     <!--具体内容-->
     <div class="col-sm-12">
-        <p></p>
+        <p style="text-indent:2em;font-size:20px">{{result.con}}</p>
     </div>
 </div>
 </template>
@@ -19,30 +19,20 @@
 export default{
     data(){
         return{
-            
+           result:{},
         }
     },
-    beforeCreate:function(){
-      alert(this.$store.state.dataId)
-   },
+    mounted:function(){
+        this.showlist();
+    },
     methods:{
         showlist(){
-            // this.$http.post('/api/list/showlist',params).then((response)=>{
-            //     //列表数据
-            //     var result=JSON.parse(response.bodyText).data;
-            //     //数据的总数量
-            //     var sum=JSON.parse(response.bodyText).sum;
-            //     //渲染出页码
-            //     $(".fenye").empty();
-                
-            //     for(var i=0;i<Math.ceil(sum/params.limit);i++){
-            //         _this.sumpage.push(i);
-            //     }
-            //     console.log( _this.sumpage)
-			// 	//将结果赋值给需要循环
-			// 	_this.homelists=result;
-			// 	return _this.homelists;
-			// });
+            var _this=this;
+            this.$http.post('/api/list/showlist',{id:this.$route.params.id}).then((response)=>{
+                //数据
+                this.result=JSON.parse(response.bodyText).data[0];
+                console.log(this.result);
+			});
         },
     }
 }
