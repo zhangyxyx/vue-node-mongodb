@@ -31,7 +31,6 @@ export default{
             this.$http.post('/api/list/showlist',{id:this.$route.params.id}).then((response)=>{
                 //数据
                 this.result=JSON.parse(response.bodyText).data[0];
-                console.log(this.result);
 			});
         },
     }

@@ -19,6 +19,7 @@ export default {
     background:rgba(153,204,204,.2);
     cursor:pointer;
     padding-left:30px;
+    font-size:20px;
     }
 .contact-every:hover{
     background:rgba(153,204,204,1)

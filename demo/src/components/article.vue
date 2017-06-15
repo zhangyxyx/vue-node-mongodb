@@ -23,9 +23,8 @@
     </div>
     <!--添加的-->
 	<div class="col-sm-12">
-		<label>标题：</label><input type="text" v-model="list.title"/>	
-		<label>时间：</label><input type="text" v-model="list.time"/>	</br>
-		<label>分类：</label><input type="text" v-model="list.sort"/>	
+		<label>标题：</label><input type="text" v-model="list.title"/>	</br>	
+		<label>分类：</label><input type="text" v-model="list.sort"/>	</br>	
 		<label>内容：</label><input type="text" v-model="list.con"/></br>	
 		<button @click="addlist">给列表添加信息</button>
 	</div> 
@@ -83,12 +82,14 @@ export default {
 		},
         //添加列表
 		addlist(){
+            var time=new Date().getTime();
 			let params = { 
                 title : this.list.title,
-                time : this.list.time,
+                time : time,
 				sort:this.list.sort,
 				con:this.list.con
             };
+            
 			this.$http.post('/api/list/addlist',params);
             alert('添加成功！');
             this.sums();
