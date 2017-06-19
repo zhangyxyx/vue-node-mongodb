@@ -44,19 +44,16 @@ router.post('/api/list/showlist',(req,res)=>{
         id:id,
     };
     var sum;
-    console.log(paramsval);
     if(paramsval.id){
         var query=models.list.find({"_id":ObjectID(paramsval.id)});
         models.list.find({"_id":ObjectID(paramsval.id)}).count(function(err,data){
             sum=data;
         });
-        console.log(sum)
     }else if(paramsval.val){
         var query=models.list.find({"title":new RegExp("^.*"+paramsval.val+".*$")});
         models.list.find({"title":new RegExp("^.*"+paramsval.val+".*$")}).count(function(err,data){
             sum=data;
         });
-        console.log(sum)
     }else{
         var query=models.list.find();
         models.list.find().count(function(err,data){
@@ -106,5 +103,30 @@ router.post('/api/list/removelist',(req,res)=>{
     })
     
 })
-
+//文件上传
+router.post('/api/file/addfile',(req,res)=>{
+    console.log(req.body)
+    console.log(req.body.img)
+    let newAccount=new models.file({
+        url:req.body.img
+    });
+    newAccount.save((err,data)=>{
+        if(err){
+            res.send(err)
+        }else{
+            res.send('成功上传文件')
+        }
+    })
+})
+//显示图片
+router.get('/api/file/showfile',(req,res)=>{
+    models.file.find((err,data)=>{
+        if(err){
+            res.send(err)
+        }else{
+            console.log(data)
+            res.send(data)
+        }
+    })
+})
 module.exports = router;

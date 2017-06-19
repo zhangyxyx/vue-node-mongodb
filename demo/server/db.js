@@ -1,4 +1,5 @@
-// Schema、Model、Entity或者Documents的关系请牢记，Schema生成Model，Model创造Entity，
+// Schema、Model、Entity或者Documents的关系请牢记，
+//Schema生成Model，Model创造Entity，
 //Model和Entity都可对数据库操作造成影响，
 //但Model比Entity更具操作性。
 const mongoose = require('mongoose');
@@ -28,9 +29,14 @@ const listSchema=mongoose.Schema({
     sort:String,
     con:String
 });
+//文件
+const fileSchema=mongoose.Schema({
+    url:String
+})
 const Models = {
     Login : mongoose.model('Login',loginSchema),
     homes: mongoose.model('homes',homesSchema),
-    list:mongoose.model('lists',listSchema)
+    list:mongoose.model('list',listSchema),
+    file:mongoose.model('file',fileSchema)
 }
 module.exports = Models;
