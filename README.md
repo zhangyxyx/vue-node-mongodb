@@ -1,4 +1,5 @@
-# vue-node-mongodb
-2017-6-2</br>
-前台的登录和一个列表显示和添加列表内容</br>
-目前数据显示还是不对的，需要更改
+前台代码用的是vue-cli</br>
+后台代码是nodejs</br>
+数据库用的是mongodb</br>
+nodejs链接成功mongodb之后，开始设置api,建立模型等</br>
+
