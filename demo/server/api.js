@@ -30,7 +30,6 @@ router.get('/api/login/getAccount',(req,res) => {
         }
     });
 });
-console.log(ObjectID);
 //获取列表
 router.post('/api/list/showlist',(req,res)=>{
     //初始化
@@ -105,8 +104,6 @@ router.post('/api/list/removelist',(req,res)=>{
 })
 //文件上传
 router.post('/api/file/addfile',(req,res)=>{
-    console.log(req.body)
-    console.log(req.body.img)
     let newAccount=new models.file({
         url:req.body.img
     });
@@ -124,7 +121,6 @@ router.get('/api/file/showfile',(req,res)=>{
         if(err){
             res.send(err)
         }else{
-            console.log(data)
             res.send(data)
         }
     })

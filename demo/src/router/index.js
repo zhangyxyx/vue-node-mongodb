@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import home from '@/components/home'
 import details from '@/components/details'
+import addData from '@/components/addData'
 
 
 Vue.use(Router)
@@ -23,7 +24,11 @@ export default new Router({
       path:'/details/:id',
       name:'details',
       component:details
-    }
-   
+    },
+   {
+     path:'/addData',
+     name:'addData',
+     component:addData
+   }
   ]
 })
