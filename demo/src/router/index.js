@@ -4,7 +4,8 @@ import Login from '@/components/Login'
 import home from '@/components/home'
 import details from '@/components/details'
 import addData from '@/components/addData'
-
+import zhuanlan from '@/components/zhuanlan/view'
+import common from '@/components/common'
 
 Vue.use(Router)
 
@@ -14,6 +15,16 @@ export default new Router({
       path: '/',
       name: 'Login',
       component: Login
+    },
+    {
+      path:'/common',
+      name:'common',
+      component:common
+    },
+    {
+     path:'/zhuanlan',
+     name:'zhuanlan',
+     component:zhuanlan
     },
     {
     	path:'/home',
@@ -29,6 +40,8 @@ export default new Router({
      path:'/addData',
      name:'addData',
      component:addData
-   }
+   },
+ 
+   
   ]
 })

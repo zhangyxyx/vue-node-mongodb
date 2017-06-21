@@ -124,5 +124,79 @@ router.get('/api/file/showfile',(req,res)=>{
             res.send(data)
         }
     })
+});
+//专栏部分
+//android
+router.get('/api/android/showdata',(req,res)=>{
+    models.android.find((err,data)=>{
+        if(err){
+            res.send(err)
+        }else{
+            res.send(data)
+        }
+    })
+})
+router.get('/api/web/showdata',(req,res)=>{
+    models.web.find((err,data)=>{
+        if(err){
+            res.send(err)
+        }else{
+            res.send(data)
+        }
+    })
+})
+router.get('/api/ios/showdata',(req,res)=>{
+    models.ios.find((err,data)=>{
+        if(err){
+            res.send(err)
+        }else{
+            res.send(data)
+        }
+    })
+})
+router.get('/api/java/showdata',(req,res)=>{
+    models.java.find((err,data)=>{
+        if(err){
+            res.send(err)
+        }else{
+            res.send(data)
+        }
+    })
+})
+router.get('/api/desgin/showdata',(req,res)=>{
+    models.desgin.find((err,data)=>{
+        if(err){
+            res.send(err)
+        }else{
+            res.send(data)
+        }
+    })
+})
+router.get('/api/products/showdata',(req,res)=>{
+    models.products.find((err,data)=>{
+        if(err){
+            res.send(err)
+        }else{
+            res.send(data)
+        }
+    })
+})
+router.get('/api/tool/showdata',(req,res)=>{
+    models.tool.find((err,data)=>{
+        if(err){
+            res.send(err)
+        }else{
+            res.send(data)
+        }
+    })
+})
+router.get('/api/read/showdata',(req,res)=>{
+    models.read.find((err,data)=>{
+        if(err){
+            res.send(err)
+        }else{
+            res.send(data)
+        }
+    })
 })
 module.exports = router;

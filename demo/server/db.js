@@ -32,11 +32,69 @@ const listSchema=mongoose.Schema({
 //文件
 const fileSchema=mongoose.Schema({
     url:String
-})
+});
+//专栏
+const zlandroid=mongoose.Schema({
+    title:String,
+    time:String,
+    user:String,
+    con:String
+});
+const zlweb=mongoose.Schema({
+    title:String,
+    time:String,
+    user:String,
+    con:String
+});
+const zlios=mongoose.Schema({
+    title:String,
+    time:String,
+    user:String,
+    con:String
+});
+const zljava=mongoose.Schema({
+    title:String,
+    time:String,
+    user:String,
+    con:String
+});
+const zldesgin=mongoose.Schema({
+    title:String,
+    time:String,
+    user:String,
+    con:String
+});
+const zlproducts=mongoose.Schema({
+    title:String,
+    time:String,
+    user:String,
+    con:String
+});
+const zltool=mongoose.Schema({
+    title:String,
+    time:String,
+    user:String,
+    con:String
+});
+const zlread=mongoose.Schema({
+    title:String,
+    time:String,
+    user:String,
+    con:String
+});
 const Models = {
     Login : mongoose.model('Login',loginSchema),
     homes: mongoose.model('homes',homesSchema),
     list:mongoose.model('list',listSchema),
-    file:mongoose.model('file',fileSchema)
+    file:mongoose.model('file',fileSchema),
+
+    android:mongoose.model('android',zlandroid),
+    web:mongoose.model('web',zlweb),
+    ios:mongoose.model('ios',zlios),
+    java:mongoose.model('java',zljava),
+    desgin:mongoose.model('desgin',zldesgin),
+    products:mongoose.model('products',zlproducts),
+    tool:mongoose.model('tool',zltool),
+    read:mongoose.model('read',zlread)
 }
 module.exports = Models;
