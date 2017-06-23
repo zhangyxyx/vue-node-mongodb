@@ -15,8 +15,6 @@
 </div>
 </template>
 <script>
-
-
 export default{
     data(){
         return{
@@ -32,14 +30,22 @@ export default{
                 {con:'注册',icon:'register'}
             ],
             ind:0,
+            mark:'',
         }
     },
-
+    props:["message"],
+    mounted:function(){
+        this.markshow();
+    },
     methods:{
+        markshow(){
+            console.log(this.message)
+            this.ind=this.message
+        },
         clickTopMenu(i,icon){
             this.ind=i;
             this.comMessage=icon;
-            this.$router.push('/'+icon)
+            this.$router.push('/home/'+icon)
 
         }
     }

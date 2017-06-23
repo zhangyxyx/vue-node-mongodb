@@ -1,5 +1,9 @@
 <template>
 <div class="main">
+    <p>专栏</p>
+    <div style="height:60px;margin-bottom:20px;">
+    <myCommon v-bind:message="commonmsg"></myCommon>
+    </div>
     <div class="top">
         <span :class="{action:ind===index}" v-for="(item,index) in lanMenu" v-on:click="clickMenu(index,item.icon)">{{item.con}}</span>    
     </div>  
@@ -10,19 +14,22 @@
 </template>
 <script>
 import routerView from './routerView.vue'
+import common from '../common.vue'
 export default{
     data(){
         return{
             lanMenu:[
-                {con:'编辑推荐',icon:'recommend'},
+                {con:'编辑推荐',icon:'bjtj'},
                 {con:'全部',icon:'all'},
             ],
             ind:0,
-            parentMsg:'recommend'
+            parentMsg:'android',
+            commonmsg:2
         }
     },
     components:{
-       "router":routerView
+       "router":routerView,
+       "myCommon":common
     },
     methods:{
         clickMenu(index,con){
@@ -42,7 +49,7 @@ export default{
     background:#fff;
     border-bottom:1px solid #ccc;
     margin-bottom:20px;
-    padding-left:40px;
+    padding-left:10px;
 }
 .top span{
     display:block;

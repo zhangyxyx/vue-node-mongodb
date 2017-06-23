@@ -1,7 +1,9 @@
 <template>
 <div class="main">
     <p>专栏</p>
+    <div style="height:60px;margin-bottom:20px;">
     <myCommon v-bind:message="commonmsg"></myCommon>
+    </div>
     <div class="top">
         <span :class="{action:ind===index}" v-for="(item,index) in lanMenu" v-on:click="clickMenu(index,item.icon)">{{item.con}}</span>    
     </div>  
@@ -17,18 +19,11 @@ export default{
     data(){
         return{
             lanMenu:[
-                {con:'Android',icon:'android'},
-                {con:'前端',icon:'web'},
-                {con:'iOS',icon:'ios'},
-                {con:'后端',icon:'java'},
-                {con:'设计',icon:'desgin'},
-                {con:'产品',icon:'products'},
-                {con:'工具资料',icon:'tool'},
-                {con:'阅读',icon:'read'},
+                {con:'全部标签',icon:'bjtj'},
             ],
             ind:0,
             parentMsg:'android',
-            commonmsg:1
+            commonmsg:4
         }
     },
     components:{
@@ -53,7 +48,7 @@ export default{
     background:#fff;
     border-bottom:1px solid #ccc;
     margin-bottom:20px;
-    padding-left:40px;
+    padding-left:10px;
 }
 .top span{
     display:block;

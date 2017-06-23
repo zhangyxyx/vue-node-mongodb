@@ -1,7 +1,9 @@
 <template>
 <div class="main">
-    <p>专栏</p>
+    <p>发现</p>
+    <div style="height:60px;margin-bottom:20px;">
     <myCommon v-bind:message="commonmsg"></myCommon>
+    </div>
     <div class="top">
         <span :class="{action:ind===index}" v-for="(item,index) in lanMenu" v-on:click="clickMenu(index,item.icon)">{{item.con}}</span>    
     </div>  
@@ -11,7 +13,6 @@
 </div> 
 </template>
 <script>
-import routerView from './routerView.vue'
 import common from '../common.vue'
 export default{
     data(){
@@ -28,11 +29,10 @@ export default{
             ],
             ind:0,
             parentMsg:'android',
-            commonmsg:1
+            commonmsg:3
         }
     },
     components:{
-       "router":routerView,
        "myCommon":common
     },
     methods:{
