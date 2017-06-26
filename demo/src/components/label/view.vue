@@ -1,15 +1,19 @@
 <template>
 <div class="main">
-    <p>专栏</p>
     <div style="height:60px;margin-bottom:20px;">
     <myCommon v-bind:message="commonmsg"></myCommon>
     </div>
     <div class="top">
-        <span :class="{action:ind===index}" v-for="(item,index) in lanMenu" v-on:click="clickMenu(index,item.icon)">{{item.con}}</span>    
+        <span>全部标签</span>
+        <span :class="{action:ind===index}" v-for="(item,index) in labTab" v-on:click="clickMenu(index,item.icon)">{{item.con}}</span>    
+        <span>
+            <input type="text" placeholder="请输入标签" style="height:30px;padding:0px 10px;">
+        </span>
     </div>  
     <div class="con">
         <router v-bind:message="parentMsg"></router>
     </div> 
+   
 </div> 
 </template>
 <script>
@@ -18,8 +22,9 @@ import common from '../common.vue'
 export default{
     data(){
         return{
-            lanMenu:[
-                {con:'全部标签',icon:'bjtj'},
+            labTab:[
+                {con:'最热',icon:'hot'},
+                {con:'最新',icon:'new'}
             ],
             ind:0,
             parentMsg:'android',

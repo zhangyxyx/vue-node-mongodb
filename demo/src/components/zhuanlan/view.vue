@@ -1,6 +1,5 @@
 <template>
 <div class="main">
-    <p>专栏</p>
     <myCommon v-bind:message="commonmsg"></myCommon>
     <div class="top">
         <span :class="{action:ind===index}" v-for="(item,index) in lanMenu" v-on:click="clickMenu(index,item.icon)">{{item.con}}</span>    

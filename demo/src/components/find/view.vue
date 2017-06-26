@@ -1,6 +1,5 @@
 <template>
 <div class="main">
-    <p>发现</p>
     <div style="height:60px;margin-bottom:20px;">
     <myCommon v-bind:message="commonmsg"></myCommon>
     </div>
@@ -13,6 +12,7 @@
 </div> 
 </template>
 <script>
+import routerView from './routerView.vue'
 import common from '../common.vue'
 export default{
     data(){
@@ -33,6 +33,7 @@ export default{
         }
     },
     components:{
+       "router":routerView,
        "myCommon":common
     },
     methods:{
