@@ -1,18 +1,20 @@
 <template>
 <div class="main">
-    <div style="height:60px;margin-bottom:20px;">
     <myCommon v-bind:message="commonmsg"></myCommon>
-    </div>
-    <div class="top">
-        <span :class="{action:ind===index}" v-for="(item,index) in lanMenu" v-on:click="clickMenu(index,item.icon)">{{item.con}}</span>    
-    </div> 
-    <div class="col-sm-9" style="height:60px;background:#fff;margin:10px 0px;line-height:60px;">
-        <div class="topTwo">
-            <span :class="{action:ind===index}" v-for="(item,index) in labSort" v-on:click="clickMenu(index,item.icon)">{{item.con}}</span>    
+    <div class="collecttop">
+        <div class="commonWM">
+            <span :class="{action:ind===index}" v-for="(item,index) in lanMenu" v-on:click="clickMenu(index,item.icon)" :key="index">{{item.con}}</span>    
         </div>
-        <div class="topTwo">
-            <span :class="{action:ind===index}" v-for="(item,index) in labTab" v-on:click="clickMenu(index,item.icon)">{{item.con}}</span>    
-        </div> 
+    </div> 
+    <div style="height:46px;background:#fff;line-height:46px;border-top:1px solid #ccc;">
+        <div class="commonWM">
+            <div class="topTwo">
+                <span :class="{action:ind===index}" v-for="(item,index) in labSort" v-on:click="clickMenu(index,item.icon)" :key="index">{{item.con}}</span>    
+            </div>
+            <div class="topTwo">
+                <span :class="{action:ind===index}" v-for="(item,index) in labTab" v-on:click="clickMenu(index,item.icon)" :key="index">{{item.con}}</span>    
+            </div> 
+        </div>
     </div>
     <div class="con">
         <router v-bind:message="parentMsg"></router>
@@ -63,22 +65,20 @@ export default{
 }
 </script>
 <style>
-.top{
-    height:50px;
-    line-height:50px;
+.collecttop{
+    height:46px;
+    line-height:46px;
     font-size:14px;
     background:#fff;
-    border-bottom:1px solid #ccc;
-    margin-bottom:10px;
-    padding-left:10px;
+    border-top:1px solid #ccc;
 }
-.top span{
+.collecttop span{
     display:block;
     float:left;
     width:60px;
     text-align:center;
 }
-.top span:hover{
+.collecttop span:hover{
     cursor:pointer
 }
 .action{

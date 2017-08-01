@@ -1,10 +1,10 @@
 <template>
 <div class="main">
-    <div style="height:60px;margin-bottom:20px;">
     <myCommon v-bind:message="commonmsg"></myCommon>
-    </div>
-    <div class="top">
-        <span :class="{action:ind===index}" v-for="(item,index) in lanMenu" v-on:click="clickMenu(index,item.icon)">{{item.con}}</span>    
+    <div class="findtop">
+        <div class="commonWM">
+        <span :class="{action:ind===index}" v-for="(item,index) in lanMenu" v-on:click="clickMenu(index,item.icon)" :key="index">{{item.con}}</span>    
+        </div>
     </div>  
     <div class="con">
         <router v-bind:message="parentMsg"></router>
@@ -47,22 +47,20 @@ export default{
 }
 </script>
 <style>
-.top{
+.findtop{
     height:50px;
     line-height:50px;
     font-size:14px;
     background:#fff;
-    border-bottom:1px solid #ccc;
-    margin-bottom:20px;
-    padding-left:40px;
+    border-top:1px solid #ccc;
 }
-.top span{
+.findtop span{
     display:block;
     float:left;
     width:60px;
     text-align:center;
 }
-.top span:hover{
+.findtop span:hover{
     cursor:pointer
 }
 .action{

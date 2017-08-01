@@ -2,7 +2,9 @@
 <div class="main">
     <myCommon v-bind:message="commonmsg"></myCommon>
     <div class="top">
-        <span :class="{action:ind===index}" v-for="(item,index) in lanMenu" v-on:click="clickMenu(index,item.icon)">{{item.con}}</span>    
+        <div class="commonWM">
+            <span :class="{action:ind===index}" v-for="(item,index) in lanMenu" v-on:click="clickMenu(index,item.icon)" :key="index">{{item.con}}</span>    
+        </div>
     </div>  
     <div class="con">
         <router v-bind:message="parentMsg"></router>
@@ -50,7 +52,7 @@ export default{
     line-height:50px;
     font-size:14px;
     background:#fff;
-    border-bottom:1px solid #ccc;
+    border-top:1px solid #ccc;
     margin-bottom:20px;
     padding-left:40px;
 }
@@ -64,6 +66,6 @@ export default{
     cursor:pointer
 }
 .action{
-    color:blue
+    color:#007fff
 }
 </style>

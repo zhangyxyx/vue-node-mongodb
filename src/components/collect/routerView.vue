@@ -1,13 +1,13 @@
 <template>
-<div class="row">
-    <div class="col-sm-9">
-        <div v-for="(item,index) in homelists" class="every">
+<div>
+    <div>
+        <div v-for="(item,index) in homelists" class="every" :key="index">
             <h2>{{item.title}}</h2>
             <p>{{item.con}}</p>
 
         </div>
     </div>
-    <div class="col-sm-2"></div>
+    <div ></div>
 </div>
 </template>
 

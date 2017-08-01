@@ -27,11 +27,22 @@ export default new Router({
       name:'common',
       component:common
     },
+    //添加文章
+    {
+      path:'/add',
+      name:'add',
+      component:addData
+    },
     //部分组件 
     {
     	path:'/home/home',//首页
     	name:'home',
     	component:home
+    },
+    {//首页的我的关注和前端 这两个大类下面有分给三个热门 最新 评论
+      path:'/home/hn/:id',
+      name:'ho',
+      component:home
     },
     {
      path:'/home/zhuanlan',//专栏

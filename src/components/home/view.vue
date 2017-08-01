@@ -1,24 +1,33 @@
 <template>
-<div class="home row">
+<div class="home">
 	<myCommon v-bind:message="commonmsg"></myCommon>
-    <!--左侧菜单-->
-    <div class="col-sm-2 home-con-menu">
-      <div class="row">
-      	<div class="col-md-12 menu-every" v-for='(options,index) in leftMenu' v-on:click="leftMenu(index)">
-			  {{options.text}}
+    <!--专属home的菜单 我的关注 前端-->
+    <div class="home-con-menu">
+		<div style="width:960px;margin:0 auto;">
+			<div class="menu-every" v-for='(options,index) in leftMenu' v-bind:data-menu="options.change" v-on:click="onemenu(leftMenu[index])" :key="index">
+				{{options.text}}
+			</div>
 		</div>
-      </div>
     </div>
-    <!--右侧对应的内容-->
-	<div class="col-sm-10">
+	<div style="width:960px;margin:20px auto;">
+		<!--右侧对应的内容-->
 		<div class="row">
-			<!--精选-->
-			<div class="col-sm-12 rightevery article" style="display:block;"><articleview></articleview></div>
-			<div class="col-sm-12 rightevery contact"><contactview></contactview></div>
+			<div class="col-sm-9" style="background:#fff;">
+				<!--热门 最新 评论-->
+				<div class="topmenuone">
+					<div class="menu-every" v-for='(options,index) in topMenuOne' v-bind:data-menu="options.change"  v-on:click="twomenu(topMenuOne[index])"  :key="index">
+						{{options.text}}
+					</div>
+				</div>
+				<!--精选-->
+				<div class="col-sm-12 rightevery article" style="display:block;"><articleview></articleview></div>
+			</div>
+			<div class="col-sm-3">
+				<img src="static/home_img1.png" style="width:100%;">
+			</div>
+			<!--分页-->
 		</div>
-		<!--分页-->
 	</div>
-    
 </div>
 </template>
 <script>
@@ -29,15 +38,13 @@ export default {
 	data() {
 		return{
 				leftMenu:[
-					{change:'tuijian',text:'推荐'},
-					{change:'android',text:'Android'},
+					{change:'attention',text:'我关注的'},
 					{change:'web',text:'前端'},
-					{change:'ios',text:'iOS'},
-					{change:'java',text:'后端'},
-					{change:'design',text:'设计'},
-					{change:'produce',text:'产品'},
-					{change:'article',text:'随笔/文章'},
-					{change:'concat',text:'联系'}
+				],
+				topMenuOne:[
+					{change:'hot',text:'热门'},
+					{change:'new',text:'最新'},
+					{change:'comment',text:'评论'},
 				],
 				commonmsg:0		
 		}
@@ -53,6 +60,15 @@ export default {
 		clickmenu(menu){
 			$(".rightevery").eq(menu).css({display:"block"}).siblings().css({display:"none"})
 		},
+		//点击菜单跳转
+		onemenu(mark){
+			$('.home-con-menu .menu-every[data-menu='+mark.change+']').addClass('active').siblings().removeClass("active");
+			this.$router.push({name:'ho',params:{id:mark.change}})
+		},
+		twomenu(mark){
+			$('.topmenuone .menu-every[data-menu='+mark.change+']').addClass('active').siblings().removeClass("active");
+			this.$router.push({name:'ho',params:{id:mark.change}})
+		}
 		
 	}
 }
@@ -60,17 +76,32 @@ export default {
 </script>
 <style>
 
-/*左側菜單*/
+/*菜單*/
+.home-con-menu{
+	height:46px;
+	line-height:46px;
+	background:#fff;
+	border-top:1px solid #ccc;
+}
 .menu-every{
-	background:rgba(234,234,234,.5);
 	cursor:pointer;
-	height:50px;
-	line-height:50px;
-	font-size:18px;
+	font-size:15px;
 	text-align:center;
-	}
-.menu-every:hover{background:rgba(214,214,214,.5)}
+	padding:0px 8px;
+	float:left;
+}
+.home-con-menu .active{
+	color:#007fff
+}
+.topmenuone .active{
+	color:#007fff
+}
 .rightevery{display:none}
+.topmenuone{
+	height:46px;
+	line-height:46px;
+
+}
 </style>
 
 
