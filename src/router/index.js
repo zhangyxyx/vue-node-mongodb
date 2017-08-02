@@ -10,17 +10,23 @@ import common from '@/components/common'
 import label from '@/components/label/view'
 import find from '@/components/find/view'
 import collect from '@/components/collect/view'
+//管理员的页面
+import Hmain from '@/components/houtai/main'
+import Hhone from '@/components/houtai/home/view'
+import Hcollect from '@/components/houtai/collect/view'
+import Hfind from '@/components/houtai/find/view'
+import Hzhuanlan from '@/components/houtai/zhuanlan/view'
 
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: 'Login',
-      component: Login
-    },
+    // {
+    //   path: '/',
+    //   name: 'Login',
+    //   component: Login
+    // },
     //公共的部分
     {
       path:'/common',
@@ -35,6 +41,11 @@ export default new Router({
     },
     //部分组件 
     {
+    	path:'/',//首页
+    	name:'home',
+    	component:home
+    },
+     {
     	path:'/home/home',//首页
     	name:'home',
     	component:home
@@ -80,7 +91,26 @@ export default new Router({
      name:'addData',
      component:addData
    },
- 
-   
+  //管理员的页面路由
+   {
+     path:'/houtai/home',
+     name:'Hhome',
+     component:Hhone
+   },
+   {
+     path:'/houtai/home',
+     name:'Hcollect',
+     component:Hcollect
+   },
+    {
+     path:'/houtai/home',
+     name:'Hfind',
+     component:Hfind
+   },
+    {
+     path:'/houtai/home',
+     name:'Hhome',
+     component:Hzhuanlan
+   },
   ]
 })

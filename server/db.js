@@ -82,6 +82,14 @@ const zlread=mongoose.Schema({
     user:String,
     con:String
 });
+//后台测试接口
+const seeks=mongoose.Schema({
+    title:String,
+    user:String,
+    time:String,
+    sort:String,
+    con:String,
+})
 const Models = {
     Login : mongoose.model('Login',loginSchema),
     homes: mongoose.model('homes',homesSchema),
@@ -95,6 +103,10 @@ const Models = {
     desgin:mongoose.model('desgin',zldesgin),
     products:mongoose.model('products',zlproducts),
     tool:mongoose.model('tool',zltool),
-    read:mongoose.model('read',zlread)
+    read:mongoose.model('read',zlread),
+
+    //后台测试接口
+    seek:mongoose.model('seeks',seeks),
+
 }
 module.exports = Models;

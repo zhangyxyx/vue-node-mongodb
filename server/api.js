@@ -2,6 +2,7 @@ const models = require('./db');
 const express = require('express');
 const ObjectID=require('mongodb').ObjectID;
 const router = express.Router();
+const util = require("util");
 // 创建账号接口
 router.post('/api/login/createAccount',(req,res) => {
     // 这里的req.body能够使用就在index.js中引入了const bodyParser = require('body-parser')
@@ -198,5 +199,26 @@ router.get('/api/read/showdata',(req,res)=>{
             res.send(data)
         }
     })
+})
+router.get('/api/seek/list',(req,res)=>{
+    var offset=req.query.offset;//页码
+    var limit=req.query.limit;//限制显示几个 
+    //从第几个开始 skip页数 limint
+    var allNum;
+    models.seek.find().count((err,data)=>{
+        allNum=data;
+    });
+    models.seek.find().skip(offset).limit(limit).find((err,data)=>{
+        if(err){
+            res.send(err)
+        }else{
+            res.send(util.inspect({
+                rows:data,
+                size:limit,
+                total:allNum
+            }))
+        }
+    })
+    
 })
 module.exports = router;
