@@ -1,4 +1,4 @@
-#本项目是仿照掘金网站的实战项目，vue2+vue-router2+es6+webpack+node+mongodb的项目
+<h2>本项目是仿照掘金网站的实战项目，vue2+vue-router2+es6+webpack+node+mongodb的项目</h2>
 <h2>项目整体结构</h2>
 <ul>
   <li>vue-cli</li>
@@ -18,10 +18,6 @@
    <li>数据的查询，添加，删除</li>
    <li>将数据进行分页的效果</li>
 </ul>
-
-<h2>添加后台页面</h2>
-<p>页面列表内容用的是bootstrap-table采用服务器端渲染</p>
-<p>地址：/houtai/home</p>
 <h6>目前并没有全部完整...</h6>
 
 

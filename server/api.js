@@ -201,8 +201,8 @@ router.get('/api/read/showdata',(req,res)=>{
     })
 })
 router.get('/api/seek/list',(req,res)=>{
-    var offset=req.query.offset;//页码
-    var limit=req.query.limit;//限制显示几个 
+    var offset=parseInt(req.query.offset);//页码
+    var limit=parseInt(req.query.limit);//限制显示几个 
     //从第几个开始 skip页数 limint
     var allNum;
     models.seek.find().count((err,data)=>{
@@ -212,11 +212,11 @@ router.get('/api/seek/list',(req,res)=>{
         if(err){
             res.send(err)
         }else{
-            res.send(util.inspect({
+            res.send({
                 rows:data,
                 size:limit,
                 total:allNum
-            }))
+            })
         }
     })
     
