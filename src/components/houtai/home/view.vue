@@ -3,6 +3,10 @@
 	<myCommon v-bind:message="commonmsg"></myCommon>
     <!--专属home的菜单 我的关注 前端-->
     <div class="col-sm-9 home-con-menu" style="height:100%">
+		<h3>首页当前的全部信息</h3>
+		<button type="button" class="btn btn-primary" v-on:click="addData()">添加</button>
+		<button type="button" class="btn btn-primary" v-on:click="removeDate()">删除</button>
+		<router-link to="/home/home"><button type="button" class="btn btn-primary" >返回前台页面</button></router-link>
 		<table id="table"></table>
     </div>
 	
@@ -46,6 +50,29 @@ export default {
 			$('.topmenuone .menu-every[data-menu='+mark.change+']').addClass('active').siblings().removeClass("active");
 			this.$router.push({name:'ho',params:{id:mark.change}})
 		},
+		addData(){
+			this.$router.push('/houtai/add')
+		},
+		removeDate(){
+			var _this=this;
+			var sum=$("tr").length;
+			var collId=new Array();
+			$("tr").each(function(i){
+				if($("tr").eq(i).attr("class")=='selected'){
+					collId.push($("tr").eq(i).attr('id'));
+				}
+			})
+			//id集合
+			var params={
+				id:collId
+			}
+			
+			this.$http.post('/api/seek/remove',params).then((response)=>{
+				alert(1)
+				this.$options.methods.table.bind(this)();
+			})
+		},
+		//初始化表格
 		table(){
 			$('#table').bootstrapTable({
 				sortName : "",
@@ -58,26 +85,15 @@ export default {
 				pageSize:5,
 				search:true,
 				idField:"_id",//标志选项的id
-				searchOnEnterKey:true,
 				dataType:'json',
 				url: '/api/seek/list?',
 				maintainSelected:true,
 				queryParams : function(params) {
 					return params;
 				},
-				onLoadSuccess: function(data){ //加载成功时执行
-					console.log("加载成功"+data);
-				},
-				onLoadError: function(status){ //加载失败时执行
-					console.log("加载数据失败"+status);
-				},
 				responseHandler:function(res){
-				//远程数据加载之前,处理程序响应数据格式,对象包含的参数: 我们可以对返回的数据格式进行处理
-				//在ajax后我们可以在这里进行一些事件的处理
-				console.log(res)
 				return res.body;
 				},
-
 				columns: [{
 					field: 'checkStatus',
 					checkbox: true, 
@@ -89,7 +105,6 @@ export default {
 					title: '标题',
 					sortable : true,
 					formatter:function(value,row){
-						console.log(value)
 						return value
 					}
 				}, {
@@ -131,7 +146,7 @@ export default {
 </script>
 
 <style>
-
+.active{color:#007fff}
 
 </style>
 

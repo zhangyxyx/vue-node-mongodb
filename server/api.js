@@ -200,6 +200,8 @@ router.get('/api/read/showdata',(req,res)=>{
         }
     })
 })
+//后台
+//查询数据
 router.get('/api/seek/list',(req,res)=>{
     var offset=parseInt(req.query.offset);//页码
     var limit=parseInt(req.query.limit);//限制显示几个 
@@ -219,5 +221,32 @@ router.get('/api/seek/list',(req,res)=>{
                
             }
         });
+})
+//添加数据
+router.post('/api/seek/add',(req,res)=>{
+    let newDate=new models.seeks({
+        title:req.body.title,
+        user:req.body.name,
+        time:req.body.time,
+        sort:req.body.sort,
+        con:req.body.con,
+    })
+    newDate.save((err,date)=>{
+        if(err){
+            res.send(err)
+        }else{
+            res.send('添加成功')
+        }
+    })
+})
+//删除数据
+router.post('/api/seek/remove',(req,res)=>{
+    models.seek.remove({ _id: { $in: req.body.id } },(err,data)=>{
+        if(err){
+            res.send(err)
+        }else{
+            res.send(data)
+        }
+    });
 })
 module.exports = router;

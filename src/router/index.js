@@ -16,6 +16,7 @@ import Hhone from '@/components/houtai/home/view'
 import Hcollect from '@/components/houtai/collect/view'
 import Hfind from '@/components/houtai/find/view'
 import Hzhuanlan from '@/components/houtai/zhuanlan/view'
+import add from '@/components/houtai/add/view'
 
 
 Vue.use(Router)
@@ -98,19 +99,25 @@ export default new Router({
      component:Hhone
    },
    {
-     path:'/houtai/home',
+     path:'/houtai/collect',
      name:'Hcollect',
      component:Hcollect
    },
     {
-     path:'/houtai/home',
+     path:'/houtai/find',
      name:'Hfind',
      component:Hfind
    },
     {
-     path:'/houtai/home',
+     path:'/houtai/zhuanlan',
      name:'Hhome',
      component:Hzhuanlan
+   },
+    //详情
+    {
+     path:'/houtai/add',
+     name:'add',
+     component:add
    },
   ]
 })

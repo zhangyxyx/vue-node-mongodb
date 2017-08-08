@@ -38,6 +38,7 @@ export default{
         },
         clickTopMenu(i,icon){
             this.ind=i;
+            console.log(i)
             this.comMessage=icon;
             this.$router.push('/houtai/'+icon)
 
