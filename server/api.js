@@ -203,22 +203,21 @@ router.get('/api/read/showdata',(req,res)=>{
 router.get('/api/seek/list',(req,res)=>{
     var offset=parseInt(req.query.offset);//页码
     var limit=parseInt(req.query.limit);//限制显示几个 
-    //从第几个开始 skip页数 limint
-    var allNum;
-    models.seek.find().count((err,data)=>{
-        allNum=data;
-    });
-    models.seek.find().skip(offset).limit(limit).find((err,data)=>{
-        if(err){
-            res.send(err)
-        }else{
-            res.send({
-                rows:data,
-                size:limit,
-                total:allNum
-            })
-        }
-    })
-    
+        models.seek.find().skip(offset).limit(limit).find((err,data)=>{ 
+            if(err){
+                res.send(err)
+            }else{
+                models.seek.find().count((err,result)=>{
+                    res.send({
+                        body:{
+                        rows:data,
+                        size:limit,
+                        total:result
+                        }
+                    })
+                })
+               
+            }
+        });
 })
 module.exports = router;

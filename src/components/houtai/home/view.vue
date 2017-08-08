@@ -47,7 +47,6 @@ export default {
 			this.$router.push({name:'ho',params:{id:mark.change}})
 		},
 		table(){
-			console.log($('#table'))
 			$('#table').bootstrapTable({
 				sortName : "",
 				sortOrder : "",
@@ -58,12 +57,12 @@ export default {
 				pageNumber:1,
 				pageSize:5,
 				search:true,
+				idField:"_id",//标志选项的id
 				searchOnEnterKey:true,
 				dataType:'json',
 				url: '/api/seek/list?',
 				maintainSelected:true,
 				queryParams : function(params) {
-					console.log(params)
 					return params;
 				},
 				onLoadSuccess: function(data){ //加载成功时执行
@@ -75,12 +74,16 @@ export default {
 				responseHandler:function(res){
 				//远程数据加载之前,处理程序响应数据格式,对象包含的参数: 我们可以对返回的数据格式进行处理
 				//在ajax后我们可以在这里进行一些事件的处理
-				return res.data;
+				console.log(res)
+				return res.body;
 				},
 
 				columns: [{
+					field: 'checkStatus',
+					checkbox: true, 
+				},{
 					field: 'id',
-					title: 'Item ID'
+					visible:'false'
 				}, {
 					field: 'title',
 					title: '标题',
