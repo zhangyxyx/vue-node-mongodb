@@ -33,12 +33,10 @@ export default{
     },
     methods:{
         markshow(){
-            console.log(this.message)
             this.ind=this.message
         },
         clickTopMenu(i,icon){
             this.ind=i;
-            console.log(i)
             this.comMessage=icon;
             this.$router.push('/houtai/'+icon)
 

@@ -224,7 +224,7 @@ router.get('/api/seek/list',(req,res)=>{
 })
 //添加数据
 router.post('/api/seek/add',(req,res)=>{
-    let newDate=new models.seeks({
+    let newDate=new models.seek({
         title:req.body.title,
         user:req.body.name,
         time:req.body.time,

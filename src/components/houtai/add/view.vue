@@ -43,7 +43,6 @@ export default {
 			}
 			if(params.title&&params.name&&params.time&&params.sort&&params.con){
 				this.$http.post('/api/seek/add',params).then((response)=>{
-					console.log(response)
 					this.$router.push('/houtai/home')
 				})
 			}else{

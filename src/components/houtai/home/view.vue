@@ -66,10 +66,8 @@ export default {
 			var params={
 				id:collId
 			}
-			
 			this.$http.post('/api/seek/remove',params).then((response)=>{
-				alert(1)
-				this.$options.methods.table.bind(this)();
+				$("#table").bootstrapTable('refresh', this.table());
 			})
 		},
 		//初始化表格
