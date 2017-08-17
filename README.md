@@ -1,4 +1,4 @@
-<h2>本项目是仿照掘金网站的实战项目</h2><br/>
+<h2>本项目是仿照掘金网站的实战项目</h2>
 <h3>vue2+vue-router2+es6+webpack+node+mongodb的项目</h3>
 <h2>项目整体结构</h2>
 <ul>
