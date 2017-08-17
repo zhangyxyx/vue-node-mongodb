@@ -4,7 +4,7 @@
     <!--专属home的菜单 我的关注 前端-->
     <div class="home-con-menu">
 		<div style="width:960px;margin:0 auto;">
-			<div class="menu-every" v-for='(options,index) in leftMenu' v-bind:data-menu="options.change" v-on:click="onemenu(leftMenu[index])" :key="index">
+			<div class="menu-every"v-for='(options,index) in onemenu' v-bind:data-menu="options.change"  :class="options.active" v-on:click="onemenuclick(onemenu[index])" :key="index">
 				{{options.text}}
 			</div>
 		</div>
@@ -15,12 +15,12 @@
 			<div class="col-sm-9" style="background:#fff;">
 				<!--热门 最新 评论-->
 				<div class="topmenuone">
-					<div class="menu-every" v-for='(options,index) in topMenuOne' v-bind:data-menu="options.change"  v-on:click="twomenu(topMenuOne[index])"  :key="index">
+					<div class="menu-every" v-for='(options,index) in twomenu' v-bind:data-menu="options.change"  :class="options.active"  v-on:click="twomenuclick(twomenu[index])"  :key="index">
 						{{options.text}}
 					</div>
 				</div>
 				<!--精选-->
-				<div class="col-sm-12 rightevery article" style="display:block;"><articleview></articleview></div>
+				<div class="col-sm-12 rightevery article" style="display:block;"><articleview v-bind:message="nowId"></articleview></div>
 			</div>
 			<div class="col-sm-3">
 				<img src="static/home_img1.png" style="width:100%;">
@@ -37,16 +37,17 @@ import common from '../common.vue'
 export default {
 	data() {
 		return{
-				leftMenu:[
-					{change:'attention',text:'我关注的'},
+				onemenu:[
+					{change:'attention',text:'我关注的',active:'active'},
 					{change:'web',text:'前端'},
 				],
-				topMenuOne:[
-					{change:'hot',text:'热门'},
+				twomenu:[
+					{change:'hot',text:'热门',active:'active'},
 					{change:'new',text:'最新'},
 					{change:'comment',text:'评论'},
 				],
-				commonmsg:0		
+				commonmsg:0,
+				nowId:{},
 		}
 	},
 	components:{
@@ -54,21 +55,35 @@ export default {
 		"contactview":contact,
 		"myCommon":common
 	},
-
+	mounted(){
+		this.Jumprouting();
+	},
 	methods:{
 		//切换左边的菜单
 		clickmenu(menu){
 			$(".rightevery").eq(menu).css({display:"block"}).siblings().css({display:"none"})
 		},
 		//点击菜单跳转
-		onemenu(mark){
+		onemenuclick(mark){
 			$('.home-con-menu .menu-every[data-menu='+mark.change+']').addClass('active').siblings().removeClass("active");
-			this.$router.push({name:'ho',params:{id:mark.change}})
+			this.Jumprouting();
 		},
-		twomenu(mark){
+		twomenuclick(mark){
 			$('.topmenuone .menu-every[data-menu='+mark.change+']').addClass('active').siblings().removeClass("active");
-			this.$router.push({name:'ho',params:{id:mark.change}})
-		}
+			this.Jumprouting();
+		},
+		//点击菜单的时候跳转路由
+		Jumprouting(){
+			var one=$(".home-con-menu .active").attr("data-menu");
+			var two=$('.topmenuone .active').attr("data-menu");
+			var json={
+				one:one,
+				two:two
+			}
+			this.$router.push({path:'/home/'+one,query:{two:two}});
+			this.nowId=json;
+			return json
+		},
 		
 	}
 }

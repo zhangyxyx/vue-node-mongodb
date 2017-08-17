@@ -1,3 +1,8 @@
+<!--说明
+1.对应后台是list模型，模型里面放置的是我的关注和前端的东西 list是全部的内容。
+所以如果需要调用前端的东西就直接用sort参数来从数据库中获取
+2.在首页中还有热门 最新 评价几个选项这就需要在后台区分开
+-->
 <template>
 <div class="row">
     <!-- <div class="col-sm-12 top">
@@ -18,6 +23,7 @@
                 </div>
             </div>
     </div>
+    {{message}}
     <!--分页-->
     <!-- <div class="fenye">
         <span style="height:20px;border:1px solid #000;cursur:pointer">上一页</span>
@@ -39,6 +45,7 @@ export default {
         }
        
     },
+    props:['message'],
     mounted:function () {
         //类似于jquery中的ready方法
         this.sums();
@@ -50,7 +57,10 @@ export default {
              _this.sumpage=[];
             this.$http.post('/api/list/showlist',params).then((response)=>{
                 //列表数据
-                var result=JSON.parse(response.bodyText).data;
+                var result=response.body 
+                console.log(result)
+                //列表数据
+                //var result=JSON.parse(response.bodyText).data;
                 //数据的总数量
                 var sum=JSON.parse(response.bodyText).sum;
                 //渲染出页码
@@ -60,7 +70,6 @@ export default {
                     _this.sumpage.push(i);
                 }
                 //将结果赋值给需要循环
-                console.log(result)
 				_this.homelists=result;
 				return _this.homelists;
 			});
@@ -70,7 +79,9 @@ export default {
 			var _this=this;
             var params={
                 page:0,
-                limit:5
+                limit:5,
+                oneSort:this.message.one,
+                twoSort:this.message.two
             };
 			this.showlist(params);
 		},

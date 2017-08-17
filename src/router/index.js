@@ -10,6 +10,7 @@ import common from '@/components/common'
 import label from '@/components/label/view'
 import find from '@/components/find/view'
 import collect from '@/components/collect/view'
+import article from '@/components/home/article'
 //管理员的页面
 import Hmain from '@/components/houtai/main'
 import Hhone from '@/components/houtai/home/view'
@@ -52,10 +53,11 @@ export default new Router({
     	component:home
     },
     {//首页的我的关注和前端 这两个大类下面有分给三个热门 最新 评论
-      path:'/home/hn/:id',
-      name:'ho',
+      path:'/home/:id',
+      name:'article',
       component:home
     },
+
     {
      path:'/home/zhuanlan',//专栏
      name:'zhuanlan',
