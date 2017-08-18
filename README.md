@@ -15,14 +15,7 @@
 <h3>实现的功能</h3>
 <p>项目分为前台页面和管理员页面</p>
 <p>可以直接在router里面的index.js中放置了全部的路由</p>
-<h3>项目的页面</h3>
-<p>前台页面</p>
 
-![maze](https://github.com/GainLoss/vue-node-mongodb/blob/master/static/introduct/2.png) 
-
-<p>管理员页面</p>
-
-![maze](https://github.com/GainLoss/vue-node-mongodb/blob/master/static/introduct/3.png) 
 
 
 
