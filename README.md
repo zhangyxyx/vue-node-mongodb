@@ -3,7 +3,7 @@
 <h3>项目整体结构</h3>
 <p>本项目中后台用到的是nodejs express</p>
 <p>前台用的是vuejs bootstrap vue-router vue-resource</p>
-![maze](https://github.com/GainLoss/own-web/raw/master/myImg/jiegou.png) 
+![maze](https://github.com/GainLoss/vue-node-mongodb/blob/master/static/introduct/1.png) 
 <h3>安装</h3>
 <p>前提是需要本地电脑安装npm和node<p>
 <p>另外项目中有一些需要安装的插件，可以在pakeage.json里面看</p>
@@ -15,8 +15,9 @@
 <p>可以直接在router里面的index.js中放置了全部的路由</p>
 <h3>项目的页面</h3>
 <p>前台页面</p>
-
+![maze](https://github.com/GainLoss/vue-node-mongodb/blob/master/static/introduct/2.png) 
 <p>管理员页面</p>
+![maze](https://github.com/GainLoss/vue-node-mongodb/blob/master/static/introduct/3.png) 
 
 
 
