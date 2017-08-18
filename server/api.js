@@ -77,9 +77,9 @@ const util = require("util");
 //排序的话用sort 1升序 -1降序
 router.post('/api/list/showlist',(req,res)=>{
     //参数
-    var sort=req.body.oneSort;
+    var sort=req.body.one;
     //排序参数
-    var hot=req.body.twoSort;
+    var hot=req.body.two;
     var query=models.list.find({sort:sort});
     query.find(function(err,data){
         if(err){
@@ -96,6 +96,7 @@ router.post('/api/list/addlist',(req,res)=>{
        title:req.body.title,
        time:req.body.time,
        sort:req.body.sort,
+       user:req.body.user,
        con:req.body.con
    });
    newAccount.save((err,data)=>{

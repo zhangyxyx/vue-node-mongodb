@@ -9,9 +9,10 @@
             <p>感谢分享，文章的审核时间为1-2个工作日</p>
             <!--添加的-->
             <div class="addcon col-sm-8">
-                <input type="text" v-model="list.title" placeholder="标题" /> </br>
-                <input type="text" v-model="list.con" placeholder="描述" /> </br>
-                <input type="text" v-model="list.sort" placeholder="分类" />
+                <label>标题</label>&nbsp;<input type="text" v-model="list.title" placeholder="标题" /> </br>
+                <label>用户</label>&nbsp;<input type="text" v-model="list.user" placeholder="用户" /> </br>
+                <label>分类</label>&nbsp;<input type="text" v-model="list.sort" placeholder="分类" /></br>
+                <label>内容</label>&nbsp;<input type="text" v-model="list.con" placeholder="内容" /> </br>
                 </br>
                 <button @click="addlist">给列表添加信息</button>
             </div>

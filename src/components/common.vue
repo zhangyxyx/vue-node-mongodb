@@ -44,7 +44,6 @@ export default{
     },
     methods:{
         markshow(){
-            console.log(this.message)
             this.ind=this.message
         },
         clickTopMenu(i,icon){

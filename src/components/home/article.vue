@@ -4,7 +4,7 @@
 2.在首页中还有热门 最新 评价几个选项这就需要在后台区分开
 -->
 <template>
-<div class="row">
+<div class="row article" >
     <!-- <div class="col-sm-12 top">
         <input class="serchtext" type="text" placeholder="输入你要查找的内容" >
         <span class="search" v-on:click="search()">搜索</span>
@@ -46,11 +46,28 @@ export default {
        
     },
     props:['message'],
-    mounted:function () {
+    beforeUpdate:function () {
         //类似于jquery中的ready方法
-        this.sums();
+        this.sums()
     },
     methods:{ 
+        //判断一下组件的数据是否出来
+        propsData(){
+            if(this.message.rows){
+                this.sums()
+            }
+        },
+        //渲染列表
+        sums(){
+			var _this=this;
+            var params={
+                page:0,
+                limit:5,
+                one:this.message.one,
+                two:this.message.two
+            };
+			this.showlist(params);
+		},
         //渲染数据
         showlist(params){
             var _this=this;
@@ -58,7 +75,6 @@ export default {
             this.$http.post('/api/list/showlist',params).then((response)=>{
                 //列表数据
                 var result=response.body 
-                console.log(result)
                 //列表数据
                 //var result=JSON.parse(response.bodyText).data;
                 //数据的总数量
@@ -74,17 +90,7 @@ export default {
 				return _this.homelists;
 			});
         },
-        //渲染列表
-        sums(){
-			var _this=this;
-            var params={
-                page:0,
-                limit:5,
-                oneSort:this.message.one,
-                twoSort:this.message.two
-            };
-			this.showlist(params);
-		},
+        
        
         //查找内容
         search(){

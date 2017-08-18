@@ -20,7 +20,7 @@
 					</div>
 				</div>
 				<!--精选-->
-				<div class="col-sm-12 rightevery article" style="display:block;"><articleview v-bind:message="nowId"></articleview></div>
+				<div class="col-sm-12 rightevery article" style="display:block;"><articleview v-if="nowId" v-bind:message="nowId"></articleview></div>
 			</div>
 			<div class="col-sm-3">
 				<img src="static/home_img1.png" style="width:100%;">

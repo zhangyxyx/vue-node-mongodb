@@ -27,61 +27,15 @@ const listSchema=mongoose.Schema({
 	title:String,
     time:String,
     sort:String,
-    con:String
+    con:String,
+    user:String
 });
 //文件
 const fileSchema=mongoose.Schema({
     url:String
 });
-//专栏
-const zlandroid=mongoose.Schema({
-    title:String,
-    time:String,
-    user:String,
-    con:String
-});
-const zlweb=mongoose.Schema({
-    title:String,
-    time:String,
-    user:String,
-    con:String
-});
-const zlios=mongoose.Schema({
-    title:String,
-    time:String,
-    user:String,
-    con:String
-});
-const zljava=mongoose.Schema({
-    title:String,
-    time:String,
-    user:String,
-    con:String
-});
-const zldesgin=mongoose.Schema({
-    title:String,
-    time:String,
-    user:String,
-    con:String
-});
-const zlproducts=mongoose.Schema({
-    title:String,
-    time:String,
-    user:String,
-    con:String
-});
-const zltool=mongoose.Schema({
-    title:String,
-    time:String,
-    user:String,
-    con:String
-});
-const zlread=mongoose.Schema({
-    title:String,
-    time:String,
-    user:String,
-    con:String
-});
+
+
 //后台测试接口
 const seeks=mongoose.Schema({
     title:String,
