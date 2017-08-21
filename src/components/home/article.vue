@@ -46,25 +46,21 @@ export default {
        
     },
     props:['message'],
-    beforeUpdate:function () {
-        //类似于jquery中的ready方法
-        this.sums()
+    watch:{
+        "message":function(val){
+            this.sums(val);
+        }
     },
     methods:{ 
-        //判断一下组件的数据是否出来
-        propsData(){
-            if(this.message.rows){
-                this.sums()
-            }
-        },
+
         //渲染列表
-        sums(){
+        sums(message){
 			var _this=this;
             var params={
                 page:0,
                 limit:5,
-                one:this.message.one,
-                two:this.message.two
+                one:message.one,
+                two:message.two
             };
 			this.showlist(params);
 		},
@@ -73,6 +69,7 @@ export default {
             var _this=this;
              _this.sumpage=[];
             this.$http.post('/api/list/showlist',params).then((response)=>{
+                
                 //列表数据
                 var result=response.body 
                 //列表数据

@@ -12,8 +12,6 @@ db.once('error',() => console.log('Mongo connection error'));
 db.once('open',() => console.log('Mongo connection successed'));
 
 /************** 定义模型Model **************/
-
-
 /************** 定义模式loginSchema **************/
 const loginSchema = mongoose.Schema({
     account : String,
@@ -50,14 +48,14 @@ const Models = {
     list:mongoose.model('list',listSchema),
     file:mongoose.model('file',fileSchema),
 
-    android:mongoose.model('android',zlandroid),
-    web:mongoose.model('web',zlweb),
-    ios:mongoose.model('ios',zlios),
-    java:mongoose.model('java',zljava),
-    desgin:mongoose.model('desgin',zldesgin),
-    products:mongoose.model('products',zlproducts),
-    tool:mongoose.model('tool',zltool),
-    read:mongoose.model('read',zlread),
+    // android:mongoose.model('android',zlandroid),
+    // web:mongoose.model('web',zlweb),
+    // ios:mongoose.model('ios',zlios),
+    // java:mongoose.model('java',zljava),
+    // desgin:mongoose.model('desgin',zldesgin),
+    // products:mongoose.model('products',zlproducts),
+    // tool:mongoose.model('tool',zltool),
+    // read:mongoose.model('read',zlread),
 
     //后台测试接口
     seek:mongoose.model('seeks',seeks),
