@@ -59,23 +59,23 @@ export default new Router({
     },
 
     {
-     path:'/home/zhuanlan',//专栏
+     path:'/zhuanlan',//专栏
      name:'zhuanlan',
      component:zhuanlan
     },
     
     {
-     path:'/home/collect',//收藏集
+     path:'/collect',//收藏集
      name:'collect',
      component:collect
     },
     {
-      path:'/home/find',//发现
+      path:'/find',//发现
       name:'find',
       component:find
     },
     {
-      path:'/home/label',//标签
+      path:'/label',//标签
       name:'label',
       component:label
     },

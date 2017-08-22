@@ -11,7 +11,7 @@ const db = mongoose.connection;
 db.once('error',() => console.log('Mongo connection error'));
 db.once('open',() => console.log('Mongo connection successed'));
 
-/************** 定义模型Model **************/
+
 /************** 定义模式loginSchema **************/
 const loginSchema = mongoose.Schema({
     account : String,
@@ -30,10 +30,32 @@ const listSchema=mongoose.Schema({
 });
 //文件
 const fileSchema=mongoose.Schema({
-    url:String
+    filename: String,
 });
 
-
+//专栏
+const zlSchema=mongoose.Schema({
+    user:String,
+    title:String,
+    con:String,
+    like:Number,
+    collect:Number,
+    time:String,
+});
+//收藏集
+const clSchema=mongoose.Schema({
+    user:String,
+    title:String,
+    con:String,
+    time:String,
+});
+//发现
+const fiSchema=mongoose.Schema({
+    user:String,
+    title:String,
+    con:String,
+    time:String,
+});
 //后台测试接口
 const seeks=mongoose.Schema({
     title:String,
@@ -42,21 +64,15 @@ const seeks=mongoose.Schema({
     sort:String,
     con:String,
 })
+/************** 定义模型Model **************/
 const Models = {
     Login : mongoose.model('Login',loginSchema),
     homes: mongoose.model('homes',homesSchema),
-    list:mongoose.model('list',listSchema),
+    list:mongoose.model('lists',listSchema),
     file:mongoose.model('file',fileSchema),
-
-    // android:mongoose.model('android',zlandroid),
-    // web:mongoose.model('web',zlweb),
-    // ios:mongoose.model('ios',zlios),
-    // java:mongoose.model('java',zljava),
-    // desgin:mongoose.model('desgin',zldesgin),
-    // products:mongoose.model('products',zlproducts),
-    // tool:mongoose.model('tool',zltool),
-    // read:mongoose.model('read',zlread),
-
+    zhuanlan:mongoose.model('zhuanlans',zlSchema),//专栏
+    collect:mongoose.model('collects',clSchema),//收藏
+    find:mongoose.model('finds',fiSchema),//发现
     //后台测试接口
     seek:mongoose.model('seeks',seeks),
 

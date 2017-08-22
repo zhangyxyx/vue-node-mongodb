@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="con">
-        <router v-bind:message="parentMsg"></router>
+        <div class="commonWM"  style="margin-top:20px;"><router v-bind:message="parentMsg"></router></div>
     </div> 
     
 </div> 
@@ -82,7 +82,7 @@ export default{
     cursor:pointer
 }
 .action{
-    color:blue
+    color:#007fff
 }
 .topTwo{
     floaT:left;

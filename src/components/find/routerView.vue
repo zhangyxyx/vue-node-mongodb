@@ -1,14 +1,14 @@
 <template>
-<div class="row">
+<div>
     <div class="col-sm-9">
-        <div v-for="(item,index) in homelists" class="every">
+        <div v-for="(item,index) in homelists" class="every" :key="index">
             <h2>{{item.title}}</h2>
             <p>{{item.con}}</p>
 
         </div>
     </div>
-    <div class="col-sm-2"></div>
 </div>
+
 </template>
 
 <script>
@@ -31,7 +31,7 @@ export default {
     methods:{
         showdata(){
            var _this=this;
-           this.$http.get('/api/'+this.message+'/showdata').then((response)=>{
+           this.$http.get('/api/find/list').then((response)=>{
                  //列表数据
                 var result=JSON.parse(response.bodyText);
 				//将结果赋值给需要循环
@@ -49,5 +49,8 @@ export default {
     border-bottom:1px solid #efefef;
     background:#fff;
     padding:10px;
+}
+.col-sm-9{
+    padding:0px;
 }
 </style>

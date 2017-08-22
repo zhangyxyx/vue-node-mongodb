@@ -23,7 +23,7 @@
                 </div>
             </div>
     </div>
-    {{message}}
+
     <!--分页-->
     <!-- <div class="fenye">
         <span style="height:20px;border:1px solid #000;cursur:pointer">上一页</span>

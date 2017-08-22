@@ -49,7 +49,7 @@ export default{
         clickTopMenu(i,icon){
             this.ind=i;
             this.comMessage=icon;
-            this.$router.push('/home/'+icon)
+            this.$router.push('/'+icon)
 
         }
     }
@@ -76,7 +76,7 @@ export default{
 	cursor:pointer;
 }
 .homeTop span:hover{
-	color:blue
+	color:#007fff
 }
 .homeTop .active{
 	color:#007fff

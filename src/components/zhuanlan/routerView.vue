@@ -31,7 +31,8 @@ export default {
     methods:{
         showdata(){
            var _this=this;
-           this.$http.get('/api/'+this.message+'/showdata').then((response)=>{
+           this.$http.get('/api/zhuanlan/list').then((response)=>{
+               console.log(response)
                  //列表数据
                 var result=JSON.parse(response.bodyText);
 				//将结果赋值给需要循环
