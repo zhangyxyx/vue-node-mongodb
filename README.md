@@ -1,5 +1,6 @@
 <h1>本项目是仿照掘金网站的实战项目</h1>
 <h3>vue+vue-router+es6+webpack+node+mongodb的项目</h3>
+<hr/>
 <h2>项目整体结构</h2>
 <p>本项目中后台用到的是nodejs express</p>
 <p>前台用的是vuejs bootstrap vue-router vue-resource</p>
