@@ -6,13 +6,13 @@
 
 ![maze](https://github.com/GainLoss/vue-node-mongodb/blob/master/static/introduct/1.png) 
 
-<h3>安装</h3>
+<h2>安装</h2>
 <p>前提是需要本地电脑安装npm和node<p>
 <p>另外项目中有一些需要安装的插件，可以在pakeage.json里面看</p>
-<h3>运行项目</h3>
+<h2>运行项目</h2>
 <p>demo文件中打开cmd然后输入npm run dev</p>
 <p>demo文件中的server文件打开cmd然后输入node index</p>
-<h3>实现的功能</h3>
+<h2>实现的功能</h2>
 <p>项目分为前台页面和管理员页面</p>
 <p>可以直接在router里面的index.js中放置了全部的路由</p>
 <h2>代码的流程</h2>
