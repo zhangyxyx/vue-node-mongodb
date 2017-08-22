@@ -21,9 +21,9 @@
 <p>3.在App.vue中有一个<router-view></router-view>是将公共的渲染，就是可以将需要展示的组件放到这里面</p></br>
 <p>4.然后对应上浏览器地址栏上的地址，前面说了在mian.js中已经将需要的插件引入了，其中就包含router中的index.js文件，这样可以执行路由，将地址栏上的地址和对应的路由对象，就可以找到需要的组件的位置，然后进行渲染</p></br>
 <h3>后台的介绍</h3>
-<p>1.db.js文件是存放Schema Model这两个都可对数据库操作造成影响，其中Schema生成Model;在这个文件中引入mongoose并且连上本地的数据库；定义模式Schema这个是定义对应的集合中的文档的数据结构的定义；定义模型mode</p></br>
-<p>2.api.js文件是定义接口和操作数据的增删改查的，这里面引入了express db.js等之类，使用express的路由中间件，定义接口和操作数据</p></br>
-<p>3.index.js文件这个是一开始后台的入口，因为我们是在cmd中执行node index所以一开始是从这个文件。在这个文件中需要引入api(就是定义的接口文件) express 之类的资源</p></br>
+<p>1.db.js文件是存放Schema Model这两个都可对数据库操作造成影响，其中Schema生成Model;在这个文件中引入mongoose并且连上本地的数据库；定义模式Schema这个是定义对应的集合中的文档的数据结构的定义；定义模型mode</p>
+<p>2.api.js文件是定义接口和操作数据的增删改查的，这里面引入了express db.js等之类，使用express的路由中间件，定义接口和操作数据</p>
+<p>3.index.js文件这个是一开始后台的入口，因为我们是在cmd中执行node index所以一开始是从这个文件。在这个文件中需要引入api(就是定义的接口文件) express 之类的资源</p>
 <hr/>
 
 
