@@ -18,7 +18,11 @@ const loginSchema = mongoose.Schema({
     password : String
 });
 const homesSchema=mongoose.Schema({
-	id:String
+	title:String,
+    time:String,
+    sort:String,
+    con:String,
+    user:String
 });
 //列表的模式
 const listSchema=mongoose.Schema({
@@ -32,7 +36,6 @@ const listSchema=mongoose.Schema({
 const fileSchema=mongoose.Schema({
     filename: String,
 });
-
 //专栏
 const zlSchema=mongoose.Schema({
     user:String,
@@ -67,14 +70,15 @@ const seeks=mongoose.Schema({
 /************** 定义模型Model **************/
 const Models = {
     Login : mongoose.model('Login',loginSchema),
-    homes: mongoose.model('homes',homesSchema),
-    list:mongoose.model('lists',listSchema),
-    file:mongoose.model('file',fileSchema),
+    home: mongoose.model('home',homesSchema,'home'),
+
+    //list:mongoose.model('lists',listSchema),//home
     zhuanlan:mongoose.model('zhuanlans',zlSchema),//专栏
     collect:mongoose.model('collects',clSchema),//收藏
     find:mongoose.model('finds',fiSchema),//发现
     //后台测试接口
     seek:mongoose.model('seeks',seeks),
+    file:mongoose.model('file',fileSchema),
 
 }
 module.exports = Models;

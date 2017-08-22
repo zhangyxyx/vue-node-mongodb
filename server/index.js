@@ -13,7 +13,7 @@ const app = express();
 const busboy=require('connect-busboy');
 
 app.use(busboy()); 
-
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(api);

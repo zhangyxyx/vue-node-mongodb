@@ -1,6 +1,6 @@
 <template>
 <div class="commonWM" style="background:#fff;">
-    <div class="col-sm-10">
+    <div class="col-sm-10" style="padding:0px;">
         <div v-for="(item,index) in homelists" class="every" :key="index">
             <h2>{{item.title}}</h2>
             <p>{{item.con}}</p>

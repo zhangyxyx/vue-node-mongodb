@@ -7,20 +7,18 @@ const util = require("util");
 const path = require('path');
 const fs = require('fs');
 
-
-
 //获取列表 也就是首页中的信息 排序的话用sort 1升序 -1降序
 router.post('/api/list/showlist', (req, res) => {
     //参数
     var sort = req.body.one;
     //排序参数
     var hot = req.body.two;
-    var query = models.list.find({ sort: sort });
+    console.log(req.body)
+    var query = models.home.find({ sort: sort });
     query.find(function (err, data) {
         if (err) {
             res.send(err)
         } else {
-            console.log(data)
             res.send(data)
         }
     })
@@ -57,22 +55,6 @@ router.post('/api/list/removelist', (req, res) => {
 
 })
 //文件上传
-// router.post('/api/file/addfile',(req,res)=>{
-//     let newAccount=new models.file({
-//         url:req.body.img
-//     });
-//     newAccount.save((err,data)=>{
-//         if(err){
-//             res.send(err)
-//         }else{
-//             res.send('成功上传文件')
-//         }
-//     })
-// })
-//读取文件
-
-
-
 router.post('/api/file/upload', function (req, res, next) {
     //生成multiparty对象，并配置上传目标路径
     if (req.busboy) {

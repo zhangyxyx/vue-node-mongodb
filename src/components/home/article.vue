@@ -52,7 +52,6 @@ export default {
         }
     },
     methods:{ 
-
         //渲染列表
         sums(message){
 			var _this=this;
@@ -67,9 +66,9 @@ export default {
         //渲染数据
         showlist(params){
             var _this=this;
-             _this.sumpage=[];
+            _this.sumpage=[];
+            console.log(params)
             this.$http.post('/api/list/showlist',params).then((response)=>{
-                
                 //列表数据
                 var result=response.body 
                 //列表数据
