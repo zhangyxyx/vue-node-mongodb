@@ -27,7 +27,7 @@
 <p>2.api.js文件是定义接口和操作数据的增删改查的，这里面引入了express db.js等之类，使用express的路由中间件，定义接口和操作数据</p>
 <p>3.index.js文件这个是一开始后台的入口，因为我们是在cmd中执行node index所以一开始是从这个文件。在这个文件中需要引入api(就是定义的接口文件) express 之类的资源</p>
 <hr/>
-
+http://www.cnblogs.com/GainLoss/p/6927626.html
 
 
 
