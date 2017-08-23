@@ -13,12 +13,13 @@ router.post('/api/list/showlist', (req, res) => {
     var sort = req.body.one;
     //排序参数
     var hot = req.body.two;
-    console.log(req.body)
-    var query = models.home.find({ sort: sort });
+    console.log(hot)
+    var query = models.home.find({ sort: sort}).sort({hot:-1});
     query.find(function (err, data) {
         if (err) {
             res.send(err)
         } else {
+            console.log()
             res.send(data)
         }
     })
@@ -54,6 +55,18 @@ router.post('/api/list/removelist', (req, res) => {
     })
 
 })
+//获取详情信息
+router.post("/api/list/detail",(req,res)=>{
+    let id=req.body.id;
+    console.log(id)
+    models.home.find({"_id":ObjectID(id)},function(err,data){
+        if(err){
+            res.send(err)
+        }else{
+            res.json(data)
+        }
+    })
+})
 //文件上传
 router.post('/api/file/upload', function (req, res, next) {
     //生成multiparty对象，并配置上传目标路径
@@ -67,7 +80,6 @@ router.post('/api/file/upload', function (req, res, next) {
                     success: true
                 });
             });
-            console.log(file)
         });
         req.pipe(req.busboy);
     }
@@ -148,7 +160,6 @@ router.get('/api/seek/list', (req, res) => {
                     }
                 })
             })
-
         }
     });
 })

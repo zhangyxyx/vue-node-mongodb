@@ -30,7 +30,9 @@ const listSchema=mongoose.Schema({
     time:String,
     sort:String,
     con:String,
-    user:String
+    user:String,
+    like:Number,
+    collect:Number
 });
 //文件
 const fileSchema=mongoose.Schema({
@@ -70,15 +72,12 @@ const seeks=mongoose.Schema({
 /************** 定义模型Model **************/
 const Models = {
     Login : mongoose.model('Login',loginSchema),
-    home: mongoose.model('home',homesSchema,'home'),
-
-    //list:mongoose.model('lists',listSchema),//home
-    zhuanlan:mongoose.model('zhuanlans',zlSchema),//专栏
-    collect:mongoose.model('collects',clSchema),//收藏
-    find:mongoose.model('finds',fiSchema),//发现
+    home: mongoose.model('home',homesSchema,'home'),//首页
+    zhuanlan:mongoose.model('zhuanlan',zlSchema,'zhuanlan'),//专栏
+    collect:mongoose.model('collect',clSchema,'collect'),//收藏
+    find:mongoose.model('find',fiSchema,'find'),//发现
     //后台测试接口
     seek:mongoose.model('seeks',seeks),
     file:mongoose.model('file',fileSchema),
-
 }
 module.exports = Models;

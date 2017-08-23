@@ -43,7 +43,7 @@ export default {
 				],
 				twomenu:[
 					{change:'hot',text:'热门',active:'active'},
-					{change:'new',text:'最新'},
+					{change:'time',text:'最新'},
 					{change:'comment',text:'评论'},
 				],
 				commonmsg:0,

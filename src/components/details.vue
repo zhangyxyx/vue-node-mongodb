@@ -1,5 +1,5 @@
 <template>
-<div class="row" style="background:#fff">
+<div class="commonWM" style="background:#fff;height:auto;display:inline-block;margin:0 auto">
     <!--标题-->
     <div class="col-sm-12" style="margin:10px 0px">
         <h1>{{result.title}}</h1>
@@ -28,9 +28,11 @@ export default{
     methods:{
         showlist(){
             var _this=this;
-            this.$http.post('/api/list/showlist',{id:this.$route.params.id}).then((response)=>{
+            this.$http.post('/api/list/detail',{id:this.$route.params.id}).then((response)=>{
                 //数据
-                this.result=JSON.parse(response.bodyText).data[0];
+                if(response&&response.body[0]){
+                    this.result=response.body[0]
+                }
 			});
         },
     }

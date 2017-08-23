@@ -13,13 +13,18 @@
     <div class="col-sm-12  home-con-right" v-for="(item,index) in homelists" :key="index">
             <div class="row">
                 <div class="col-sm-12">
-                    <span class="articleuser" >{{item.user}}</span>
+                    <span class="articlesort" style="color:#b71ed7">{{item.sort}}</span>
+                    <span class="articleuser" style="color:#909090">{{item.user}}</span>
                     <span class="articletime" >{{item.time}}</span>
-                    <span class="articlesort" >{{item.sort}}</span>
+                   
                 </div>
                 <div class="col-sm-12">
                     <router-link :to="{name:'details',params:{id:item._id}}"><h2>{{item.title}}</h2></router-link>
                     <!--<span class="articleremove" v-on:click="clickremove(homelists[index])">x</span>-->
+                </div>
+                <div class="col-sm-12 article-bottom">
+                    <p><img src="static/like.png">{{item.like}}</p>
+                    <p><img src="static/collect.png">{{item.collect}}</p>
                 </div>
             </div>
     </div>
@@ -172,12 +177,13 @@ export default {
 text-decoration:none;
 }
 .home-con-right h2{
-    margin-top:10px;
-    font-size:14px;
+    font-size:20px;
+    margin:0px;
     color:#000;
-    font-weight:bold;
-    
+    font-weight:bold;  
 }
+
+
 .home-con-right .articleremove{
     display:block;
     width:15px;
@@ -198,6 +204,19 @@ text-decoration:none;
     margin:10px 10px 10px 0px;
     display:block; 
     float:left;
+}
+.article-bottom p{
+    width:auto;
+    height: 24px;
+    line-height:24px;
+    border:1px solid #ccc;
+    float:left;
+    margin-top:10px;
+    margin-right:5px;
+}
+.article-bottom img{
+    width:20px;
+    height:20px;
 }
 /*分頁*/
 .page span{
