@@ -4,7 +4,7 @@
 <h2>项目整体结构</h2>
 <p>本项目中后台用到的是nodejs express</p>
 <p>vue+vue-router+es6+webpack+node+mongodb的项目</p>
-<p>数据库的设置在db.js中有链接的数据库的名字和设置的数据库中集合的名字</p>
+<p>数据库的设置在server/db.js中有链接的数据库的名字和设置的数据库中集合的名字</p>
 <p>前台用的是vuejs bootstrap vue-router vue-resource</p>
 
 ![maze](https://github.com/GainLoss/vue-node-mongodb/blob/master/static/introduct/1.png) 
