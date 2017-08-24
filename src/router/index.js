@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/Login'
+
 import details from '@/components/details'
 import addData from '@/components/addData'
 //home
@@ -12,6 +12,7 @@ import find from '@/components/find/view'
 import collect from '@/components/collect/view'
 import article from '@/components/home/article'
 //管理员的页面
+import Login from '@/components/houtai/login/view'
 import Hmain from '@/components/houtai/main'
 import Hhone from '@/components/houtai/home/view'
 import Hcollect from '@/components/houtai/collect/view'
@@ -24,11 +25,6 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'Login',
-    //   component: Login
-    // },
     //公共的部分
     {
       path:'/common',
@@ -95,6 +91,11 @@ export default new Router({
      component:addData
    },
   //管理员的页面路由
+  {
+    path:'/houtai/login',
+    name:'login',
+    component:Login
+  },
    {
      path:'/houtai/home',
      name:'Hhome',

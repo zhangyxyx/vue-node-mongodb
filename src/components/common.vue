@@ -14,7 +14,7 @@
         <div class="addMessUser">
             <div><router-link to="/add"><img src="static/add.png"></router-link></div>
             <div><img src="static/ling.png"></div>
-            <div style="width:30px;height:30px;border-shadow:50%;"><img src="static/logo.png" style="width:100%"></div>
+            <a title="进入管理员页面" style="width:30px;height:30px;display:block;float:left;margin-left:20px;cursor:pointer;border-shadow:50%;" v-on:click="houtai()"><img src="static/logo.png" style="width:100%"></a>
         </div>
        
 	</div>
@@ -51,6 +51,10 @@ export default{
             this.comMessage=icon;
             this.$router.push('/'+icon)
 
+        },
+        //进入管理员界面
+        houtai(){
+            this.$router.push('/houtai/login')
         }
     }
 }

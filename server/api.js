@@ -13,13 +13,11 @@ router.post('/api/list/showlist', (req, res) => {
     var sort = req.body.one;
     //排序参数
     var hot = req.body.two;
-    console.log(hot)
     var query = models.home.find({ sort: sort}).sort({hot:-1});
     query.find(function (err, data) {
         if (err) {
             res.send(err)
         } else {
-            console.log()
             res.send(data)
         }
     })
@@ -58,7 +56,6 @@ router.post('/api/list/removelist', (req, res) => {
 //获取详情信息
 router.post("/api/list/detail",(req,res)=>{
     let id=req.body.id;
-    console.log(id)
     models.home.find({"_id":ObjectID(id)},function(err,data){
         if(err){
             res.send(err)
@@ -143,6 +140,22 @@ router.get('/api/find/list', (req, res) => {
     })
 })
 //后台
+//后台登录
+router.post('/api/login/add',(req,res)=>{
+    let name=req.body.name;
+    let pass=req.body.pass;
+    models.login.find({name:name,pass:pass},function(err,data){
+        if(err){
+            res.send(err)
+        }else{
+            if(data[0]==undefined){
+                res.send('fail')
+            }else{
+                res.send('success')
+            }
+        }
+    })
+})
 //查询数据
 router.get('/api/seek/list', (req, res) => {
     var offset = parseInt(req.query.offset);//页码

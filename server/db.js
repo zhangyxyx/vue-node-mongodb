@@ -68,6 +68,11 @@ const seeks=mongoose.Schema({
     time:String,
     sort:String,
     con:String,
+});
+//后台登录
+const login=mongoose.Schema({
+    name:String,
+    pass:String
 })
 /************** 定义模型Model **************/
 const Models = {
@@ -79,5 +84,6 @@ const Models = {
     //后台测试接口
     seek:mongoose.model('seeks',seeks),
     file:mongoose.model('file',fileSchema),
+    login:mongoose.model('login',login,'login')
 }
 module.exports = Models;
