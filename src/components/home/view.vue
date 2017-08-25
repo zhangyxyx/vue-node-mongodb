@@ -20,7 +20,7 @@
 					</div>
 				</div>
 				<!--精选-->
-				<div class="col-sm-12 rightevery article" style="display:block;"><articleview v-if="nowId" v-bind:message="nowId"></articleview></div>
+				<div class="col-sm-12 rightevery article" style="display:block;"><articleview v-bind:message="nowId"></articleview></div>
 			</div>
 			<div class="col-sm-3">
 				<img src="static/home_img1.png" style="width:100%;">
@@ -48,6 +48,7 @@ export default {
 				],
 				commonmsg:0,
 				nowId:{},
+				
 		}
 	},
 	components:{
@@ -78,10 +79,11 @@ export default {
 			var two=$('.topmenuone .active').attr("data-menu");
 			var json={
 				one:one,
-				two:two
+				two:two,
 			}
 			this.$router.push({path:'/home/'+one,query:{two:two}});
 			this.nowId=json;
+
 			return json
 		},
 		

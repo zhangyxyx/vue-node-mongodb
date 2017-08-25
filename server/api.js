@@ -13,10 +13,14 @@ router.post('/api/list/showlist', (req, res) => {
     var sort = req.body.one;
     //排序参数
     var panduan =req.body.two;
+    //限制几个
+    var limit=req.body.limit;
+    //从第几页开始
+    var skip=req.body.page*limit;
     var json={};
     json[panduan]=1;
-
-    var query = models.home.find({ sort: sort}).sort(json);
+    
+    var query = models.home.find({ sort: sort}).sort(json).limit(limit).skip(skip);
     query.find(function (err, data) {
         if (err) {
             res.send(err)
