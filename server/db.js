@@ -22,7 +22,9 @@ const homesSchema=mongoose.Schema({
     time:String,
     sort:String,
     con:String,
-    user:String
+    user:String,
+    like:Number,
+    collect:Number
 });
 //列表的模式
 const listSchema=mongoose.Schema({

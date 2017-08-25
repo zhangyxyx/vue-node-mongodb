@@ -12,8 +12,11 @@ router.post('/api/list/showlist', (req, res) => {
     //参数
     var sort = req.body.one;
     //排序参数
-    var hot = req.body.two;
-    var query = models.home.find({ sort: sort}).sort({hot:-1});
+    var panduan =req.body.two;
+    var json={};
+    json[panduan]=1;
+
+    var query = models.home.find({ sort: sort}).sort(json);
     query.find(function (err, data) {
         if (err) {
             res.send(err)

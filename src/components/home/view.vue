@@ -42,9 +42,9 @@ export default {
 					{change:'web',text:'前端'},
 				],
 				twomenu:[
-					{change:'hot',text:'热门',active:'active'},
+					{change:'like',text:'热门',active:'active'},
 					{change:'time',text:'最新'},
-					{change:'comment',text:'评论'},
+					{change:'collect',text:'评论'},
 				],
 				commonmsg:0,
 				nowId:{},

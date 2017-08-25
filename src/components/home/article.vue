@@ -208,15 +208,17 @@ text-decoration:none;
 .article-bottom p{
     width:auto;
     height: 24px;
-    line-height:24px;
+    line-height:20px;
     border:1px solid #ccc;
     float:left;
     margin-top:10px;
     margin-right:5px;
+    padding:0px 5px;
 }
 .article-bottom img{
-    width:20px;
-    height:20px;
+    width:15px;
+    height:15px;
+    margin-right:5px;
 }
 /*分頁*/
 .page span{
