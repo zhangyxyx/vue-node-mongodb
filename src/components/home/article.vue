@@ -4,47 +4,49 @@
 2.在首页中还有热门 最新 评价几个选项这就需要在后台区分开
 -->
 <template>
-<div>
-    <div class="row article">
-        <!-- <div class="col-sm-12 top">
-                <input class="serchtext" type="text" placeholder="输入你要查找的内容" >
-                <span class="search" v-on:click="search()">搜索</span>
-            </div> -->
-        <!--内容-->
-        <div class="col-sm-12  home-con-right" v-for="(item,index) in homelists" :key="index">
-            <div class="row">
-                <div class="col-sm-12">
-                    <span class="articlesort" style="color:#b71ed7">{{item.sort}}</span>
-                    <span class="articleuser" style="color:#909090">{{item.user}}</span>
-                    <span class="articletime">{{item.time}}</span>
+    <div>
+        <div class="row article">
+            <!-- <div class="col-sm-12 top">
+                    <input class="serchtext" type="text" placeholder="输入你要查找的内容" >
+                    <span class="search" v-on:click="search()">搜索</span>
+                </div> -->
+            <!--内容-->
+            <div class="col-sm-12  home-con-right" v-for="(item,index) in homelists" :key="index">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span class="articlesort" style="color:#b71ed7">{{item.sort}}</span>
+                        <span class="articleuser" style="color:#909090">{{item.user}}</span>
+                        <span class="articletime">{{item.time}}</span>
 
-                </div>
-                <div class="col-sm-12">
-                    <router-link :to="{name:'details',params:{id:item._id}}">
-                        <h2>{{item.title}}</h2>
-                    </router-link>
-                    <!--<span class="articleremove" v-on:click="clickremove(homelists[index])">x</span>-->
-                </div>
-                <div class="col-sm-12 article-bottom">
-                    <p><img src="static/like.png">{{item.like}}</p>
-                    <p><img src="static/collect.png">{{item.collect}}</p>
+                    </div>
+                    <div class="col-sm-12">
+                        <router-link :to="{name:'details',params:{id:item._id}}">
+                            <h2>{{item.title}}</h2>
+                        </router-link>
+                        <!--<span class="articleremove" v-on:click="clickremove(homelists[index])">x</span>-->
+                    </div>
+                    <div class="col-sm-12 article-bottom">
+                        <p><img src="static/like.png">{{item.like}}</p>
+                        <p><img src="static/collect.png">{{item.collect}}</p>
+                    </div>
                 </div>
             </div>
+            <!--分页-->
+            <!-- <div class="fenye">
+                    <span style="height:20px;border:1px solid #000;cursur:pointer">上一页</span>
+                    <div class="page" v-for="(item,index) in sumpage" :key="index">
+                        <span :class="{'pageactive':ind===index}" v-on:click="clickpage(item,index)">{{index+1}}</span>
+                    </div>
+                    <span style="height:20px;border:1px solid #000;cursor:pointer">下一页</span>
+                </div> -->
         </div>
-        <!--分页-->
-        <!-- <div class="fenye">
-                <span style="height:20px;border:1px solid #000;cursur:pointer">上一页</span>
-                <div class="page" v-for="(item,index) in sumpage" :key="index">
-                    <span :class="{'pageactive':ind===index}" v-on:click="clickpage(item,index)">{{index+1}}</span>
-                </div>
-                <span style="height:20px;border:1px solid #000;cursor:pointer">下一页</span>
-            </div> -->
+
     </div>
-    
-</div>
 </template>
 <script>
 import Vue from 'vue'
+import layui from './layui/src/layui.js'
+
 export default {
     data() {
         return {
@@ -67,8 +69,19 @@ export default {
     mounted() {
         //滚动分页
         this.scroll();
+        //弹出框
+        this.popUp();
+
     },
     methods: {
+        //弹出框
+        popUp() {
+           layui.use('layer', function(){
+            var layer = layui.layer;
+            
+            layer.msg('hello');
+            });  
+        },
         //渲染列表
         sums(message) {
             var _this = this;
@@ -181,7 +194,10 @@ export default {
     }
 }
 </script>
+
+
 <style>
+@import "./layui/src/css/layui.css";
 /*搜索*/
 
 .pageactive {
@@ -221,6 +237,7 @@ export default {
     color: #fff;
     background: #afb5b5
 }
+
 
 
 
@@ -285,6 +302,7 @@ export default {
     height: 15px;
     margin-right: 5px;
 }
+
 
 
 

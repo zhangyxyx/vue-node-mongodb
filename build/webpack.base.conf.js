@@ -24,10 +24,9 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src')
+      '@': resolve('src'),
     }
   },
-
   module: {
     rules: [
       {
@@ -62,7 +61,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin('common.js'),
     new webpack.ProvidePlugin({
     jQuery: "jquery",
-    $: "jquery"
+    $: "jquery",
     })
   ]
 }
