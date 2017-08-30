@@ -38,8 +38,10 @@ router.post('/api/list/addlist', (req, res) => {
         time: new Date(),
         sort: req.body.sort,
         user: req.body.user,
-        con: req.body.con
+        con: req.body.con,
+        file:req.body.file,
     });
+    console.log(req.body)
     newAccount.save((err, data) => {
         if (err) {
             res.send(err)
@@ -48,6 +50,27 @@ router.post('/api/list/addlist', (req, res) => {
         }
     })
 });
+//文件上传
+router.post('/api/files/upload', upload.single('fabricImage'), function (req, res, next) {
+    var file = req.file;
+    //以下代码得到文件后缀
+    name = file.originalname;
+    nameArray = name.split('');
+    var nameMime = [];
+    l = nameArray.pop();
+    nameMime.unshift(l);
+    while (nameArray.length != 0 && l != '.') {
+        l = nameArray.pop();
+        nameMime.unshift(l);
+    }
+    //Mime是文件的后缀
+    Mime = nameMime.join('');
+    
+    //重命名文件 加上文件后缀
+    fs.renameSync('./upload/' + file.filename, './upload/' + file.filename + Mime);
+    var path='./upload/' + file.filename + Mime
+    res.send(path);
+})
 //删除列表内容
 router.post('/api/list/removelist', (req, res) => {
     var removelist = new models.list({
@@ -73,57 +96,6 @@ router.post("/api/list/detail", (req, res) => {
         }
     })
 })
-//文件上传
-router.post('/api/files/upload', upload.single('fabricImage'), function (req, res, next) {
-        var file = req.file;
-        //以下代码得到文件后缀
-        name = file.originalname;
-        nameArray = name.split('');
-        var nameMime = [];
-        l = nameArray.pop();
-        nameMime.unshift(l);
-        while (nameArray.length != 0 && l != '.') {
-            l = nameArray.pop();
-            nameMime.unshift(l);
-        }
-        //Mime是文件的后缀
-        Mime = nameMime.join('');
-        console.log(Mime);
-        res.send("done");
-        //重命名文件 加上文件后缀
-        console.log( file.filename)
-        fs.renameSync('./upload/' + file.filename, './upload/' + file.filename + Mime);
-        res.send(file.path+Mine);
-})
-    //这是图片成base64的时候后台接收的
-    // form.parse(req, function(err, fields, files){
-    //     console.log(files)
-    //     var inputFile = files.file[0];
-    //     var uploadedPath = inputFile.path;
-    //     var dstPath = './uploads/' + inputFile.originalFilename;
-    //     fs.rename(uploadedPath, dstPath, function(err) {
-    //         if(err){
-    //             console.log('rename error: ' + err);
-    //         } else {
-    //             console.log('rename ok');
-    //         }
-    //     });
-    //     files.file.path = dstPath;
-    //     var data = files;
-
-    //     res.send(data);
-    // });
-
-//显示图片
-router.get('/api/file/showfile', (req, res) => {
-    models.file.find((err, data) => {
-        if (err) {
-            res.send(err)
-        } else {
-            res.send(data)
-        }
-    })
-});
 //获取专栏信息
 router.get('/api/zhuanlan/list', (req, res) => {
     models.zhuanlan.find((err, data) => {

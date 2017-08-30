@@ -23,6 +23,7 @@ const homesSchema=mongoose.Schema({
     sort:String,
     con:String,
     user:String,
+    file:String,
     like:Number,
     collect:Number
 });

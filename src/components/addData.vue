@@ -13,8 +13,7 @@
                 <label>用户</label>&nbsp;<input type="text" v-model="list.user" placeholder="用户" /> </br>
                 <label>分类</label>&nbsp;<input type="text" v-model="list.sort" placeholder="分类" /></br>
                 <label>内容</label>&nbsp;<input type="text" v-model="list.con" placeholder="内容" /> </br>
-                </br>
-                <button @click="addlist">给列表添加信息</button>
+                </br> 
             </div>
             <label class="custom-file-upload">
             <input type="file" 
@@ -22,8 +21,9 @@
                     name="myupload" id="uploadInput" >
             </label>
             <label class="custom-file-submit">
-            <button v-on:click="uploadImage()" >提交文件</button>
+            <button v-on:click="uploadImage()" v-bind:name="list.filepath">提交文件</button>
             </label> 
+            <button @click="addlist">给列表添加信息</button>
         </div>
     </div>
 </template>
@@ -37,7 +37,8 @@ export default {
                 title: '',
                 sort: '',
                 con: '',
-                img: ''
+                img: '',
+                filepath:'',
             },
         }
     },
@@ -51,13 +52,14 @@ export default {
             formData.append('fabricImage', myfile);
             this.$http.post('/api/files/upload', formData, {
                 //transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}
+                //headers: {'Content-Type': undefined}
             }).then(function(result){
-                console.log('succeed');                
+                console.log('succeed'); 
+                this.list.filepath=result.body
+                console.log(result)               
             },function(err){
                 console.log(err)
             });
-           
         },
         addlist(){
             var params={
@@ -65,6 +67,7 @@ export default {
                 user:this.list.user,
                 sort:this.list.sort,
                 con:this.list.con,
+                file:this.list.filepath, 
             }
             console.log(params)
             this.$http.post('/api/list/addlist',params).then(response=>{
