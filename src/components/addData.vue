@@ -50,14 +50,11 @@ export default {
             var formData = new FormData();
             var myfile = document.getElementById('uploadInput').files[0];
             formData.append('fabricImage', myfile);
-            this.$http.post('/api/files/upload', formData, {
-                //transformRequest: angular.identity,
-                //headers: {'Content-Type': undefined}
-            }).then(function(result){
+            this.$http.post('/api/files/upload', formData).then(response=>{
                 console.log('succeed'); 
-                this.list.filepath=result.body
-                console.log(result)               
-            },function(err){
+                this.list.filepath=response.body
+                console.log(result)  
+            }).catch(err=>{
                 console.log(err)
             });
         },

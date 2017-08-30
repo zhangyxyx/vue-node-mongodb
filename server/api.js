@@ -41,7 +41,6 @@ router.post('/api/list/addlist', (req, res) => {
         con: req.body.con,
         file:req.body.file,
     });
-    console.log(req.body)
     newAccount.save((err, data) => {
         if (err) {
             res.send(err)
@@ -65,10 +64,10 @@ router.post('/api/files/upload', upload.single('fabricImage'), function (req, re
     }
     //Mime是文件的后缀
     Mime = nameMime.join('');
-    
     //重命名文件 加上文件后缀
-    fs.renameSync('./upload/' + file.filename, './upload/' + file.filename + Mime);
-    var path='./upload/' + file.filename + Mime
+    //fs.renameSync('./upload/' + file.filename, './upload/' + file.filename + Mime);
+    fs.renameSync('./upload/' + file.filename, '../static/upload/' + file.filename + Mime);
+    var path='/static/upload/' + file.filename + Mime
     res.send(path);
 })
 //删除列表内容

@@ -29,16 +29,11 @@
                         <p><img src="static/like.png">{{item.like}}</p>
                         <p><img src="static/collect.png">{{item.collect}}</p>
                     </div>
+                    <div style="position:absolute;right:20px;top:20px;width:100px;height:80px">
+                        <img v-bind:src="item.file" style="width:100%;height:100%">
+                    </div>
                 </div>
             </div>
-            <!--分页-->
-            <!-- <div class="fenye">
-                    <span style="height:20px;border:1px solid #000;cursur:pointer">上一页</span>
-                    <div class="page" v-for="(item,index) in sumpage" :key="index">
-                        <span :class="{'pageactive':ind===index}" v-on:click="clickpage(item,index)">{{index+1}}</span>
-                    </div>
-                    <span style="height:20px;border:1px solid #000;cursor:pointer">下一页</span>
-                </div> -->
         </div>
         <div class="tip">正在加载中...</div>
     </div>
