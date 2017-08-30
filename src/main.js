@@ -9,12 +9,13 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-table/dist/bootstrap-table.min.css'
 import 'bootstrap-table/dist/bootstrap-table.min.js'
 import store from './store'
-
+import Element from 'element-ui'
 
 
 Vue.config.productionTip = false
 
 Vue.use(vueresource);
+Vue.use(Element);
 
 
 new Vue({

@@ -29,7 +29,7 @@ const homesSchema=mongoose.Schema({
 //列表的模式
 const listSchema=mongoose.Schema({
 	title:String,
-    time:String,
+    time:Date,
     sort:String,
     con:String,
     user:String,
@@ -83,6 +83,7 @@ const Models = {
     zhuanlan:mongoose.model('zhuanlan',zlSchema,'zhuanlan'),//专栏
     collect:mongoose.model('collect',clSchema,'collect'),//收藏
     find:mongoose.model('find',fiSchema,'find'),//发现
+    
     //后台测试接口
     seek:mongoose.model('seeks',seeks),
     file:mongoose.model('file',fileSchema),

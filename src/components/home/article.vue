@@ -40,12 +40,12 @@
                     <span style="height:20px;border:1px solid #000;cursor:pointer">下一页</span>
                 </div> -->
         </div>
-
+        <div class="tip">正在加载中...</div>
     </div>
 </template>
 <script>
 import Vue from 'vue'
-import layui from './layui/src/layui.js'
+import { Loading } from 'element-ui';
 
 export default {
     data() {
@@ -69,19 +69,8 @@ export default {
     mounted() {
         //滚动分页
         this.scroll();
-        //弹出框
-        this.popUp();
-
     },
     methods: {
-        //弹出框
-        popUp() {
-           layui.use('layer', function(){
-            var layer = layui.layer;
-            
-            layer.msg('hello');
-            });  
-        },
         //渲染列表
         sums(message) {
             var _this = this;
@@ -98,12 +87,11 @@ export default {
         showlist(params) {
             var _this = this;
             _this.sumpage = [];
-
             this.$http.post('/api/list/showlist', params).then((response) => {
-
                 Vue.http.interceptors.push((response, next) => {
-                    alert(1);
-                    next((response) => {
+                    $(".tip").css("display","block")
+                    next((response) => { 
+                        $(".tip").css("display","none")  
                         return response;
                     })
                 })
@@ -197,7 +185,19 @@ export default {
 
 
 <style>
-@import "./layui/src/css/layui.css";
+.tip{
+    width:200px;
+    height:50px;
+    text-align:center;
+    line-height:50px;
+    background:#fff;
+    border:1px solid #ccc;
+    position: fixed;
+    top:100px;
+    left:50%;
+    margin-left:-50px;
+    display:none;
+}
 /*搜索*/
 
 .pageactive {

@@ -6,21 +6,23 @@ const util = require("util");
 // 引入处理路径的模块
 const path = require('path');
 const fs = require('fs');
+var multer  = require('multer');
+var upload=multer({dest:'upload/'});
 
 //获取列表 也就是首页中的信息 排序的话用sort 1升序 -1降序
 router.post('/api/list/showlist', (req, res) => {
     //参数
     var sort = req.body.one;
     //排序参数
-    var panduan =req.body.two;
+    var panduan = req.body.two;
     //限制几个
-    var limit=req.body.limit;
+    var limit = req.body.limit;
     //从第几页开始
-    var skip=req.body.page*limit;
-    var json={};
-    json[panduan]=1;
-    
-    var query = models.home.find({ sort: sort}).sort(json).limit(limit).skip(skip);
+    var skip = req.body.page * limit;
+    var json = {};
+    json[panduan] = 1;
+
+    var query = models.home.find({ sort: sort }).sort(json).limit(limit).skip(skip);
     query.find(function (err, data) {
         if (err) {
             res.send(err)
@@ -31,9 +33,9 @@ router.post('/api/list/showlist', (req, res) => {
 })
 //添加列表
 router.post('/api/list/addlist', (req, res) => {
-    let newAccount = new models.list({
+    let newAccount = new models.home({
         title: req.body.title,
-        time: req.body.time,
+        time: new Date(),
         sort: req.body.sort,
         user: req.body.user,
         con: req.body.con
@@ -61,32 +63,38 @@ router.post('/api/list/removelist', (req, res) => {
 
 })
 //获取详情信息
-router.post("/api/list/detail",(req,res)=>{
-    let id=req.body.id;
-    models.home.find({"_id":ObjectID(id)},function(err,data){
-        if(err){
+router.post("/api/list/detail", (req, res) => {
+    let id = req.body.id;
+    models.home.find({ "_id": ObjectID(id) }, function (err, data) {
+        if (err) {
             res.send(err)
-        }else{
+        } else {
             res.json(data)
         }
     })
 })
 //文件上传
-router.post('/api/file/upload', function (req, res, next) {
-    //生成multiparty对象，并配置上传目标路径
-    if (req.busboy) {
-        req.busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
-            var saveTo = path.join(__dirname.replace('routes', 'static'), '文件');
-            file.pipe(fs.createWriteStream(saveTo));
-            file.on('end', function () {
-                //在这边可以做一些数据库操作  
-                res.json({
-                    success: true
-                });
-            });
-        });
-        req.pipe(req.busboy);
-    }
+router.post('/api/files/upload', upload.single('fabricImage'), function (req, res, next) {
+        var file = req.file;
+        //以下代码得到文件后缀
+        name = file.originalname;
+        nameArray = name.split('');
+        var nameMime = [];
+        l = nameArray.pop();
+        nameMime.unshift(l);
+        while (nameArray.length != 0 && l != '.') {
+            l = nameArray.pop();
+            nameMime.unshift(l);
+        }
+        //Mime是文件的后缀
+        Mime = nameMime.join('');
+        console.log(Mime);
+        res.send("done");
+        //重命名文件 加上文件后缀
+        console.log( file.filename)
+        fs.renameSync('./upload/' + file.filename, './upload/' + file.filename + Mime);
+        res.send(file.path+Mine);
+})
     //这是图片成base64的时候后台接收的
     // form.parse(req, function(err, fields, files){
     //     console.log(files)
@@ -105,7 +113,7 @@ router.post('/api/file/upload', function (req, res, next) {
 
     //     res.send(data);
     // });
-});
+
 //显示图片
 router.get('/api/file/showfile', (req, res) => {
     models.file.find((err, data) => {
@@ -148,16 +156,16 @@ router.get('/api/find/list', (req, res) => {
 })
 //后台
 //后台登录
-router.post('/api/login/add',(req,res)=>{
-    let name=req.body.name;
-    let pass=req.body.pass;
-    models.login.find({name:name,pass:pass},function(err,data){
-        if(err){
+router.post('/api/login/add', (req, res) => {
+    let name = req.body.name;
+    let pass = req.body.pass;
+    models.login.find({ name: name, pass: pass }, function (err, data) {
+        if (err) {
             res.send(err)
-        }else{
-            if(data[0]==undefined){
+        } else {
+            if (data[0] == undefined) {
                 res.send('fail')
-            }else{
+            } else {
                 res.send('success')
             }
         }
