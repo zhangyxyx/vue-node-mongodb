@@ -3,6 +3,24 @@
 <p>管理员的界面的话：从数据库中获取的数据，主要界面利用bootstrap table组织的数据</p>
 <p>一个简单的项目实现的步骤：http://www.cnblogs.com/GainLoss/p/6927626.html</p>
 <h2>项目整体结构</h2>
+```
+project
+│   README.md
+│   file001.txt    
+│
+└───folder1
+│   │   file011.txt
+│   │   file012.txt
+│   │
+│   └───subfolder1
+│       │   file111.txt
+│       │   file112.txt
+│       │   ...
+│   
+└───folder2
+    │   file021.txt
+    │   file022.txt
+```
 <p>本项目中后台用到的是nodejs express</p>
 <p>vue+vue-router+es6+webpack+node+mongodb的项目</p>
 <p>数据库的设置在server/db.js中有链接的数据库的名字和设置的数据库中集合的名字</p>
