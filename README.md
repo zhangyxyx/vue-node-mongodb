@@ -2,6 +2,7 @@
 <p>这是前台的页面现在能涉及到的有路由基本和动态路由；父组件和子组件之间的数据传递；express定义接口；mongodb的数据增删改查；文件的上传；界面有bootstrap的组织</p>
 <p>管理员的界面的话：从数据库中获取的数据，主要界面利用bootstrap table组织的数据</p>
 <p>一个简单的项目实现的步骤：http://www.cnblogs.com/GainLoss/p/6927626.html</p>
+<p>功能说明：http://www.cnblogs.com/GainLoss/p/7605164.html</p>
 <h2>项目整体结构</h2>
 <p>本项目中后台用到的是nodejs express</p>
 <p>vue+vue-router+es6+webpack+node+mongodb的项目</p>
