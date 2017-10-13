@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import details from '@/components/details'
-import addData from '@/components/addData'
+
 //home
 import home from '@/components/home/view'
 import zhuanlan from '@/components/zhuanlan/view'
@@ -11,6 +11,8 @@ import label from '@/components/label/view'
 import find from '@/components/find/view'
 import collect from '@/components/collect/view'
 import article from '@/components/home/article'
+import write from '@/components/write'
+import sharelink from '@/components/sharelink'
 //管理员的页面
 import Login from '@/components/houtai/login/view'
 import Hmain from '@/components/houtai/main'
@@ -33,9 +35,15 @@ export default new Router({
     },
     //添加文章
     {
-      path:'/add',
-      name:'add',
-      component:addData
+      path:'/home/write',
+      name:'write',
+      component:write
+    },
+    //添加文章
+    {
+      path:'/home/sharelink',
+      name:'sharelink',
+      component:sharelink
     },
     //部分组件 
     {
@@ -53,13 +61,11 @@ export default new Router({
       name:'article',
       component:home
     },
-
-    {
-     path:'/zhuanlan',//专栏
-     name:'zhuanlan',
-     component:zhuanlan
+    {//专栏分为几个部分
+      path:'/zhuanlan/:id',//专栏
+      name:'zhuanlan',
+      component:zhuanlan
     },
-    
     {
      path:'/collect',//收藏集
      name:'collect',
@@ -85,11 +91,7 @@ export default new Router({
       name:'details',
       component:details
     },
-   {
-     path:'/addData',
-     name:'addData',
-     component:addData
-   },
+   
   //管理员的页面路由
   {
     path:'/houtai/login',

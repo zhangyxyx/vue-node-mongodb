@@ -33,9 +33,16 @@ router.post('/api/list/showlist', (req, res) => {
 })
 //添加列表
 router.post('/api/list/addlist', (req, res) => {
+    var year=new Date().getFullYear();
+    var month=new Date().getMonth()+1;
+    var day=new Date().getDay();
+    var hour=new Date().getHours();
+    var minutes=new Date().getMinutes();
+    var seconds=new Date().Seconds();
+    var time=year+"/"+month+"/"+day+"/"+hour+"/"+minutes+"/"+seconds;
     let newAccount = new models.home({
         title: req.body.title,
-        time: new Date(),
+        time: time,
         sort: req.body.sort,
         user: req.body.user,
         con: req.body.con,

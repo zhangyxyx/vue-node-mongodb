@@ -14,22 +14,23 @@
             <div class="col-sm-12  home-con-right" v-for="(item,index) in homelists" :key="index">
                 <div class="row">
                     <div class="col-sm-12">
-                        <span class="articlesort" style="color:#b71ed7">{{item.sort}}</span>
-                        <span class="articleuser" style="color:#909090">{{item.user}}</span>
-                        <span class="articletime">{{item.time}}</span>
+                        <span class="articleuser" style="color:#3b76c5">{{item.user||'user'}}&nbsp;▶</span>
+                        <span class="articlesort" style="color:#b71ed7">{{item.sort}}&nbsp;▶</span>
+                        <span class="articletime">{{year}}</span>
 
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12" style="width:570px;">
                         <router-link :to="{name:'details',params:{id:item._id}}">
                             <h2>{{item.title}}</h2>
                         </router-link>
+                        <div style="max-height:40px;margin:10px 0px;">{{item.con}}</div>
                         <!--<span class="articleremove" v-on:click="clickremove(homelists[index])">x</span>-->
                     </div>
                     <div class="col-sm-12 article-bottom">
-                        <p><img src="static/like.png">{{item.like}}</p>
-                        <p><img src="static/collect.png">{{item.collect}}</p>
+                        <p><img src="static/home/like.png">{{item.like}}</p>
+                        <p><img src="static/home/message.png">{{item.collect}}</p>
                     </div>
-                    <div style="position:absolute;right:20px;top:20px;width:100px;height:80px">
+                    <div style="position:absolute;right:20px;top:20px;width:75px;height:75px">
                         <img v-bind:src="item.file" style="width:100%;height:100%">
                     </div>
                 </div>
@@ -50,6 +51,7 @@ export default {
             ind: '',
             page: 0,
             flag: true,
+            year:'',
         }
     },
     props: ['message'],
@@ -240,8 +242,9 @@ export default {
 
 .home-con-right {
     height: 117px;
-    border-top: 1px solid #ccc;
-    cursor: pointer
+    border-bottom: 1px solid rgba(204,204,204,.3);
+    cursor: pointer;
+    height:auto;
 }
 
 .home-con-right a {
@@ -262,7 +265,7 @@ export default {
     height: 15px;
     text-align: center;
     line-height: 12px;
-    border: 1px solid #ccc;
+    border: 1px solid rgba(204,204,204,.5);
     background: #fff;
     color: #999;
     position: absolute;
@@ -285,7 +288,6 @@ export default {
     width: auto;
     height: 24px;
     line-height: 20px;
-    border: 1px solid #ccc;
     float: left;
     margin-top: 10px;
     margin-right: 5px;
