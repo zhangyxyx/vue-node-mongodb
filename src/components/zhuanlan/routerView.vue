@@ -1,8 +1,8 @@
 <template>
     <div>
         <div style="width:700px;float:left;">
-            <div style="height:53px;border-bottom:1px solid rgba(204,204,204,.3);background:#fff;padding-left:30px;">
-                <div style="float:left;margin:18px 0px;font-size:16px;">原创文章</div>
+            <div style="padding-left:20px;height:53px;border-bottom:1px solid rgba(204,204,204,.3);background:#fff;padding-left:30px;">
+                <div style="float:left;line-height:53px;font-size:16px;">原创文章</div>
                 <!--热门 最新 评论-->
                 <div class="zltopmenuone">
                     <div class="zltopmenuone-menu-every" v-for='(options,index) in twomenu' v-bind:data-menu="options.change" :class="options.active" v-on:click="twomenuclick(twomenu[index])" :key="index">
@@ -14,6 +14,11 @@
                 <h2>{{item.title}}</h2>
                 <p>{{item.con}}</p>
             </div>
+            <!--专栏内容-->
+            <div class="zlCon">
+                {{message}}
+                <myzlArticle v-bind:zlmessage="mymessage"></myzlArticle>
+            </div>
         </div>
         <div style="width:240px;margin-left:20px;float:left;">
             <img src="/static/home/home_right_1.png" />
@@ -22,6 +27,7 @@
 </template>
 
 <script>
+import article from './article.vue'
 export default {
     data() {
         return {
@@ -32,9 +38,13 @@ export default {
 				{ change: 'collect', text: '评论' },
 			],
             sumpage: [],
+            mymessage:'all',
         }
     },
     props: ['message'],
+    components:{
+        'myzlArticle':article
+    },
     mounted() {
         this.showdata();
     },
@@ -67,7 +77,7 @@ export default {
     padding: 10px;
 }
 .zltopmenuone {
-    width:160px;
+    width:200px;
 	height: 50px;
 	padding:15px 0px;
 	font-size:12px;

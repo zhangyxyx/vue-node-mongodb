@@ -8,6 +8,12 @@ const path = require('path');
 const fs = require('fs');
 var multer  = require('multer');
 var upload=multer({dest:'upload/'});
+/*
+首页
+专栏
+收藏集
+发现
+*/
 
 //获取列表 也就是首页中的信息 排序的话用sort 1升序 -1降序
 router.post('/api/list/showlist', (req, res) => {

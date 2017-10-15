@@ -1,9 +1,20 @@
 <template>
 <div>
-    <div class="col-sm-9">
-        <div v-for="(item,index) in homelists" class="every" :key="index">
-            <h2>{{item.title}}</h2>
-            <p>{{item.con}}</p>
+   <div class="findCon">
+        <div class="findConLeft" style="background:#fff">
+           <div class="findMenu findMenuOne">
+                <div v-for="(item,index) in findMenuone" :key="index">{{item.con}}</div>
+            </div> 
+            <div class="findMenu findMenuTwo">
+                <div v-for="(item,index) in findMenutwo" :key="index">{{item.con}}</div>
+            </div>
+            <myArticle v-bind:articlemessage="mymessage"></myArticle>
+
+        </div>
+        <div class="findConRight">
+            
+        <div><img src="/static/home/home_right_1.png" style="width:100%;"></div>
+		<div style="margin-top:20px;"><img src="/static/home/home_right_2.png" style="width:100%;"></div>
 
         </div>
     </div>
@@ -12,14 +23,28 @@
 </template>
 
 <script>
+import article from './article.vue'
 export default {
     data(){
         return{
             homelists:[],
             sumpage:[],
+            mymessage:'all',
+            findMenuone:[
+                {con:'热门',mark:'hot'},
+                {con:'最新',mark:'now'},
+            ],
+            findMenutwo:[
+                {con:'本周最热',icon:'weekHot'},
+                {con:'本月最热',icon:'monthHot'},
+                {con:'历史最热',icon:'historyHot'},
+            ]
         }
     },
     props:['message'],
+    components:{
+        'myArticle':article
+    },
     mounted(){
         this.showdata();
     },
@@ -45,12 +70,34 @@ export default {
 </script>
 
 <style>
-.every{
-    border-bottom:1px solid #efefef;
-    background:#fff;
-    padding:10px;
+/*发现的内容*/
+.findCon{
+    width:960px;
+    margin:0 auto;
 }
-.col-sm-9{
-    padding:0px;
+.findConLeft{
+    width:700px;
+    float:left;
+}
+.findConRight{
+    width:240px;
+    float:left;
+    margin-left:20px;
+}
+.findMenuOne{
+    float:left;
+    padding:13px 0px;
+    border-bottom:1px solid rgba(204,204,204,.3)
+}
+.findMenuTwo{
+    float:right;
+    padding:13px 0px;
+    border-bottom:1px solid rgba(204,204,204,.3)
+}
+.findMenu div{
+    floaT:left;
+    font-size:14px;
+    padding:0px 10px;
+    border-right:1px solid rgba(204,204,204,.3)
 }
 </style>

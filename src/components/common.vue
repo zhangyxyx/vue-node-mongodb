@@ -6,9 +6,9 @@
                 <router-link to="/home/attention?two=like"><h2><img src="static/home/web.svg"></h2></router-link>
                 <span v-for="(item,index) in topMenu" v-on:click="clickTopMenu(index,item.icon)" :class="{active:ind===index}" :key="index">{{item.con}}
                 </span>
-                <div style="float:left;position:relative;width:240px;margin-left:100px;">
+                <div style="float:left;position:relative;width:240px;margin-left:90px;">
                     <input type="text" placeholder="搜索掘金">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true" style="position:absolute;top:21px;right:-19px;"></span>
+                    <span class="glyphicon glyphicon-search" aria-hidden="true" style="position:absolute;top:24px;right:-19px;"></span>
                 </div>
                 <!--添加 消息 个人-->
                 <div class="addMessUser">
@@ -30,10 +30,10 @@ export default {
         return {
             topMenu: [
                 { con: '首页', icon: 'home' },
-                { con: '专栏', icon: 'zhuanlan\all' },
+                { con: '专栏', icon: 'zhuanlan/all' },
                 { con: '收藏集', icon: 'collect' },
                 { con: '发现', icon: 'find' },
-                //{con:'标签',icon:'label'},
+                {con:'开源库',icon:'source'},
             ],
 
             ind: 0,
@@ -99,9 +99,18 @@ export default {
     line-height: 32px;
     padding: 0px 10px;
     border: 1px solid rgba(204,204,204,.3);
-    color: #71777c;
-    outline: none;
+    color: #d0d2d2;
 }
+.homeTop input::-webkit-input-placeholder{
+    color: #d0d2d2;
+}
+.homeTop input::-moz-placeholder{
+    color: #d0d2d2;
+}
+.homeTop input::-ms-input-placeholder{
+    color: #d0d2d2;
+}
+
 
 .homeTop .login {
     width: 50px;

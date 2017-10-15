@@ -6,17 +6,8 @@
             <span :class="{action:ind===index}" v-for="(item,index) in lanMenu" v-on:click="clickMenu(index,item.icon)" :key="index">{{item.con}}</span>    
         </div>
     </div> 
-    <div style="height:46px;background:#fff;line-height:46px;border-top:1px solid #ccc;">
-        <div class="commonWM">
-            <div class="topTwo">
-                <span :class="{action:ind===index}" v-for="(item,index) in labSort" v-on:click="clickMenu(index,item.icon)" :key="index">{{item.con}}</span>    
-            </div>
-            <div class="topTwo">
-                <span :class="{action:ind===index}" v-for="(item,index) in labTab" v-on:click="clickMenu(index,item.icon)" :key="index">{{item.con}}</span>    
-            </div> 
-        </div>
-    </div>
-    <div class="con">
+    
+    <div class="collectcon">
         <div class="commonWM"  style="margin-top:20px;"><router v-bind:message="parentMsg"></router></div>
     </div> 
     
@@ -70,7 +61,7 @@ export default{
     line-height:46px;
     font-size:14px;
     background:#fff;
-    border-top:1px solid #ccc;
+    border-top:1px solid rgba(204,204,204,.3);
 }
 .collecttop span{
     display:block;
@@ -91,5 +82,10 @@ export default{
     height:60px;
     padding:10px;
     cursor:pointer;
+}
+.collectcon{
+    width:960px;
+    margin:0 auto;
+    
 }
 </style>
