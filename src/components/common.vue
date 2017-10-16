@@ -4,7 +4,7 @@
         <div class="homeTop">
             <div style="width:960px;margin:0 auto;"> 
                 <router-link to="/home/attention?two=like"><h2><img src="static/home/web.svg"></h2></router-link>
-                <span v-for="(item,index) in topMenu" v-on:click="clickTopMenu(index,item.icon)" :class="{active:ind===index}" :key="index">{{item.con}}
+                <span v-for="(item,index) in topMenu" v-on:click="clickTopMenu(item.mark,item.icon)" :class="{active:ind===item.mark}" :key="index">{{item.con}}
                 </span>
                 <div style="float:left;position:relative;width:240px;margin-left:90px;">
                     <input type="text" placeholder="搜索掘金">
@@ -29,24 +29,24 @@ export default {
     data() {
         return {
             topMenu: [
-                { con: '首页', icon: 'home' },
-                { con: '专栏', icon: 'zhuanlan/all' },
-                { con: '收藏集', icon: 'collect' },
-                { con: '发现', icon: 'find' },
-                {con:'开源库',icon:'source'},
+                { con: '首页', icon: 'home',mark:'home' },
+                { con: '专栏', icon: 'zhuanlan/all',mark:'zhuanlan' },
+                { con: '收藏集', icon: 'collect/recommend',mark:'collect' },
+                { con: '发现', icon: 'find/all',mark:'find' },
+                {con:'开源库',icon:'source',mark:'source'},
             ],
 
-            ind: 0,
+            ind: 'home',
             mark: '',
         }
     },
     props: ["message"],
     mounted: function() {
-        this.markshow();
+        this.markshow();  
     },
     methods: {
         markshow() {
-            this.ind = this.message
+            this.ind = this.$route.name
         },
         clickTopMenu(i, icon) {
             this.ind = i;

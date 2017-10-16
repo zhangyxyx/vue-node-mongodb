@@ -1,3 +1,6 @@
+<!--
+在线编辑器应该是原创文章那儿也就是专栏的集合
+-->
 <template>
 <div>
     <div style="height:60px;line-height:60px;border-bottom:1px solid #ccc">
@@ -9,18 +12,10 @@
                     <h5 style="padding-left:20px;margin:20px 0px;font-size:20px;">发布文章</h5>
                     <h5 style="padding-left:20px;margin:20px 0px;font-size:16px;">选择分类</h5>
                     <ul style="padding:0px 9px;overflow:hidden">
-                        <li>Android</li>
-                        <li>前端</li>
-                        <li>iOS</li>
-                        <li>产品</li>
-                        <li>设计</li>
-                        <li>工具资源</li>
-                        <li>阅读</li>
-                        <li>后端</li>
-                        <li>人工智能</li>
+                        <li :class="{active:mark===item.icon}" v-for="(item,index) in type" v-on:click="clickType(item.icon)" :key="index">{{item.con}}</li>
                     </ul>
                     <div style="text-align:center;margin-top:50px;">
-                    <button style="width:102px;height:33px;text-align:center;line-height:33px;border:1px solid #007fff;color:#007fff">确认并发布</button>
+                    <button v-on:click="add()" style="width:102px;height:33px;text-align:center;line-height:33px;border:1px solid #007fff;color:#007fff">确认并发布</button>
                     </div>
                 </div>
                 <div style="width:40px;height:40px;border-radius:50%;float:right;cursor:pointer;" v-on:click="backHome()">
@@ -29,8 +24,11 @@
             </div>
         </div>
     </div>
-    
-    <div id="editor" style="margin-top:20px;">
+    <div style="padding:20px;">
+        <label>标题：</label>
+        <input type="text" name="title" placeholder="请输入标题" style="width:300px;height:40px;padding:0px 10px;border:1px solid #ccc;"/>
+    </div>
+    <div id="editor" name="con">
         <mavon-editor style="height:100%"></mavon-editor>
     </div>
 </div>
@@ -42,7 +40,19 @@ import 'mavon-editor/dist/css/index.css'
 export default {
     data(){
         return{
-            writesort:false
+            writesort:false,
+            mark:'',
+            type:[
+                {con:'Android',icon:'android'},
+                {con:'前端',icon:'web'},
+                {con:'iOS',icon:'ios'},
+                {con:'产品',icon:'products'},
+                {con:'设计',icon:'desgin'},
+                {con:'工具资料',icon:'tool'},
+                {con:'阅读',icon:'read'},
+                {con:'后端',icon:'java'},
+                {con:'人工智能',icon:'rgzn'},
+            ]
         }
     },
     name:'editor',
@@ -55,7 +65,35 @@ export default {
         },
         backHome:function(){
             this.$router.push('/home/attention?two=like')
+        },
+        //添加提交 title user time con like collect type
+        add:function(){
+            let title=$("input[name=title]").val();
+            let user='admin1';
+            let con=$(".v-show-content").html();
+            let like=0;
+            let collect=0;
+            let type=this.mark;
+            var params={
+                title:title,
+                user:user,
+                con:con,
+                like:like,
+                collect:collect,
+                type:type
+            };
+            this.$http.post('/api/zhuanlan/add',params).then((response)=>{
+                if(response&&response.status==200){
+                    this.$router.push('/zhuanlan/all')
+                }
+            })
+
+        },
+        
+        clickType:function(con){
+            this.mark=con;
         }
+
     }
 }
 </script>
@@ -77,7 +115,8 @@ export default {
     padding:15px 10px;
     margin:5px;
     float:left;
-    border:1px solid rgba(204,204,204,.3)
+    border:1px solid rgba(204,204,204,.3);
+    cursor:pointer;
 }
 
 #editor{

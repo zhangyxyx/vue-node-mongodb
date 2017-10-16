@@ -49,6 +49,7 @@ const zlSchema=mongoose.Schema({
     like:Number,
     collect:Number,
     time:String,
+    type:String
 });
 //收藏集
 const clSchema=mongoose.Schema({
@@ -56,6 +57,10 @@ const clSchema=mongoose.Schema({
     title:String,
     con:String,
     time:String,
+    like:Number,
+    collect:Number,
+    type:String,
+    recommend:Number
 });
 //发现
 const fiSchema=mongoose.Schema({

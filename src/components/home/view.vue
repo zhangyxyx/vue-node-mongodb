@@ -111,8 +111,8 @@ export default {
 <style>
 /*菜單*/
 .home-con-menu {
-	height: 46px;
-	line-height: 44px;
+	height: 50px;
+	line-height: 50px;
 	background: #fff;
 	border-top: 1px solid rgba(204,204,204,.3);
 	overflow:hidden
@@ -121,8 +121,8 @@ export default {
 	color: #007fff
 }
 .home-con-menu-menu-every {
-	height: 46px;
-	line-height:46px;
+	height: 50px;
+	line-height:50px;
 	padding:0px 10px;
 	float:left;
 	cursor:pointer;

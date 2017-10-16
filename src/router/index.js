@@ -66,13 +66,15 @@ export default new Router({
       name:'zhuanlan',
       component:zhuanlan
     },
+    //收藏集也分为几个部分
     {
-     path:'/collect',//收藏集
+     path:'/collect/:id',//收藏集
      name:'collect',
      component:collect
     },
+    //发现也分为几个部分
     {
-      path:'/find',//发现
+      path:'/find/:id',//发现
       name:'find',
       component:find
     },

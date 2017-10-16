@@ -1,35 +1,35 @@
 <!--说明
-1.对应后台是list模型，模型里面放置的是我的关注和前端的东西 list是全部的内容。
-所以如果需要调用前端的东西就直接用sort参数来从数据库中获取
-2.在首页中还有热门 最新 评价几个选项这就需要在后台区分开
+这个页面表示的是调取后台的信息，然后展示出来：
+1.调取后台数据
+2.滑动加载更多
+3.点击顶部选择其他内容
+4.点击最新之类的进行排序
+5.点击每一个进入到详情页面
 -->
 <template>
     <div>
-        <div class="row article">
+        <div class="article">
             <!--内容-->
-            <div class="col-sm-12  home-con-right" v-for="(item,index) in homelists" :key="index">
-                <div class="row">
-                    <div class="col-sm-12">
+            <div class="home-con-right" v-for="(item,index) in homelists" :key="index" style="background:#fff;overflow:hidden;padding:0px 20px;">
+                    <div class="articleconone">
                         <span class="articleuser" style="color:#3b76c5">{{item.user||'user'}}&nbsp;▶</span>
                         <span class="articlesort" style="color:#b71ed7">{{item.sort}}&nbsp;▶</span>
-                        <span class="articletime">{{year}}</span>
-
+                        <span class="articletime">{{item.type}}</span>
                     </div>
-                    <div class="col-sm-12" style="width:570px;">
+                    <div style="width:570px;">
                         <router-link :to="{name:'details',params:{id:item._id}}">
                             <h2>{{item.title}}</h2>
                         </router-link>
                         <div style="max-height:40px;margin:10px 0px;">{{item.con}}</div>
                         <!--<span class="articleremove" v-on:click="clickremove(homelists[index])">x</span>-->
                     </div>
-                    <div class="col-sm-12 article-bottom">
+                    <div class="article-bottom">
                         <p><img src="static/home/like.png">{{item.like}}</p>
                         <p><img src="static/home/message.png">{{item.collect}}</p>
                     </div>
                     <div style="position:absolute;right:20px;top:20px;width:75px;height:75px">
                         <img v-bind:src="item.file" style="width:100%;height:100%">
                     </div>
-                </div>
             </div>
         </div>
         <div class="tip">正在加载中...</div>
@@ -42,17 +42,18 @@ import { Loading } from 'element-ui';
 export default {
     data() {
         return {
-            homelists: [],
+            homelists: [],//调出的数据
             sumpage: [],
             ind: '',
             page: 0,
             flag: true,
             year:'',
+            mark:this.findChildMsg
         }
     },
-    props: ['articlemessage'],
+    props: ['findChildMsg'],
     watch: {
-        "articlemessage": function(val) {
+        findChildMsg: function(val) {
             this.page = 0;
             this.homelists = [];
             this.sums(val);
@@ -62,25 +63,26 @@ export default {
     mounted() {
         //滚动分页
         this.scroll();
+        this.sums(this.findChildMsg);
     },
     methods: {
         //渲染列表
-        sums(message) {
+        sums(val) {
             var _this = this;
             this.flag = false;
             var params = {
                 page: this.page,
                 limit: 5,
-                one: message.one,
-                two: message.two
+                type: this.$route.params.id,
+                sort: this.$route.query.sort===undefined?"hot":this.$route.query.sort
             };
-            this.showlist(params);
+            this.showlist(params)
         },
         //渲染数据
         showlist(params) {
             var _this = this;
             _this.sumpage = [];
-            this.$http.post('/api/list/showlist', params).then((response) => {
+            this.$http.post('/api/find/list', params).then((response) => {
                 Vue.http.interceptors.push((response, next) => {
                     $(".tip").css("display","block")
                     next((response) => { 
@@ -157,12 +159,10 @@ export default {
                 var scroll = $(document).scrollTop();//滚动
                 var n = height - client;
                 if (n - 100 <= scroll) {
-                    console.log(_this.flag)
                     if (_this.flag == false) {
                         return;
                     }
                     page++;
-                    console.log(page)
                     _this.page = page;
                     _this.sums(_this.message)
                     _this.Setflag()
@@ -241,6 +241,7 @@ export default {
     border-bottom: 1px solid rgba(204,204,204,.3);
     cursor: pointer;
     height:auto;
+    position:relative;
 }
 
 .home-con-right a {
@@ -269,17 +270,6 @@ export default {
     right: 20px;
     cursor: pointer;
 }
-
-.articleuser,
-.articletime,
-.articlesort {
-    color: #999;
-    font-size: 15px;
-    margin: 10px 10px 10px 0px;
-    display: block;
-    float: left;
-}
-
 .article-bottom p {
     width: auto;
     height: 24px;
@@ -295,8 +285,18 @@ export default {
     height: 15px;
     margin-right: 5px;
 }
-
-
+/*每个数据里面包含用户名时间*/
+.articleconone{
+    overflow: hidden;
+    padding:10px 0px;
+}
+.articleconone span{
+    color: #999;
+    font-size: 15px;
+    margin: 0px 10px 0px 0px;
+    display: block;
+    float: left;
+}
 
 
 /*分頁*/
