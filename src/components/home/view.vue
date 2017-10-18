@@ -1,3 +1,6 @@
+<!--
+这是一开始打开的页面。
+-->
 <template>
 	<div class="home">
 		<myCommon v-bind:message="commonmsg"></myCommon>
@@ -85,13 +88,14 @@ export default {
 		},
 		//点击菜单的时候跳转路由
 		Jumprouting() {
+			console.log(this.$route)
 			var one = $(".home-con-menu .active").attr("data-menu");
 			var two = $('.topmenuone .active').attr("data-menu");
 			var json = {
 				one: one,
 				two: two,
 			}
-			this.$router.push({ path: '/home/' + one, query: { two: two } });
+			this.$router.push({ path: '/home/'+one, query: {sort: two } });
 			this.nowId = json;
 
 			return json

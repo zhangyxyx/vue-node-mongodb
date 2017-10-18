@@ -20,7 +20,7 @@
                         <router-link :to="{name:'details',params:{id:item._id}}">
                             <h2>{{item.title}}</h2>
                         </router-link>
-                        <div style="max-height:40px;margin:10px 0px;">{{item.con}}</div>
+                        <div style="max-height:40px;margin:10px 0px;" v-html="item.con"></div>
                         <!--<span class="articleremove" v-on:click="clickremove(homelists[index])">x</span>-->
                     </div>
                     <div class="article-bottom">
@@ -61,6 +61,7 @@ export default {
         }
     },
     mounted() {
+        console.log(this.zlmessage)
         //滚动分页
         this.scroll();
         this.sums(this.zlmessage);

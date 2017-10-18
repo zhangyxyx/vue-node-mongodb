@@ -29,7 +29,7 @@ export default {
     data() {
         return {
             topMenu: [
-                { con: '首页', icon: 'home',mark:'home' },
+                { con: '首页', icon: 'home/attention',mark:'home' },
                 { con: '专栏', icon: 'zhuanlan/all',mark:'zhuanlan' },
                 { con: '收藏集', icon: 'collect/recommend',mark:'collect' },
                 { con: '发现', icon: 'find/all',mark:'find' },
@@ -46,7 +46,9 @@ export default {
     },
     methods: {
         markshow() {
+            
             this.ind = this.$route.name
+            console.log(this.$route)
         },
         clickTopMenu(i, icon) {
             this.ind = i;

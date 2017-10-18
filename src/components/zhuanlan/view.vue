@@ -57,11 +57,11 @@ export default{
             type:this.$route.params.id,
             //二级菜单
             ind:0,
-            //二级菜单
-            sort:this.$route.query.two,
+            //二级菜单 一开始选择type的时候默认是热门的
+            sort:this.$route.query.sort||'like',
             //传给子组件的props
             //childMsg:{one:'all',two:'like'},
-            childMsg:this.$route.params.id+":"+this.$route.params.id,
+            childMsg:this.$route.params.id+":"+this.$route.query.sort||'like',
             commonmsg:1
         }
     },
@@ -69,8 +69,9 @@ export default{
        "myCommon":common,
        "myzlArticle":article
     },
+    
     mounted() {
-		
+        
 	},
     methods:{
         //点击一级菜单
@@ -88,8 +89,6 @@ export default{
             this.childMsg=type+":"+sort;
             this.$router.push({path:'/zhuanlan/'+type,query:{sort:sort}});
         }
-
-
     }
 }
 </script>

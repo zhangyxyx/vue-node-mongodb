@@ -58,7 +58,7 @@ export default new Router({
     },
     {//首页的我的关注和前端 这两个大类下面有分给三个热门 最新 评论
       path:'/home/:id',
-      name:'article',
+      name:'home',
       component:home
     },
     {//专栏分为几个部分
