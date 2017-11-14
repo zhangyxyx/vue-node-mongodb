@@ -65,6 +65,6 @@ export default{
     cursor:pointer
 }
 .action{
-    color:blue
+    color:#007fff
 }
 </style>

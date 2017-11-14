@@ -64,7 +64,7 @@ export default{
     
 }
 .homeTop span:hover{
-	color:blue
+	color:#007fff
 }
 .homeTop .active{
 	color:#007fff

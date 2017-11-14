@@ -1,0 +1,8 @@
+/*这个设置一下类似于函数的东西 有参数 然后可以引入这个文件 */
+$blue:#007fff;
+
+@mixin fz($size,$color){
+    font-size:$size;
+    color:$color
+}
+

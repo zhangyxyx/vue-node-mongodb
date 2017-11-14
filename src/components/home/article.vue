@@ -115,7 +115,6 @@ export default {
             }).then(function() {
                 this.flag = true
             }).catch((response) => {
-                console.log(response)
             });
         },
         // //查找内容

@@ -17,8 +17,8 @@
 			<div style="width:700px;float:left;">
 				<div style="height:50px;line-height:50px;background:#fff;margin:20px 0px;">
 					<div style="width:50px;float:left;"><img src="/static/logo.png" style="width:100%" /></div>
-					<div style="float:left;margin:0px 16px;color:#007fff;cursor:pointer;" v-on:click="write()"><img src="/static/home/write.png" style="width:20px;margin-right:5px;">写文章</div>
-					<div style="float:left;margin:0px 16px;color:#007fff;cursor:pointer;" v-on:click="sharelink()"><img src="/static/home/link.png" style="width:20px;margin-right:5px;">分享链接</div>
+					<div style="float:left;margin-left:30px;color:#007fff;cursor:pointer;font-size:15px;" v-on:click="write()"><img src="/static/home/write.png" style="width:20px;margin-right:5px;vertical-align:middle">写文章</div>
+					<div style="float:left;margin-left:30px;color:#007fff;cursor:pointer;font-size:15px;" v-on:click="sharelink()"><img src="/static/home/link.png" style="width:20px;margin-right:5px;vertical-align:middle">分享链接</div>
 					<div style="float:right;margin:0px 16px;color:#ccc">草稿</div>
 				</div>
 				<div style="background:#fff;">
@@ -51,7 +51,7 @@ export default {
 	data() {
 		return {
 			onemenu: [
-				{ change: 'attention', text: '我关注的', active: 'active' },
+				{ change: 'all', text: '我关注的', active: 'active' },
 				{ change: 'web', text: '前端' },
 			],
 			twomenu: [
@@ -88,7 +88,6 @@ export default {
 		},
 		//点击菜单的时候跳转路由
 		Jumprouting() {
-			console.log(this.$route)
 			var one = $(".home-con-menu .active").attr("data-menu");
 			var two = $('.topmenuone .active').attr("data-menu");
 			var json = {
@@ -97,7 +96,6 @@ export default {
 			}
 			this.$router.push({ path: '/home/'+one, query: {sort: two } });
 			this.nowId = json;
-
 			return json
 		},
 		//进入到添加文章
@@ -115,14 +113,12 @@ export default {
 <style>
 /*菜單*/
 .home-con-menu {
+	width:100%;
 	height: 50px;
 	line-height: 50px;
 	background: #fff;
 	border-top: 1px solid rgba(204,204,204,.3);
 	overflow:hidden
-}
-.home-con-menu .active {
-	color: #007fff
 }
 .home-con-menu-menu-every {
 	height: 50px;
@@ -130,16 +126,13 @@ export default {
 	padding:0px 10px;
 	float:left;
 	cursor:pointer;
+	font-size:14px;
 }
 .topmenuone {
 	width:100%;
-	height: 50px;
-	padding:15px 0px;
-	font-size:12px;
-	padding-left:20px;
-}
-.topmenuone .active {
-	color: #007fff
+	height: auto;
+	padding:17px 20px;
+	display:inline-block
 }
 .topmenuone-menu-every {
 	cursor: pointer;

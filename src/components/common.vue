@@ -3,7 +3,7 @@
         <!--顶部的菜单-->
         <div class="homeTop">
             <div style="width:960px;margin:0 auto;"> 
-                <router-link to="/home/attention?two=like"><h2><img src="static/home/web.svg"></h2></router-link>
+                <router-link to="/home"><h2><img src="static/home/web.svg"></h2></router-link>
                 <span v-for="(item,index) in topMenu" v-on:click="clickTopMenu(item.mark,item.icon)" :class="{active:ind===item.mark}" :key="index">{{item.con}}
                 </span>
                 <div style="float:left;position:relative;width:240px;margin-left:90px;">
@@ -29,7 +29,7 @@ export default {
     data() {
         return {
             topMenu: [
-                { con: '首页', icon: 'home/attention',mark:'home' },
+                { con: '首页', icon: 'home',mark:'home' },
                 { con: '专栏', icon: 'zhuanlan/all',mark:'zhuanlan' },
                 { con: '收藏集', icon: 'collect/recommend',mark:'collect' },
                 { con: '发现', icon: 'find/all',mark:'find' },
@@ -63,6 +63,9 @@ export default {
     }
 }
 </script>
+<style scoped>
+@import './common.css';
+</style>
 <style>
 /*顶部菜单*/
 
@@ -75,7 +78,10 @@ export default {
 .homeTop h2 {
     float: left;
     margin-right: 20px;
-    margin-top: 8px;
+
+}
+.homeTop h2 img{
+    vertical-align:middle
 }
 
 .homeTop span {
@@ -83,7 +89,7 @@ export default {
     floaT: left;
     text-align: center;
     display: block;
-    font-size: 15px;
+    font-size: 16px;
     cursor: pointer;
 }
 
@@ -121,6 +127,9 @@ export default {
 .addMessUser {
     height: 60px;
     line-height: 60px;
+}
+.addMessUser img{
+    vertical-align:middle
 }
 
 </style>
