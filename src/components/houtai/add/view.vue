@@ -19,8 +19,7 @@
 					<label>内容</label>
 					<input type="text" class="form-control" placeholder="请输入内容" name="con">
 				</div>
-				
-				<span class="submit" v-on:click="addData()">提交</span>
+				<button type="back" class="btn btn-primary"v-on:click="addData()">提交</button>
 				<button type="back" class="btn btn-primary">返回</button>
 			</form>
 		</div>

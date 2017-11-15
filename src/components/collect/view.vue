@@ -1,171 +1,182 @@
 <!--
-说明一下：我理解的这块是收藏集有三部分
-1，最上面的全部和编辑推荐 recommend
-2. ios 前端 后台之类的 type
-3. 热门 最新 排序 sort
-4.上面是区分为几个部分之后，这个页面也是需要下拉加载更多的
+这是一开始打开的页面。
 -->
 <template>
-    <div class="main">
-        <myCommon v-bind:message="commonmsg"></myCommon>
-        <div class="collecttop">
-            <div class="commonWM">
-                <span :class="{action:item.icon===recommend}" v-for="(item,index) in lanMenu" v-on:click="recommendMenu(index,item.icon)" :key="index">{{item.con}}</span>
-            </div>
-        </div>
-
-        <div class="collectcon">
-            <div style="width:700px;float:left;background:#fff;border-bottom:1px solid rgba(204,204,204,.3)">
-                <div class="collectMenu collectMenuOne">
-                    <div :class="{action:item.mark===sort}" v-for="(item,index) in collectMenuone" v-on:click="sortMenu(index,item.mark)" :key="index">{{item.con}}</div>
-                </div>
-                <div class="collectMenu collectMenuTwo">
-                    <div :class="{action:item.icon===type}" v-for="(item,index) in collectMenutwo" v-on:click="typeMenu(index,item.icon)" :key="index">{{item.con}}</div>
-                </div>
-                <div class="collectCon">
-                    <div class="commonWM" style="margin-top:20px;">
-                        <router v-bind:message="childMsg"></router>
-                    </div>
-                </div>
-
-            </div>
-            <div style="width:240px;float:left;margin-left:20px;">
-                <div><img src="/static/home/home_right_1.png" style="width:100%;"></div>
-                <div style="margin-top:20px;"><img src="/static/home/home_right_2.png" style="width:100%;"></div>
-            </div>
-        </div>
-    </div>
+	<div class="home">
+		<myCommon v-bind:message="commonmsg"></myCommon>
+		<!--专属home的菜单 我的关注 前端-->
+		<div class="home-con-menu">
+			<div style="width:960px;margin:0px auto;height:46px;">
+				<div class="home-con-menu-menu-every" v-for='(options,index) in onemenu' :class="{active:onemenuactive===options.change}" v-on:click="onemenuclick(options.change)" :key="index">
+					{{options.text}}
+				</div>
+			</div>
+		</div>
+		<div style="width:960px;margin:20px auto;">
+			<!--右侧对应的内容-->
+			<div class="content-left" style="width:700px;float:left;">
+				<div style="background:#fff;">
+					<!--热门 最新 评论-->
+					<div class="topmenuone">
+						<div class="topmenuone-menu-every-left">
+							<div class="topmenuone-menu-every" v-for='(options,index) in twomenu' v-bind:data-menu="options.change" :class="{active:twomenuactive===options.change}" v-on:click="twomenuclick(options.change)" :key="index">
+								{{options.text}}
+							</div>
+						</div>
+						<div class="topmenuone-menu-every-right">
+							<div class="topmenuone-menu-every" v-for='(options,index) in threemenu' v-bind:data-menu="options.change" :class="{active:threemenuactive===options.change}" v-on:click="threemenuclick(options.change)" :key="index">
+								{{options.text}}
+							</div>
+						</div>
+					</div>
+					<!--精选-->
+					<div class="rightevery article">
+						<articleview v-bind:message="nowId"></articleview>
+					</div>
+				</div>
+			</div>
+			<div class="content-right">
+				<div><img src="/static/home/home_right_1.png" style="width:100%;"></div>
+				<div style="margin-top:20px;"><img src="/static/home/home_right_2.png" style="width:100%;"></div>
+			</div>
+		</div>
+	</div>
 </template>
 <script>
-import routerView from './routerView.vue'
+import article from './article.vue'
 import common from '../common.vue'
 export default {
-    data() {
-        return {
-            lanMenu: [
-                { con: '编辑推荐', icon: 'recommend' },
-                { con: '全部', icon: 'all'},
-            ],
-            collectMenuone:[
-                {con:'热门',mark:'hot'},
-                {con:'最新',mark:'now'},
-            ],
-            collectMenutwo:[
-                {con:'全部',icon:'all'},
-                {con:'iOS',icon:'ios'},
-                {con:'Android',icon:'android'},
-                {con:'前端',icon:'web'},
-                {con:'产品',icon:'products'},
-                {con:'设计',icon:'desgin'},
-                {con:'后端',icon:'java'}
-            ],
-            
-            parentMsg: 'android',
-            //一级菜单 二级菜单 三级排序
-            recommend:'recommend',
-            type:'all',
-            sort:'hot',
-            //传给子组件的props
-            childMsg:'recommend'+":"+"hot"+":"+"all",
-            //公共
-            commonmsg:2
-        }
-    },
-    components: {
-        "router": routerView,
-        "myCommon": common
-    },
-    methods: {
-        //一级菜单 recommend
-        recommendMenu(index,con){
-           this.recommend=con;
-           this.changeClass(con,this.type,this.sort)
-        },
-        //二级菜单 排序 
-        sortMenu(index,con){
-            this.sort=con;
-            this.changeClass(this.recommend,this.sort,con)
-        },
-        //三级菜单 type
-        typeMenu(index,con){
-           this.type=con;
-           this.changeClass(this.recommend,con,this.type)
-        },
-        
-        //根据点击一级二级菜单来选择哪块需要显示 和地址栏需要怎么变化
-        changeClass(recommend,type,sort){
-            this.childMsg=recommend+":"+type+":"+sort;
-            this.$router.push({path:'/collect/'+recommend,query:{type:type,sort:sort}});
-        }
-    }
+	data() {
+		return {
+			onemenu: [
+				{text:'编辑推荐',change:'all'},
+                {text:'全部',change:'android'},
+			],
+			twomenu: [
+				{ change: 'like', text: '热门'},
+				{ change: 'time', text: '最新' },
+			],
+			threemenu: [
+				{text:'全部',change:'all'},
+				{text:'iOS',change:'ios'},
+				{text:'Android',change:'android'},
+				{text:'前端',change:'web'},
+				{text:'设计',change:'desgin'},
+				{text:'产品',change:'products'},
+                {text:'后端',change:'java'},
+			],
+			commonmsg: 2,
+			nowId: {},
+			onemenuactive:this.$route.params.id||'all',//一级菜单
+			twomenuactive:this.$route.query.sort||'like',//二级菜单 左边
+			threemenuactive:this.$route.query.type||'all'//二级菜单 右边
+		}
+	},
+	components: {
+		"articleview": article,
+		"myCommon": common
+	},
+	mounted() {
+		this.Jumprouting();
+	},
+	methods: {
+		//点击菜单跳转
+		onemenuclick(mark) {
+			this.onemenuactive=mark;
+			this.Jumprouting();
+		},
+		twomenuclick(mark) {
+			this.twomenuactive=mark;
+			this.Jumprouting();
+		},
+		threemenuclick(mark) {
+			this.threemenuactive=mark;
+			this.Jumprouting();
+		},
+		//点击菜单的时候跳转路由
+		Jumprouting() {
+			var one = this.onemenuactive;
+			var two = this.twomenuactive;
+			var three = this.threemenuactive;
+			var json = {
+				one: one,
+				two: two,
+				three:three
+			}
+			this.$router.push({ path: '/collect/'+one, query: {sort: two,type:three } });
+			this.nowId = json;
+			return json
+		},
+	}
 }
+
 </script>
-<style>
-.collecttop {
-    height: 50px;
-    line-height: 50px;
-    font-size: 14px;
-    background: #fff;
-    border-top: 1px solid rgba(204, 204, 204, .3);
+<style lang="scss" scoped>
+@import '../../style/mixin';
+/*菜單*/
+.home-con-menu {
+	@include wh(100%,50px);
+	line-height: 50px;
+	background: #fff;
+	border-top: 1px solid rgba(204,204,204,.3);
+	overflow:hidden;
+	.home-con-menu-menu-every {
+		height: 50px;
+		line-height:50px;
+		padding:0px 10px;
+		float:left;
+		cursor:pointer;
+		font-size:14px;
+		&:hover{
+			@include active;
+		}
+	}
 }
-
-.collecttop span {
-    display: block;
-    float: left;
-    padding: 0px 10px;
+.topmenuone {
+	width:100%;
+	height: auto;
+	@include wh(100%,auto);
+	padding:17px 0px;
+	display:inline-block;
+	.topmenuone-menu-every-left{
+		@include left;
+		margin-left:20px;
+	}
+	.topmenuone-menu-every-right{
+		@include right;
+		margin-right:20px
+	}
+	.topmenuone-menu-every {
+		@include right;
+		cursor: pointer;
+		font-size: 14px;
+		text-align: center;
+		padding: 0px 8px;
+		float: left;
+		border-right:1px solid rgba(204,204,204,.3);
+		&:hover{
+			@include active;
+		}
+	}
 }
-
-.collecttop span:hover {
-    cursor: pointer
+.rightevery {
+	padding:0px 20px;
+	border-top:1px solid rgba(204,204,204,.3)
 }
-
-.action {
-    color: #007fff
-}
-
-.topTwo {
-    floaT: left;
-}
-
-.topTwo span {
-    height: 60px;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.collectcon {
-    width: 960px;
-    margin:20px auto;
-}
-/*二级菜单*/
-.collectMenu{
-    padding:13px 20px;
-    
-}
-.collectMenu div{
-    floaT:left;
-    font-size:14px;
-    padding:0px 10px;
-    border-right:1px solid rgba(204,204,204,.3);
-    cursor:pointer;
-}
-.collectMenuOne{
-    float:left;
-}
-.collectMenuOne .active{
-    color: #007fff
-}
-.collectMenuTwo{
-    float:right;
-}
-.collectMenuTwo .active{
-    color: #007fff
-}
-/*收藏集内容*/
-.collectCon{
-    width:700px;
-    padding:20px;
-    overflow:hidden;
-    border-top:1px solid rgba(204,204,204,.3)
+/*右边图片*/
+.content-right{
+	width:240px;
+	margin-left:20px;
+	@include left
 }
 </style>
+
+
+
+
+
+
+
+
+
+

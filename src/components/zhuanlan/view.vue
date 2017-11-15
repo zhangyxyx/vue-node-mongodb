@@ -1,142 +1,179 @@
+<!--
+这是一开始打开的页面。
+-->
 <template>
-<div class="main">
-    <myCommon v-bind:onemessage="commonmsg"></myCommon>
-    <div class="zl_top">
-        <ul>
-            <li :class="{action:type===item.icon}" v-for="(item,index) in lanMenu" v-on:click="typeMenu(index,item.icon)" :key="index">{{item.con}}</li>    
-        </ul>
-    </div>  
-    <div style="width:960px;margin:20px auto;overflow:hidden;">
-        <div style="width:700px;float:left;">
-            <div style="padding-left:20px;height:47px;border-bottom:1px solid rgba(204,204,204,.3);background:#fff;padding-left:30px;">
-                <div style="float:left;line-height:47px;font-size:16px;">原创文章</div>
-                <!--热门 最新 评论-->
-                <div class="zltopmenuone">
-                    <div class="zltopmenuone-menu-every" :class="{action:sort===options.change}"  v-for='(options,index) in twomenu' v-on:click="sortMenu(index,options.change)" :key="index">
-                        {{options.text}}
-                    </div>
-                </div>
-            </div>
-            <!--专栏内容-->
-            <div class="zlCon">
-                <myzlArticle v-bind:zlmessage="childMsg"></myzlArticle>
-            </div>
-        </div>
-        <div style="width:240px;margin-left:20px;float:left;">
-            <img src="/static/home/home_right_1.png" />
-        </div>
-    </div> 
-</div> 
+	<div class="home">
+		<myCommon v-bind:message="commonmsg"></myCommon>
+		<!--专属home的菜单 我的关注 前端-->
+		<div class="home-con-menu">
+			<div style="width:960px;margin:0px auto;height:46px;">
+				<div class="home-con-menu-menu-every" v-for='(options,index) in onemenu' :class="{active:onemenuactive===options.change}" v-on:click="onemenuclick(options.change)" :key="index">
+					{{options.text}}
+				</div>
+			</div>
+		</div>
+		<div style="width:960px;margin:20px auto;">
+			<!--右侧对应的内容-->
+			<div class="content-left" style="width:700px;float:left;">
+				<div style="background:#fff;">
+					<!--热门 最新 评论-->
+					<div class="topmenuone">
+						<div class="topmenuone-menu-every-left"><h3>原创文章</h3></div>
+						<div class="topmenuone-menu-every-right">
+							<div class="topmenuone-menu-every" v-for='(options,index) in twomenu' v-bind:data-menu="options.change" :class="{active:twomenuactive===options.change}" v-on:click="twomenuclick(options.change)" :key="index">
+								{{options.text}}
+							</div>
+						</div>
+					</div>
+					<!--精选-->
+					<div class="rightevery article">
+						<articleview v-bind:message="nowId"></articleview>
+					</div>
+				</div>
+			</div>
+			<div class="content-right">
+				<div><img src="/static/home/home_right_1.png" style="width:100%;"></div>
+				<div style="margin-top:20px;"><img src="/static/home/home_right_2.png" style="width:100%;"></div>
+			</div>
+		</div>
+	</div>
 </template>
 <script>
-import common from '../common.vue'
 import article from './article.vue'
-export default{
-    data(){
-        return{
-            //一级菜单
-            lanMenu:[
-                {con:'全部',icon:'all'},
-                {con:'Android',icon:'android'},
-                {con:'前端',icon:'web'},
-                {con:'iOS',icon:'ios'},
-                {con:'产品',icon:'products'},
-                {con:'设计',icon:'desgin'},
-                {con:'工具资料',icon:'tool'},
-                {con:'阅读',icon:'read'},
-                {con:'后端',icon:'java'},
-                {con:'人工智能',icon:'rgzn'},
-            ],
-            //二级菜单
-            twomenu: [
-				{ change: 'like', text: '热门', active: 'active' },
+import common from '../common.vue'
+export default {
+	data() {
+		return {
+			onemenu: [
+				{text:'全部',change:'all'},
+                {text:'Android',change:'android'},
+                {text:'前端',change:'web'},
+                {text:'iOS',change:'ios'},
+                {text:'产品',change:'products'},
+                {text:'设计',change:'desgin'},
+                {text:'工具资料',change:'tool'},
+                {text:'阅读',change:'read'},
+                {text:'后端',change:'java'},
+                {text:'人工智能',change:'rgzn'},
+			],
+			twomenu: [
+				{ change: 'like', text: '热门'},
 				{ change: 'time', text: '最新' },
 				{ change: 'collect', text: '评论' },
-            ],
-            //传给子组件的props 一级菜单
-            type:this.$route.params.id,
-            //二级菜单
-            ind:0,
-            //二级菜单 一开始选择type的时候默认是热门的
-            sort:this.$route.query.sort||'like',
-            //传给子组件的props
-            //childMsg:{one:'all',two:'like'},
-            childMsg:this.$route.params.id+":"+this.$route.query.sort||'like',
-            commonmsg:1
-        }
-    },
-    components:{
-       "myCommon":common,
-       "myzlArticle":article
-    },
-    
-    mounted() {
-        
+			],
+			commonmsg: 1,
+			nowId: {},
+			onemenuactive:this.$route.params.id||'all',//一级菜单
+			twomenuactive:this.$route.query.sort||'like'//二级菜单
+		}
 	},
-    methods:{
-        //点击一级菜单
-        typeMenu(index,con){
-           this.type=con;
-           this.changeClass(con,this.sort)
-        },
-        //点击二级菜单
-        sortMenu(index,con){
-            this.sort=con;
-            this.changeClass(this.type,con)
-        },
-        //根据点击一级二级菜单来选择哪块需要显示 和地址栏需要怎么变化
-        changeClass(type,sort){
-            this.childMsg=type+":"+sort;
-            this.$router.push({path:'/zhuanlan/'+type,query:{sort:sort}});
-        }
-    }
+	components: {
+		"articleview": article,
+		"myCommon": common
+	},
+	mounted() {
+		this.Jumprouting();
+	},
+	methods: {
+		//点击菜单跳转
+		onemenuclick(mark) {
+			this.onemenuactive=mark;
+			this.Jumprouting();
+		},
+		twomenuclick(mark) {
+			this.twomenuactive=mark;
+			this.Jumprouting();
+		},
+		//点击菜单的时候跳转路由
+		Jumprouting() {
+			var one = this.onemenuactive;
+			var two = this.twomenuactive;
+			var json = {
+				one: one,
+				two: two,
+			}
+			this.$router.push({ path: '/zhuanlan/'+one, query: {sort: two } });
+			this.nowId = json;
+			return json
+		},
+		//进入到添加文章
+		write(){
+			this.$router.push('/home/write')
+		},
+		sharelink(){
+			this.$router.push('/home/sharelink')
+		}
+
+	}
 }
+
 </script>
-<style>
-.zl_top{
-    height:50px;
-    font-size:14px;
-    background:#fff;
-    border-top:1px solid rgba(204,204,204,.3);
+<style lang="scss" scoped>
+@import '../../style/mixin';
+/*菜單*/
+.home-con-menu {
+	@include wh(100%,50px);
+	line-height: 50px;
+	background: #fff;
+	border-top: 1px solid rgba(204,204,204,.3);
+	overflow:hidden;
+	.home-con-menu-menu-every {
+		height: 50px;
+		line-height:50px;
+		padding:0px 10px;
+		float:left;
+		cursor:pointer;
+		font-size:14px;
+		&:hover{
+			@include active;
+		}
+	}
 }
-.zl_top ul{
-    width:960px;
-    height:50px;
-    margin:0 auto;
-    line-height:50px;
+.topmenuone {
+	width:100%;
+	height: auto;
+	@include wh(100%,auto);
+	padding:17px 0px;
+	display:inline-block;
+	.topmenuone-menu-every-left{
+		@include left;
+		margin-left:20px;
+	}
+	.topmenuone-menu-every-right{
+		@include right;
+		margin-right:20px
+	}
+	.topmenuone-menu-every {
+		@include right;
+		cursor: pointer;
+		font-size: 14px;
+		text-align: center;
+		padding: 0px 8px;
+		float: left;
+		border-right:1px solid rgba(204,204,204,.3);
+		&:hover{
+			@include active;
+		}
+	}
 }
-.zl_top li{
-    padding:0px 10px;
-    display:block;
-    float:left;
-    color:#909090;
-    cursor:pointer;
+.rightevery {
+	padding:0px 20px;
+	border-top:1px solid rgba(204,204,204,.3)
 }
-.zl_top li:hover{
-    cursor:pointer
-}
-.zl_top .action{
-    color:#007fff
-}
-/*二级菜单*/
-.zltopmenuone {
-    width:200px;
-	height: 47px;
-	padding:15px 0px;
-	font-size:12px;
-	padding-left:20px;
-    float:right;
-    overflow:hidden
-}
-.zltopmenuone .active {
-	color: #007fff
-}
-.zltopmenuone-menu-every {
-	cursor: pointer;
-	font-size: 15px;
-	text-align: center;
-	padding: 0px 8px;
-	float: left;
-	border-right:1px solid rgba(204,204,204,.3)
+/*右边图片*/
+.content-right{
+	width:240px;
+	margin-left:20px;
+	@include left
 }
 </style>
+
+
+
+
+
+
+
+
+
+

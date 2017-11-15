@@ -20,7 +20,8 @@
                 <label for="exampleInputFile">文章图片</label>
                 <input type="file" id="exampleInputFile">
             </div>
-            <button type="submit" class="btn btn-default">提交</button>
+			<button type="button" class="btn btn-primary">提交</button>
+           
         </form>
     </div>
 </div>
@@ -65,13 +66,16 @@ export default {
 }
 
 </script>
-<style>
-
+<style lang="scss">
+@import '../../../style/mixin';
 /*菜單*/
 .home-con-menu{
 	height:100%;
 	background:#fff;
 	border-top:1px solid #ccc;
+	.active{
+		@include active;
+	}
 }
 .menu-every{
 	cursor:pointer;
@@ -79,9 +83,6 @@ export default {
 	text-align:center;
 	padding:0px 8px;
 	float:left;
-}
-.home-con-menu .active{
-	color:#007fff
 }
 .topmenuone .active{
 	color:#007fff

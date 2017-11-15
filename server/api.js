@@ -16,7 +16,15 @@ var upload=multer({dest:'upload/'});
 */
 
 //获取列表 也就是首页中的信息 排序的话用sort 1升序 -1降序
+/*
+目前表分为首页 专栏 收藏集 发现 开源库
+首页：home 专栏:zhuanlan 收藏集：collect 发现：find 开源库：source
+目前基本的就是获取数据、根据参数选择恰当的数据、排序、分页、点击进入详情、（后面这两个应该放在后台管理员界面中）修改、删除
+*/
+//获取数据
 router.post('/api/list/showlist', (req, res) => {
+    //当前是哪个表
+    var collections=req.body.collections;
     //参数
     var sort = req.body.one;
     //排序参数
@@ -27,8 +35,8 @@ router.post('/api/list/showlist', (req, res) => {
     var skip = req.body.page * limit;
     var json = {};
     json[panduan] = 1;
-
-    var query = models.home.find({ sort: sort }).sort(json).limit(limit).skip(skip);
+    console.log(collections)
+    var query = models[collections].find({ sort: sort }).sort(json).limit(limit).skip(skip);
     query.find(function (err, data) {
         if (err) {
             res.send(err)
@@ -108,103 +116,7 @@ router.post("/api/list/detail", (req, res) => {
         }
     })
 })
-//获取专栏信息
-router.post('/api/zhuanlan/list', (req, res) => {
-    let type=req.body.one;
-    let sort=req.body.two;
-    let json={};
-    json[sort]=-1;
-    if(type!='all'){
-        models.zhuanlan.find({type:type}).sort(json).exec((err,data)=>{
-            if(err){
-                res.send(err)
-            }else{
-                res.send(data)
-            }
-        }) 
-    }else{
-        models.zhuanlan.find().sort(json).exec((err,data)=>{
-            if(err){
-                res.send(err)
-            }else{
-                res.send(data)
-            }
-        }) 
-    }
-});
-router.post('/api/zhuanlan/add',(req,res)=>{
-    //title user time con like collect type
-    let title=req.body.title;
-    let user=req.body.user;
-    let year=new Date().getFullYear();
-    let month=new Date().getMonth()+1;
-    let day=new Date().getDate();
-    let hour=new Date().getHours();
-    let minutes=new Date().getMinutes();
-    let seconds=new Date().getSeconds();
-    let time=year+"/"+month+"/"+day+"/"+hour+"/"+minutes+"/"+seconds;
-    let con=req.body.con;
-    let like=req.body.like;
-    let collect=req.body.collect;
-    let type=req.body.type;
-    let newAccount = new models.zhuanlan({
-        title:title,
-        user:user,
-        time:time,
-        con:con,
-        like:like,
-        collect:collect,
-        type:type,
-    });
-    newAccount.save((err, data) => {
-        if (err) {
-            res.send(err)
-        } else {
-            res.send('成功添加列表')
-        }
-    })
-})
-//获取收藏集信息
-router.post('/api/collect/list', (req, res) => {
-    let recommend=req.body.recommend;
-    let type=req.body.type==='all'?'':req.body.type;
-    let sort=req.body.sort;
-    let json={};
-    json[sort]=-1;
-    models.collect.find({recommend:recommend,type:type}).sort(json).exec((err,data)=>{
-        if(err){
-            res.send(err)
-        }else{
-            res.send(data)
-        }
-    })
-});
-//获取发现信息
-router.post('/api/find/list', (req, res) => {
-    console.log(req.body)
-    let type=req.body.type;
-    let sort=req.body.sort;
-    let json={};
-    json[sort]=-1;
-    if(type!='all'){
-        models.collect.find({type:type}).sort(json).exec((err,data)=>{
-            if(err){
-                res.send(err)
-            }else{
-                res.send(data)
-            }
-        })
-    }else{
-        models.collect.find().sort(json).exec((err,data)=>{
-            if(err){
-                res.send(err)
-            }else{
-                res.send(data)
-            }
-        })
-    }
-    
-});
+
 //后台
 //后台登录
 router.post('/api/login/add', (req, res) => {

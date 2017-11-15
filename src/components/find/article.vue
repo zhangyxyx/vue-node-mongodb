@@ -1,33 +1,36 @@
-<!--说明
-这个页面表示的是调取后台的信息，然后展示出来：
-1.调取后台数据
-2.滑动加载更多
-3.点击顶部选择其他内容
-4.点击最新之类的进行排序
-5.点击每一个进入到详情页面
+<!--
+说明一下：
+1.后台接口：获取数据/api/list/showlist 删除数据/api/list/removelist
+
 -->
 <template>
     <div>
         <div class="article">
             <!--内容-->
-            <div class="home-con-right" v-for="(item,index) in homelists" :key="index" style="background:#fff;overflow:hidden;padding:0px 20px;">
-                    <div class="articleconone">
-                        <span class="articleuser" style="color:#3b76c5">{{item.user||'user'}}&nbsp;▶</span>
-                        <span class="articlesort" style="color:#b71ed7">{{item.sort}}&nbsp;▶</span>
-                        <span class="articletime">{{item.type}}</span>
+            <div class="home-con-right" v-for="(item,index) in homelists" :key="index">
+                    <div class="left">
+                        <!-- 上面的事件 分类  -->
+                        <div class="home-con-left-top">
+                            <span class="articleuser" style="color:#3b76c5">{{item.user||'user'}}&nbsp;▶</span>
+                            <span class="articlesort" style="color:#b71ed7">{{item.sort}}&nbsp;▶</span>
+                            <span class="articletime">{{year}}</span>
+                        </div>
+                        <!--中间的标题和内容-->
+                        <div class="home-con-left-center" style="width:570px;">
+                            <router-link :to="{name:'details',params:{id:item._id}}">
+                                <h4>{{item.title}}</h4>
+                            </router-link>
+                            <div style="max-height:40px;margin:10px 0px;">{{item.con}}</div>
+                            <!--<span class="articleremove" v-on:click="clickremove(homelists[index])">x</span>-->
+                        </div>
+                        <!--下面的收藏和喜欢-->
+                        <div class="home-con-left-bottom">
+                            <p><img src="static/home/like.png">{{item.like}}</p>
+                            <p><img src="static/home/message.png">{{item.collect}}</p>
+                        </div>
                     </div>
-                    <div style="width:570px;">
-                        <router-link :to="{name:'details',params:{id:item._id}}">
-                            <h2>{{item.title}}</h2>
-                        </router-link>
-                        <div style="max-height:40px;margin:10px 0px;">{{item.con}}</div>
-                        <!--<span class="articleremove" v-on:click="clickremove(homelists[index])">x</span>-->
-                    </div>
-                    <div class="article-bottom">
-                        <p><img src="static/home/like.png">{{item.like}}</p>
-                        <p><img src="static/home/message.png">{{item.collect}}</p>
-                    </div>
-                    <div style="position:absolute;right:20px;top:20px;width:75px;height:75px">
+                    <!--图片-->
+                    <div class="right" style="position:absolute;right:20px;top:20px;width:75px;height:75px">
                         <img v-bind:src="item.file" style="width:100%;height:100%">
                     </div>
             </div>
@@ -42,18 +45,17 @@ import { Loading } from 'element-ui';
 export default {
     data() {
         return {
-            homelists: [],//调出的数据
+            homelists: [],
             sumpage: [],
             ind: '',
             page: 0,
             flag: true,
             year:'',
-            mark:this.findChildMsg
         }
     },
-    props: ['findChildMsg'],
+    props: ['message'],
     watch: {
-        findChildMsg: function(val) {
+        "message": function(val) {
             this.page = 0;
             this.homelists = [];
             this.sums(val);
@@ -63,26 +65,26 @@ export default {
     mounted() {
         //滚动分页
         this.scroll();
-        this.sums(this.findChildMsg);
     },
     methods: {
         //渲染列表
-        sums(val) {
+        sums(message) {
             var _this = this;
             this.flag = false;
             var params = {
+                collections:'find',//给区分表的参数
                 page: this.page,
                 limit: 5,
-                type: this.$route.params.id,
-                sort: this.$route.query.sort===undefined?"hot":this.$route.query.sort
+                one: message.one,
+                two: message.two
             };
-            this.showlist(params)
+            this.showlist(params);
         },
         //渲染数据
         showlist(params) {
             var _this = this;
             _this.sumpage = [];
-            this.$http.post('/api/find/list', params).then((response) => {
+            this.$http.post('/api/list/showlist', params).then((response) => {
                 Vue.http.interceptors.push((response, next) => {
                     $(".tip").css("display","block")
                     next((response) => { 
@@ -113,20 +115,8 @@ export default {
             }).then(function() {
                 this.flag = true
             }).catch((response) => {
-                console.log(response)
             });
         },
-        // //查找内容
-        // search(){
-        //     var value=$(".serchtext").val();
-        //     //点击的是第几页
-        //     var params={
-        //         page:this.page,
-        //         limit:5,
-        //         title:value
-        //     };
-        //     this.showlist(params);
-        // },
         //点击分页
         clickpage(index) {
             var _this = this;
@@ -176,11 +166,45 @@ export default {
 }
 </script>
 
-
-<style>
+<style lang="scss" scoped>@import '../../style/mixin';
+/*每条数据*/
+.home-con-right {
+    @include wh(100%,97px);
+    border-bottom: 1px solid rgba(204,204,204,.3);
+    cursor: pointer;
+    padding:10px 0px;
+    position:relative;
+    .left{
+        @include left;
+        .home-con-left-top{
+            @include wh(100%,40px);
+            .articleuser,.articletime,.articlesort {
+                color: #999;
+                font-size: 15px;
+                margin: 10px 10px 10px 0px;
+                display: block;
+                float: left;
+            }
+        }
+        .home-con-left-bottom{
+            p{
+                @include wh(auto,20px);
+                @include left;
+                margin-right:10px;
+                img{
+                    @include wh(10px,10px);
+                    margin-right:5px;
+                }
+            }
+        }
+    }
+    .right{
+        @include right;
+    }
+}
+/*重新加载的提示语*/
 .tip{
-    width:200px;
-    height:50px;
+    @include wh(200px,50px);
     text-align:center;
     line-height:50px;
     background:#fff;
@@ -190,131 +214,6 @@ export default {
     left:50%;
     margin-left:-50px;
     display:none;
-}
-/*搜索*/
 
-.pageactive {
-    background: #000;
-    color: #fff;
-}
-
-.top {
-    height: 60px;
-}
-
-.top .serchtext {
-    height: 40px;
-    margin-top: 10px;
-    padding: 0px 10px;
-    border: 1px solid #ccc;
-    font-size: 12px;
-    width: 300px;
-    float: left;
-}
-
-.top .search {
-    width: 60px;
-    height: 40px;
-    margin-top: 10px;
-    background: #efefef;
-    border: 1px solid #ccc;
-    line-height: 40px;
-    text-align: center;
-    font-size: 16px;
-    display: block;
-    cursor: pointer;
-    float: left;
-}
-
-.top .search:hover {
-    color: #fff;
-    background: #afb5b5
-}
-
-
-
-
-/*每個數據*/
-
-.home-con-right {
-    height: 117px;
-    border-bottom: 1px solid rgba(204,204,204,.3);
-    cursor: pointer;
-    height:auto;
-    position:relative;
-}
-
-.home-con-right a {
-    text-decoration: none;
-}
-
-.home-con-right h2 {
-    font-size: 20px;
-    margin: 0px;
-    color: #000;
-    font-weight: bold;
-}
-
-
-.home-con-right .articleremove {
-    display: block;
-    width: 15px;
-    height: 15px;
-    text-align: center;
-    line-height: 12px;
-    border: 1px solid rgba(204,204,204,.5);
-    background: #fff;
-    color: #999;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-}
-.article-bottom p {
-    width: auto;
-    height: 24px;
-    line-height: 20px;
-    float: left;
-    margin-top: 10px;
-    margin-right: 5px;
-    padding: 0px 5px;
-}
-
-.article-bottom img {
-    width: 15px;
-    height: 15px;
-    margin-right: 5px;
-}
-/*每个数据里面包含用户名时间*/
-.articleconone{
-    overflow: hidden;
-    padding:10px 0px;
-}
-.articleconone span{
-    color: #999;
-    font-size: 15px;
-    margin: 0px 10px 0px 0px;
-    display: block;
-    float: left;
-}
-
-
-/*分頁*/
-
-.page span {
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    border: 1px solid #000;
-    displaY: block;
-    floaT: left;
-    cursor: pointer;
-    margin: 5px
-}
-
-.page span:hover {
-    background: #000;
-    color: #fff
 }
 </style>

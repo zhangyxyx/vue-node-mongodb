@@ -7,13 +7,14 @@
 		<button type="button" class="btn btn-primary" v-on:click="addData()">添加</button>
 		<button type="button" class="btn btn-primary" v-on:click="removeDate()">删除</button>
 		<router-link to="/home/home"><button type="button" class="btn btn-primary" >返回前台页面</button></router-link>
-		<table id="table"></table>
+		<div id="table"></div>
     </div>
 	
 </div>
 </template>
 
 <script>
+
 import common from '../common.vue'
 export default {
 	data() {
@@ -143,7 +144,11 @@ export default {
 
 </script>
 
-<style>
+<style lang="scss">
+@import "../../../style/mixin";
+.home-con-menu{
+	background:#fff;
+}
 .active{color:#007fff}
 
 </style>

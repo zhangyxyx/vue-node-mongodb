@@ -19,7 +19,7 @@
 					<div style="width:50px;float:left;"><img src="/static/logo.png" style="width:100%" /></div>
 					<div style="float:left;margin-left:30px;color:#007fff;cursor:pointer;font-size:15px;" v-on:click="write()"><img src="/static/home/write.png" style="width:20px;margin-right:5px;vertical-align:middle">写文章</div>
 					<div style="float:left;margin-left:30px;color:#007fff;cursor:pointer;font-size:15px;" v-on:click="sharelink()"><img src="/static/home/link.png" style="width:20px;margin-right:5px;vertical-align:middle">分享链接</div>
-					<div style="float:right;margin:0px 16px;color:#ccc">草稿</div>
+					<div style="float:right;font-size:14px;margin:0px 16px;color:#ccc">草稿</div>
 				</div>
 				<div style="background:#fff;">
 					<!--热门 最新 评论-->
@@ -110,40 +110,48 @@ export default {
 }
 
 </script>
-<style>
+<style lang="scss" scoped>
+@import '../../style/mixin';
 /*菜單*/
 .home-con-menu {
-	width:100%;
-	height: 50px;
+	@include wh(100%,50px);
 	line-height: 50px;
 	background: #fff;
 	border-top: 1px solid rgba(204,204,204,.3);
-	overflow:hidden
-}
-.home-con-menu-menu-every {
-	height: 50px;
-	line-height:50px;
-	padding:0px 10px;
-	float:left;
-	cursor:pointer;
-	font-size:14px;
+	overflow:hidden;
+	.home-con-menu-menu-every {
+		height: 50px;
+		line-height:50px;
+		padding:0px 10px;
+		float:left;
+		cursor:pointer;
+		font-size:14px;
+		&:hover{
+			@include active;
+		}
+	}
 }
 .topmenuone {
 	width:100%;
 	height: auto;
+	@include wh(100%,auto);
 	padding:17px 20px;
-	display:inline-block
-}
-.topmenuone-menu-every {
-	cursor: pointer;
-	font-size: 15px;
-	text-align: center;
-	padding: 0px 8px;
-	float: left;
-	border-right:1px solid rgba(204,204,204,.3)
+	display:inline-block;
+	.topmenuone-menu-every {
+		cursor: pointer;
+		font-size: 14px;
+		text-align: center;
+		padding: 0px 8px;
+		float: left;
+		border-right:1px solid rgba(204,204,204,.3);
+		&:hover{
+			@include active;
+		}
+	}
 }
 .rightevery {
-	padding:0px 26px;
+	padding:0px 20px;
+	border-top:1px solid rgba(204,204,204,.3)
 }
 </style>
 

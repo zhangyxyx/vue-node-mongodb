@@ -1,39 +1,38 @@
-<!--说明
-1.对应后台是list模型，模型里面放置的是我的关注和前端的东西 list是全部的内容。
-所以如果需要调用前端的东西就直接用sort参数来从数据库中获取
-2.在首页中还有热门 最新 评价几个选项这就需要在后台区分开
+<!--
+说明一下：
+1.后台接口：获取数据/api/list/showlist 删除数据/api/list/removelist
+
 -->
 <template>
     <div>
-        <div class="row article">
-            <!-- <div class="col-sm-12 top">
-                    <input class="serchtext" type="text" placeholder="输入你要查找的内容" >
-                    <span class="search" v-on:click="search()">搜索</span>
-                </div> -->
+        <div class="article">
             <!--内容-->
-            <div class="col-sm-12  home-con-right" v-for="(item,index) in homelists" :key="index">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <span class="articleuser" style="color:#3b76c5">{{item.user||'user'}}&nbsp;▶</span>
-                        <span class="articlesort" style="color:#b71ed7">{{item.sort}}&nbsp;▶</span>
-                        <span class="articletime">{{year}}</span>
-
+            <div class="home-con-right" v-for="(item,index) in homelists" :key="index">
+                    <div class="left">
+                        <!-- 上面的事件 分类  -->
+                        <div class="home-con-left-top">
+                            <span class="articleuser" style="color:#3b76c5">{{item.user||'user'}}&nbsp;▶</span>
+                            <span class="articlesort" style="color:#b71ed7">{{item.sort}}&nbsp;▶</span>
+                            <span class="articletime">{{year}}</span>
+                        </div>
+                        <!--中间的标题和内容-->
+                        <div class="home-con-left-center" style="width:570px;">
+                            <router-link :to="{name:'details',params:{id:item._id}}">
+                                <h4>{{item.title}}</h4>
+                            </router-link>
+                            <div style="max-height:40px;margin:10px 0px;">{{item.con}}</div>
+                            <!--<span class="articleremove" v-on:click="clickremove(homelists[index])">x</span>-->
+                        </div>
+                        <!--下面的收藏和喜欢-->
+                        <div class="home-con-left-bottom">
+                            <p><img src="static/home/like.png">{{item.like}}</p>
+                            <p><img src="static/home/message.png">{{item.collect}}</p>
+                        </div>
                     </div>
-                    <div class="col-sm-12" style="width:570px;">
-                        <router-link :to="{name:'details',params:{id:item._id}}">
-                            <h2>{{item.title}}</h2>
-                        </router-link>
-                        <div style="max-height:40px;margin:10px 0px;">{{item.con}}</div>
-                        <!--<span class="articleremove" v-on:click="clickremove(homelists[index])">x</span>-->
-                    </div>
-                    <div class="col-sm-12 article-bottom">
-                        <p><img src="static/home/like.png">{{item.like}}</p>
-                        <p><img src="static/home/message.png">{{item.collect}}</p>
-                    </div>
-                    <div style="position:absolute;right:20px;top:20px;width:75px;height:75px">
+                    <!--图片-->
+                    <div class="right" style="position:absolute;right:20px;top:20px;width:75px;height:75px">
                         <img v-bind:src="item.file" style="width:100%;height:100%">
                     </div>
-                </div>
             </div>
         </div>
         <div class="tip">正在加载中...</div>
@@ -73,6 +72,7 @@ export default {
             var _this = this;
             this.flag = false;
             var params = {
+                collections:'home',
                 page: this.page,
                 limit: 5,
                 one: message.one,
@@ -84,6 +84,7 @@ export default {
         showlist(params) {
             var _this = this;
             _this.sumpage = [];
+            console.log(params)
             this.$http.post('/api/list/showlist', params).then((response) => {
                 Vue.http.interceptors.push((response, next) => {
                     $(".tip").css("display","block")
@@ -117,17 +118,6 @@ export default {
             }).catch((response) => {
             });
         },
-        // //查找内容
-        // search(){
-        //     var value=$(".serchtext").val();
-        //     //点击的是第几页
-        //     var params={
-        //         page:this.page,
-        //         limit:5,
-        //         title:value
-        //     };
-        //     this.showlist(params);
-        // },
         //点击分页
         clickpage(index) {
             var _this = this;
@@ -179,11 +169,45 @@ export default {
 }
 </script>
 
-
-<style>
+<style lang="scss" scoped>@import '../../style/mixin';
+/*每条数据*/
+.home-con-right {
+    @include wh(100%,97px);
+    border-bottom: 1px solid rgba(204,204,204,.3);
+    cursor: pointer;
+    padding:10px 0px;
+    position:relative;
+    .left{
+        @include left;
+        .home-con-left-top{
+            @include wh(100%,40px);
+            .articleuser,.articletime,.articlesort {
+                color: #999;
+                font-size: 15px;
+                margin: 10px 10px 10px 0px;
+                display: block;
+                float: left;
+            }
+        }
+        .home-con-left-bottom{
+            p{
+                @include wh(auto,20px);
+                @include left;
+                margin-right:10px;
+                img{
+                    @include wh(10px,10px);
+                    margin-right:5px;
+                }
+            }
+        }
+    }
+    .right{
+        @include right;
+    }
+}
+/*重新加载的提示语*/
 .tip{
-    width:200px;
-    height:50px;
+    @include wh(200px,50px);
     text-align:center;
     line-height:50px;
     background:#fff;
@@ -193,131 +217,6 @@ export default {
     left:50%;
     margin-left:-50px;
     display:none;
-}
-/*搜索*/
 
-.pageactive {
-    background: #000;
-    color: #fff;
-}
-
-.top {
-    height: 60px;
-}
-
-.top .serchtext {
-    height: 40px;
-    margin-top: 10px;
-    padding: 0px 10px;
-    border: 1px solid #ccc;
-    font-size: 12px;
-    width: 300px;
-    float: left;
-}
-
-.top .search {
-    width: 60px;
-    height: 40px;
-    margin-top: 10px;
-    background: #efefef;
-    border: 1px solid #ccc;
-    line-height: 40px;
-    text-align: center;
-    font-size: 16px;
-    display: block;
-    cursor: pointer;
-    float: left;
-}
-
-.top .search:hover {
-    color: #fff;
-    background: #afb5b5
-}
-
-
-
-
-/*每個數據*/
-
-.home-con-right {
-    height: 117px;
-    border-bottom: 1px solid rgba(204,204,204,.3);
-    cursor: pointer;
-    height:auto;
-}
-
-.home-con-right a {
-    text-decoration: none;
-}
-
-.home-con-right h2 {
-    font-size: 20px;
-    margin: 0px;
-    color: #000;
-    font-weight: bold;
-}
-
-
-.home-con-right .articleremove {
-    display: block;
-    width: 15px;
-    height: 15px;
-    text-align: center;
-    line-height: 12px;
-    border: 1px solid rgba(204,204,204,.5);
-    background: #fff;
-    color: #999;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-}
-
-.articleuser,
-.articletime,
-.articlesort {
-    color: #999;
-    font-size: 15px;
-    margin: 10px 10px 10px 0px;
-    display: block;
-    float: left;
-}
-
-.article-bottom p {
-    width: auto;
-    height: 24px;
-    line-height: 20px;
-    float: left;
-    margin-top: 10px;
-    margin-right: 5px;
-    padding: 0px 5px;
-}
-
-.article-bottom img {
-    width: 15px;
-    height: 15px;
-    margin-right: 5px;
-}
-
-
-
-
-/*分頁*/
-
-.page span {
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    border: 1px solid #000;
-    displaY: block;
-    floaT: left;
-    cursor: pointer;
-    margin: 5px
-}
-
-.page span:hover {
-    background: #000;
-    color: #fff
 }
 </style>

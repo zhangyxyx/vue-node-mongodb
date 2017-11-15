@@ -1,8 +1,24 @@
 /*这个设置一下类似于函数的东西 有参数 然后可以引入这个文件 */
 $blue:#007fff;
 
+@mixin wh($w,$h){
+    width:$w;
+    height:$h;
+}
 @mixin fz($size,$color){
     font-size:$size;
     color:$color
 }
-
+@mixin left{
+    float:left;
+}
+@mixin right{
+    float:right
+}
+@mixin active{
+    color:$blue
+}
+@mixin center{
+    width:960px;
+    margin:0 auto;
+}

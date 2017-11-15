@@ -9,6 +9,8 @@ import store from './store'
 import Element from 'element-ui'
 
 
+
+
 Vue.config.productionTip = false
 
 Vue.use(vueresource);

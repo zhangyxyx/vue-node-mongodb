@@ -6,16 +6,16 @@
                 <router-link to="/home"><h2><img src="static/home/web.svg"></h2></router-link>
                 <span v-for="(item,index) in topMenu" v-on:click="clickTopMenu(item.mark,item.icon)" :class="{active:ind===item.mark}" :key="index">{{item.con}}
                 </span>
-                <div style="float:left;position:relative;width:240px;margin-left:90px;">
+                <div style="float:left;position:relative;width:202px;margin-left:90px;">
                     <input type="text" placeholder="搜索掘金">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true" style="position:absolute;top:24px;right:-19px;"></span>
+                    <span class="glyphicon glyphicon-search" aria-hidden="true" style="position:absolute;top:24px;right:11px;width:auto"></span>
                 </div>
                 <!--添加 消息 个人-->
                 <div class="addMessUser">
-                    <div style="width:25px;height:25px;">
+                    <span>
                         <router-link to="/add"><img src="static/add.png"></router-link>
-                    </div>
-                    <div style="width:25px;height:25px;"><img src="static/ling.png"></div>
+                    </span>
+                    <span><img src="static/ling.png"></span>
                     <a title="进入管理员页面" style="width:30px;height:30px;display:block;float:left;margin-left:20px;cursor:pointer;border-shadow:50%;" v-on:click="houtai()"><img src="static/logo.png" style="width:100%"></a>
                 </div>
 
@@ -63,73 +63,69 @@ export default {
     }
 }
 </script>
-<style scoped>
-@import './common.css';
-</style>
-<style>
+<style lang="scss" scoped>
+@import '../style/mixin';
 /*顶部菜单*/
-
 .homeTop {
     height: 60px;
     line-height: 60px;
     background: #fff;
+    h2{
+        @include left;
+        margin-right: 20px;
+        margin-top:10px;
+        img{
+            vertical-align:middle
+        }
+    }
+    span{
+        width: 70px;
+        @include left;
+        text-align: center;
+        display: block;
+        font-size: 16px;
+        cursor: pointer;
+        &:hover{
+            @include active
+        }
+    }
+    .active{
+        @include active
+    }
+    input{
+        @include wh(200px,32px);
+        line-height: 32px;
+        padding: 0px 10px;
+        border: 1px solid rgba(204,204,204,.3);
+        color: #d0d2d2;
+    }
+    
+    input::-webkit-input-placeholder{
+        color: #d0d2d2;
+    }
+    input::-moz-placeholder{
+        color: #d0d2d2;
+    }
+    input::-ms-input-placeholder{
+        color: #d0d2d2;
+    }
+    .login{
+         width: 50px;
+    }
+    .addMessUser {
+        @include wh(150px,60px);
+        @include left;
+        line-height: 60px;
+        span{
+            @include wh(25px,auto);
+            @include left;
+            display:inline-block;
+            margin-left:10px;
+        }
+        img{
+            vertical-align:middle;
+            @include wh(100%,100%)
+        }
+    }
 }
-
-.homeTop h2 {
-    float: left;
-    margin-right: 20px;
-
-}
-.homeTop h2 img{
-    vertical-align:middle
-}
-
-.homeTop span {
-    width: 70px;
-    floaT: left;
-    text-align: center;
-    display: block;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.homeTop span:hover {
-    color: #007fff
-}
-
-.homeTop .active {
-    color: #007fff
-}
-
-.homeTop input {
-    height: 32px;
-    width: 240px;
-    line-height: 32px;
-    padding: 0px 10px;
-    border: 1px solid rgba(204,204,204,.3);
-    color: #d0d2d2;
-}
-.homeTop input::-webkit-input-placeholder{
-    color: #d0d2d2;
-}
-.homeTop input::-moz-placeholder{
-    color: #d0d2d2;
-}
-.homeTop input::-ms-input-placeholder{
-    color: #d0d2d2;
-}
-
-
-.homeTop .login {
-    width: 50px;
-}
-
-.addMessUser {
-    height: 60px;
-    line-height: 60px;
-}
-.addMessUser img{
-    vertical-align:middle
-}
-
 </style>

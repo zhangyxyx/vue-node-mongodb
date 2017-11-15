@@ -7,7 +7,7 @@ import details from '@/components/details'
 import home from '@/components/home/view'
 import zhuanlan from '@/components/zhuanlan/view'
 import common from '@/components/common'
-import label from '@/components/label/view'
+import source from '@/components/source/view'
 import find from '@/components/find/view'
 import collect from '@/components/collect/view'
 import article from '@/components/home/article'
@@ -20,6 +20,7 @@ import Hhone from '@/components/houtai/home/view'
 import Hcollect from '@/components/houtai/collect/view'
 import Hfind from '@/components/houtai/find/view'
 import Hzhuanlan from '@/components/houtai/zhuanlan/view'
+import Hsource from '@/components/houtai/source/view'
 import add from '@/components/houtai/add/view'
 
 
@@ -79,9 +80,9 @@ export default new Router({
       component:find
     },
     {
-      path:'/label',//标签
-      name:'label',
-      component:label
+      path:'/source',//标签
+      name:'source',
+      component:source
     },
     {
     	path:'/home',
@@ -120,6 +121,11 @@ export default new Router({
      name:'Hhome',
      component:Hzhuanlan
    },
+   {
+    path:'/houtai/source',
+    name:'Hsource',
+    component:Hsource
+    },
     //详情
     {
      path:'/houtai/add',
