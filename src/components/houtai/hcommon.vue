@@ -47,6 +47,7 @@ export default{
 
 <style lang="scss" scoped>
 @import './style/bootstrap/dist/css/bootstrap.min.css';
+@import './style/bootstrap-table/dist/bootstrap-table.min.css';
 @import '../../style/mixin';
 /*顶部菜单*/
 .hmenu{

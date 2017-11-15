@@ -136,7 +136,7 @@ export default {
 	width:100%;
 	height: auto;
 	@include wh(100%,auto);
-	padding:17px 0px;
+	padding:10px 0px;
 	display:inline-block;
 	.topmenuone-menu-every-left{
 		@include left;

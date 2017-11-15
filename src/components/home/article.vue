@@ -172,7 +172,7 @@ export default {
 <style lang="scss" scoped>@import '../../style/mixin';
 /*每条数据*/
 .home-con-right {
-    @include wh(100%,97px);
+    @include wh(100%,150px);
     border-bottom: 1px solid rgba(204,204,204,.3);
     cursor: pointer;
     padding:10px 0px;

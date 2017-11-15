@@ -135,7 +135,7 @@ export default {
 	width:100%;
 	height: auto;
 	@include wh(100%,auto);
-	padding:17px 20px;
+	padding:10px 20px;
 	display:inline-block;
 	.topmenuone-menu-every {
 		cursor: pointer;

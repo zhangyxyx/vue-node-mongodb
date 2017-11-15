@@ -18,7 +18,7 @@
 				<div style="background:#fff;">
 					<!--热门 最新 评论-->
 					<div class="topmenuone">
-						<div class="topmenuone-menu-every-left"><h3>原创文章</h3></div>
+						<div class="topmenuone-menu-every-left"><span>原创文章</span></div>
 						<div class="topmenuone-menu-every-right">
 							<div class="topmenuone-menu-every" v-for='(options,index) in twomenu' v-bind:data-menu="options.change" :class="{active:twomenuactive===options.change}" v-on:click="twomenuclick(options.change)" :key="index">
 								{{options.text}}
@@ -133,7 +133,7 @@ export default {
 	width:100%;
 	height: auto;
 	@include wh(100%,auto);
-	padding:17px 0px;
+	padding:10px 0px;
 	display:inline-block;
 	.topmenuone-menu-every-left{
 		@include left;

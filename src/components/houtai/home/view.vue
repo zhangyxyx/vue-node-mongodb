@@ -3,10 +3,12 @@
 	<myCommon v-bind:message="commonmsg"></myCommon>
     <!--专属home的菜单 我的关注 前端-->
     <div class="col-sm-9 home-con-menu" style="height:100%">
+		<div class="home-con-title">
 		<h3>首页当前的全部信息</h3>
 		<button type="button" class="btn btn-primary" v-on:click="addData()">添加</button>
 		<button type="button" class="btn btn-primary" v-on:click="removeDate()">删除</button>
 		<router-link to="/home/home"><button type="button" class="btn btn-primary" >返回前台页面</button></router-link>
+		</div>
 		<div id="table"></div>
     </div>
 	
@@ -15,7 +17,7 @@
 
 <script>
 
-import common from '../common.vue'
+import common from '../hcommon.vue'
 export default {
 	data() {
 		return{
@@ -148,6 +150,9 @@ export default {
 @import "../../../style/mixin";
 .home-con-menu{
 	background:#fff;
+	.home-con-title{
+		height:50px;
+	}
 }
 .active{color:#007fff}
 

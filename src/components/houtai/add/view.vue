@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import common from '@/components/houtai/common.vue'
+import common from '../hcommon.vue'
 export default {
 	methods:{
 		addData(){

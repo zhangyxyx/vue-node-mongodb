@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import common from '../common.vue'
+import common from '../hcommon.vue'
 export default {
 	data() {
 		return{
