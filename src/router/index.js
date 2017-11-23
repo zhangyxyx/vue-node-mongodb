@@ -13,6 +13,7 @@ import collect from '@/components/collect/view'
 import article from '@/components/home/article'
 import write from '@/components/write'
 import sharelink from '@/components/sharelink'
+import graph from '@/components/graph'
 //管理员的页面
 import Login from '@/components/houtai/login/view'
 import Hmain from '@/components/houtai/main'
@@ -93,6 +94,11 @@ export default new Router({
       path:'/details/:id',
       name:'details',
       component:details
+    },
+    {
+      path:'/graph',
+      name:'graph',
+      component:graph
     },
    
   //管理员的页面路由

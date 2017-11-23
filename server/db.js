@@ -69,6 +69,13 @@ const fiSchema=mongoose.Schema({
     con:String,
     time:String,
 });
+//开源库
+const openSchema=mongoose.Schema({
+    title:String,
+    user:String,
+    url:String,
+    time:String,
+});
 //后台测试接口
 const seeks=mongoose.Schema({
     title:String,
@@ -89,6 +96,7 @@ const Models = {
     zhuanlan:mongoose.model('zhuanlan',zlSchema,'zhuanlan'),//专栏
     collect:mongoose.model('collect',clSchema,'collect'),//收藏
     find:mongoose.model('find',fiSchema,'find'),//发现
+    open:mongoose.model('open',openSchema,'open'),//开源库
     
     //后台测试接口
     seek:mongoose.model('seeks',seeks),

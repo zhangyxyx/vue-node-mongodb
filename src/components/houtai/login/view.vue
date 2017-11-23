@@ -74,7 +74,6 @@ export default {
             @include wh(100px,40px);
             background:#007fff;
             text-align:center;
-            line-height:40px;
             color:#fff;
         }
     }

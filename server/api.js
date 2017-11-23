@@ -36,14 +36,26 @@ router.post('/api/list/showlist', (req, res) => {
     var json = {};
     json[panduan] = 1;
     console.log(collections)
-    var query = models[collections].find({ sort: sort }).sort(json).limit(limit).skip(skip);
-    query.find(function (err, data) {
-        if (err) {
-            res.send(err)
-        } else {
-            res.send(data)
-        }
-    })
+    if(sort&&panduan&&limit&&skip){
+        var query = models[collections].find({ sort: sort }).sort(json).limit(limit).skip(skip);
+        query.find(function (err, data) {
+            if (err) {
+                res.send(err)
+            } else {
+                res.send(data)
+            }
+        })
+    }else{
+        var query = models[collections].find();
+        query.find(function (err, data) {
+            if (err) {
+                res.send(err)
+            } else {
+                res.send(data)
+            }
+        })
+    }
+    
 })
 //添加列表
 router.post('/api/list/addlist', (req, res) => {

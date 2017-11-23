@@ -13,7 +13,7 @@
                 <!--添加 消息 个人-->
                 <div class="addMessUser">
                     <span>
-                        <router-link to="/add"><img src="static/add.png"></router-link>
+                        <router-link to="/graph"><img src="static/add.png"></router-link>
                     </span>
                     <span><img src="static/ling.png"></span>
                     <a title="进入管理员页面" style="width:30px;height:30px;display:block;float:left;margin-left:20px;cursor:pointer;border-shadow:50%;" v-on:click="houtai()"><img src="static/logo.png" style="width:100%"></a>
@@ -46,9 +46,7 @@ export default {
     },
     methods: {
         markshow() {
-            
             this.ind = this.$route.name
-            console.log(this.$route)
         },
         clickTopMenu(i, icon) {
             this.ind = i;
@@ -113,14 +111,14 @@ export default {
          width: 50px;
     }
     .addMessUser {
-        @include wh(150px,60px);
-        @include left;
+        @include wh(auto,60px);
+        @include right;
         line-height: 60px;
         span{
             @include wh(25px,auto);
             @include left;
             display:inline-block;
-            margin-left:10px;
+            margin-left:20px;
         }
         img{
             vertical-align:middle;
