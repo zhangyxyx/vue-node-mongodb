@@ -35,8 +35,8 @@ router.post('/api/list/showlist', (req, res) => {
     var skip = req.body.page * limit;
     var json = {};
     json[panduan] = 1;
-    console.log(collections)
-    if(sort&&panduan&&limit&&skip){
+    if(sort){
+        console.log(1)
         var query = models[collections].find({ sort: sort }).sort(json).limit(limit).skip(skip);
         query.find(function (err, data) {
             if (err) {
@@ -46,6 +46,7 @@ router.post('/api/list/showlist', (req, res) => {
             }
         })
     }else{
+        console.log(2)
         var query = models[collections].find();
         query.find(function (err, data) {
             if (err) {
