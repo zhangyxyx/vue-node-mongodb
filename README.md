@@ -47,6 +47,10 @@ new Vue({
 创建render方法的时候，通过调用render方法来渲染实例DOM树，Vue在调用render方法的时候会传入一个createElement函数作为参数，也就是createElement会以App作为参数进行调用 
 在router中检测到路由变化之后，进行v_render变化，然后将vnode通过虚拟树将之前的vnode和现在的vnode进行对比，然后将vnode放到router-view中，在通过render将app渲染到html中
 
+### 注意
+1.自己npm install执行这个，因为如果你直接git clone代码的话是没有node_modules
+2.http://localhost:12342/#/home/all?sort=like
+
 
 
 
