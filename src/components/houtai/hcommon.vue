@@ -46,41 +46,41 @@ export default{
 </script>
 
 <style lang="scss" scoped>
-@import './style/bootstrap/dist/css/bootstrap.min.css';
-@import './style/bootstrap-table/dist/bootstrap-table.min.css';
-@import '../../style/mixin';
+// @import './style/bootstrap/dist/css/bootstrap.min.css';
+// @import './style/bootstrap-table/dist/bootstrap-table.min.css';
+// @import '../../style/mixin';
 /*顶部菜单*/
-.hmenu{
-    background:#fff;
-    @include wh(240px,auto);
-    @include left;
-    h2{
-        text-align:center;
-        margin-top:0px;
-    }
-    span{
-        height:60px;
-        line-height:60px;
-        text-align:center;
-        display:block;
-        font-size:17px;
-        cursor:pointer;
-        &:hover{
-            @include active;
-        }
-    }
-    .active{
-        color:#007fff
-    }
-}
-.homeTop{
-    input{
-        @include wh(240px,32px);
-        line-height:32px;
-        padding:0px 10px;
-        border:1px solid #ccc;
-        color:#71777c;
-        outline:none;
-    }
-}
+// .hmenu{
+//     background:#fff;
+//     @include wh(240px,auto);
+//     @include left;
+//     h2{
+//         text-align:center;
+//         margin-top:0px;
+//     }
+//     span{
+//         height:60px;
+//         line-height:60px;
+//         text-align:center;
+//         display:block;
+//         font-size:17px;
+//         cursor:pointer;
+//         &:hover{
+//             @include active;
+//         }
+//     }
+//     .active{
+//         color:#007fff
+//     }
+// }
+// .homeTop{
+//     input{
+//         @include wh(240px,32px);
+//         line-height:32px;
+//         padding:0px 10px;
+//         border:1px solid #ccc;
+//         color:#71777c;
+//         outline:none;
+//     }
+// }
 </style>

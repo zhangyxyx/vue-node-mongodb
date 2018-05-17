@@ -169,7 +169,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>@import '../../style/mixin';
+<style lang="scss" scoped>
+@import '../../style/mixin';
 /*每条数据*/
 .home-con-right {
     @include wh(100%,150px);
