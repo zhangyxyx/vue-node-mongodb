@@ -2,7 +2,7 @@
     <div style="width:100%;">
         <!--顶部的菜单-->
         <div class="homeTop">
-            <div style="width:960px;margin:0 auto;"> 
+            <div style="width:960px;margin:0 auto;height:60px;"> 
                 <router-link to="/home"><h2><img src="static/home/web.svg"></h2></router-link>
                 <span v-for="(item,index) in topMenu" v-on:click="clickTopMenu(item.mark,item.icon)" :class="{active:ind===item.mark}" :key="index">{{item.con}}
                 </span>
@@ -30,10 +30,13 @@ export default {
         return {
             topMenu: [
                 { con: '首页', icon: 'home',mark:'home' },
-                { con: '专栏', icon: 'zhuanlan/all',mark:'zhuanlan' },
-                { con: '收藏集', icon: 'collect/recommend',mark:'collect' },
-                { con: '发现', icon: 'find/all',mark:'find' },
+                { con: '沸点', icon: 'feidian/groom',mark:'feidian' },
+                { con: '小册', icon: 'xiaoce',mark:'xiaoce' },
+                // { con: '专栏', icon: 'zhuanlan/all',mark:'zhuanlan' },
+                // { con: '收藏集', icon: 'collect/recommend',mark:'collect' },
+                // { con: '发现', icon: 'find/all',mark:'find' },
                 {con:'开源库',icon:'source',mark:'source'},
+                { con: '活动', icon: 'huodong/all',mark:'huodong' },
             ],
 
             ind: 'home',
@@ -71,7 +74,7 @@ export default {
     h2{
         @include left;
         margin-right: 20px;
-        margin-top:10px;
+       
         img{
             vertical-align:middle
         }

@@ -14,6 +14,7 @@ import article from '@/components/home/article'
 import write from '@/components/write'
 import sharelink from '@/components/sharelink'
 import graph from '@/components/graph'
+import feidian from '@/components/feidian/view'
 //管理员的页面
 import Login from '@/components/houtai/login/view'
 import Hmain from '@/components/houtai/main'
@@ -100,6 +101,13 @@ export default new Router({
       name:'graph',
       component:graph
     },
+    //沸点
+    {
+      path:'/feidian/:id',
+      name:'feidian',
+      component:feidian
+    },
+    
    
   //管理员的页面路由
   {
