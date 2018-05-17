@@ -49,6 +49,7 @@ new Vue({
 
 ### 注意
 1.自己npm install执行这个，因为如果你直接git clone代码的话是没有node_modules
+2.http://localhost:12342/#/home/all?sort=like
 
 
 
